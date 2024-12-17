@@ -1,0 +1,7 @@
+#Metadata
+RulesetId:0
+#Objects
+0,0
+1000,0
+#Events
+0

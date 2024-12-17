@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Beat of Life"
+run/main_scene="res://Tests/beatmap_loader_test.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.png"
