@@ -1,8 +1,0 @@
-#Metadata
-RulesetId:1
-#Objects
-0,0
-1000,0
-2000,1
-#Events
-1000

@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/metronome.mp3-272515441c98986ef812e32a73f79c1
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4
