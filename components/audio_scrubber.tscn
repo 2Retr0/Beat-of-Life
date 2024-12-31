@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://daxfedsw5jend"]
+
+[ext_resource type="Script" path="res://components/audio_scrubber.gd" id="1_uib0d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bt1jq"]
+bg_color = Color(0.343714, 0.389369, 0.512391, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fah5u"]
+bg_color = Color(0.256081, 0.293929, 0.39651, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="AudioScrubber" type="PanelContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bt1jq")
+script = ExtResource("1_uib0d")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "−−−"
+fit_content = true
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_fah5u")
+max_value = 1.0
+step = 0.001
+show_percentage = false
+
+[node name="TimingLabels" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TimeElapsedLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TimingLabels"]
+clip_contents = false
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 23.0
+theme_override_font_sizes/normal_font_size = 13
+text = "00:00"
+fit_content = true
+
+[node name="TimeRemainingLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/TimingLabels"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -42.0
+offset_right = 8.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/normal_font_size = 13
+text = "−00:00"
+fit_content = true

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://5q0crfy66di6"]
+
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://components/util/audio_synchronizer.tscn" id="1_qkmuv"]
+[ext_resource type="Script" path="res://main.gd" id="1_r4sw2"]
+[ext_resource type="Script" path="res://components/util/beatmap.gd" id="2_nw4gm"]
+[ext_resource type="AudioStream" uid="uid://dlrnm6ipmvjb5" path="res://assets/beatmaps/summer_tea_party!.mp3" id="3_c8u57"]
+[ext_resource type="Shader" path="res://assets/shaders/background.gdshader" id="5_ok8f4"]
+[ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://assets/double_note.png" id="6_4b4ir"]
+[ext_resource type="PackedScene" uid="uid://b3urfk13ajffu" path="res://components/playfield.tscn" id="7_273fp"]
+[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://components/audio_scrubber.tscn" id="7_cd2u2"]
+
+[sub_resource type="Resource" id="Resource_bisge"]
+script = ExtResource("2_nw4gm")
+title = &"Summer Tea Party!"
+track = ExtResource("3_c8u57")
+path = "res://assets/beatmaps/summer_tea_party!.osu"
+start_offset = 0.01
+num_keys = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mg5xc"]
+shader = ExtResource("5_ok8f4")
+shader_parameter/background_color = Color(0.82, 0.67, 0.71, 1)
+shader_parameter/tiling = 13.5
+shader_parameter/gap = 1.75
+shader_parameter/tick = 0
+shader_parameter/tiled_texture = ExtResource("6_4b4ir")
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r4sw2")
+
+[node name="AudioSynchronizer" parent="." instance=ExtResource("1_qkmuv")]
+beatmap = SubResource("Resource_bisge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_mg5xc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Playfield" parent="CanvasLayer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("audio_synchronizer") instance=ExtResource("7_273fp")]
+layout_mode = 2
+audio_synchronizer = NodePath("../../../../AudioSynchronizer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AudioScrubber" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("track") instance=ExtResource("7_cd2u2")]
+layout_mode = 2
+track = NodePath("../../../../../AudioSynchronizer/Track")
+
+[connection signal="on_beat" from="AudioSynchronizer" to="." method="_on_audio_synchronizer_on_beat"]
+
+[editable path="AudioSynchronizer"]
