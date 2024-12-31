@@ -8,15 +8,15 @@ public partial class BeatmapPlayer : Node
 	public AudioStreamPlayer AudioPlayer { get; private set; }
 
 	[Export]
-	public Beatmap Beatmap { get; private set; }
+	public BeatmapCSharp BeatmapCSharp { get; private set; }
 
 	[Export]
 	public double CurrentTime { get; private set; }
 
-	public virtual void Initialize(Beatmap beatmap)
+	public virtual void Initialize(BeatmapCSharp beatmap)
 	{
-		Beatmap = beatmap;
-		AudioPlayer.Stream = Beatmap.Audio;
+		BeatmapCSharp = beatmap;
+		AudioPlayer.Stream = BeatmapCSharp.Audio;
 	}
 
 	public virtual void Play()

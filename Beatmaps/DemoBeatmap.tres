@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Beatmap" load_steps=3 format=3 uid="uid://c7mhsmmiy05cd"]
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c7mhsmmiy05cd"]
 
 [ext_resource type="Resource" uid="uid://iaiewwv8apyo" path="res://Rulesets/RhythmRuleset.tres" id="1_dstrn"]
 [ext_resource type="Script" path="res://Scripts/Game/Beatmaps/Beatmap.cs" id="2_7pfid"]

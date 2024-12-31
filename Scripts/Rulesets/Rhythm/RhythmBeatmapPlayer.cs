@@ -13,7 +13,7 @@ public partial class RhythmBeatmapPlayer : BeatmapPlayer
 	[Export]
 	public double ScrollSpeed { get; private set; }
 
-	public override void Initialize(Beatmap beatmap)
+	public override void Initialize(BeatmapCSharp beatmap)
 	{
 		base.Initialize(beatmap);
 	}

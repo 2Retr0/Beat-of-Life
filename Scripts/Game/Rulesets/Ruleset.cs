@@ -7,7 +7,7 @@ public partial class Ruleset : Resource
 	[Export(PropertyHint.File, "*.tscn")]
 	public string ScenePath { get; private set; } = string.Empty;
 
-	public BeatmapPlayer CreatePlayer(Node parent, Beatmap beatmap)
+	public BeatmapPlayer CreatePlayer(Node parent, BeatmapCSharp beatmap)
 	{
 		PackedScene scene = GD.Load<PackedScene>(ScenePath);
 
