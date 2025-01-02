@@ -9,11 +9,11 @@ var tick := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Hack to loop track whenever the AudioStreamPlayer's `finished` signal is emitted...
-	synchronizer.track.finished.connect(func():
-		synchronizer.track.play(0.0)
+	synchronizer.audio_player.finished.connect(func():
+		synchronizer.audio_player.play(0.0)
 		synchronizer.time = 0.0
-		synchronizer.next_metronome_time = synchronizer.beatmap.start_offset)
-	audio_scrubber.title = synchronizer.beatmap.title
+		synchronizer.next_metronome_time = synchronizer.offset)
+	audio_scrubber.title = synchronizer.beatmap.beatmap_set.title
 	synchronizer.start()
 
 

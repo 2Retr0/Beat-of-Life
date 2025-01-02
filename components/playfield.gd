@@ -35,10 +35,10 @@ func _ready() -> void:
 
 	## --- Setup Beat Indicators --- ##
 	# NOTE: This solution won't work for tracks which have variable time signatures!
-	#       `current_beats_per_measure` can be variable throughout the track!
+	#       `current_meter` can be variable throughout the track!
 	var beat_indicator : Control = $MarginContainer/GridContainer/BeatIndicator
 	indicators.push_back(beat_indicator)
-	for i in range(audio_synchronizer.current_beats_per_measure - 1):
+	for i in range(audio_synchronizer.current_meter - 1):
 		indicators.push_back(beat_indicator.duplicate())
 		$MarginContainer/GridContainer.add_child(indicators.back())
 
@@ -46,7 +46,7 @@ func _ready() -> void:
 	audio_synchronizer.on_beat.connect(_on_audio_synchronizer_on_beat)
 
 	# Add notes for start of next track loop
-	audio_synchronizer.track.finished.connect(_on_audio_synchronizer_track_finished)
+	audio_synchronizer.audio_player.finished.connect(_on_audio_synchronizer_track_finished)
 
 
 func _physics_process(delta: float) -> void:
@@ -61,15 +61,15 @@ func _on_audio_synchronizer_on_beat() -> void:
 	## --- Add New Note --- ##
 	# Add a note ahead-of-time by one measure with a hit time that incorporates
 	# audio latency.
-	var hit_time := audio_synchronizer.time + audio_synchronizer.current_beat_interval*audio_synchronizer.current_beats_per_measure + AUDIO_LATENCY
+	var hit_time := audio_synchronizer.time + audio_synchronizer.current_beat_interval*audio_synchronizer.current_meter + AUDIO_LATENCY
 	_push_new_note(hit_time)
 
 
 func _on_audio_synchronizer_track_finished() -> void:
 	for note in hit_queue: note.queue_free()
 	hit_queue.clear()
-	for i in range(audio_synchronizer.current_beats_per_measure):
-		var hit_time := audio_synchronizer.current_beat_interval*i + audio_synchronizer.beatmap.start_offset + AUDIO_LATENCY
+	for i in range(audio_synchronizer.current_meter):
+		var hit_time := audio_synchronizer.current_beat_interval*i + audio_synchronizer.offset + AUDIO_LATENCY
 		_push_new_note(hit_time)
 
 

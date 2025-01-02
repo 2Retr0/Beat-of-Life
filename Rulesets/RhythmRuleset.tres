@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="Ruleset" load_steps=2 format=3 uid="uid://iaiewwv8apyo"]
-
-[ext_resource type="Script" path="res://Scripts/Game/Rulesets/Ruleset.cs" id="1_ub1s3"]
-
-[resource]
-script = ExtResource("1_ub1s3")
-ScenePath = "res://Scenes/RhythmBeatmapPlayer.tscn"
