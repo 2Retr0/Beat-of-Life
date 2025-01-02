@@ -20,7 +20,7 @@ void fragment() {
 	vec2 checkerboard = floor(uv / gap);
 	uv = mod(uv, gap);                 // Add gap between tiles
 	uv += -gap*0.5 + 0.5;              // Center UV to middle of gap
-	
+
 	// Rotate sprite depending on tick in a checkerboard pattern
 	float theta = mix(-1.0, 1.0, float(tick % 2)) * TAU*0.0375;
 	uv = rotate(uv, mix(-theta, theta, mod(checkerboard.x+checkerboard.y, 2.0)));
