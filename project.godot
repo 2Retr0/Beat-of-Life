@@ -11,8 +11,11 @@ config_version=5
 [application]
 
 config/name="Beat of Life"
+config/version="1.0.0"
 run/main_scene="res://main.tscn"
+config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
@@ -22,6 +25,7 @@ driver/output_latency=5
 
 [autoload]
 
+WindowManager="*res://globals/window_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [debug]
@@ -33,11 +37,12 @@ gdscript/warnings/integer_division=0
 
 [display]
 
+window/size/borderless=true
+window/size/extend_to_title=true
+window/size/window_width_override=1
+window/size/window_height_override=1
 window/stretch/aspect="ignore"
 window/vsync/vsync_mode=3
-window/quality/msaa_2d=0
-window/quality/msaa_3d=1
-window/show_image=false
 
 [dotnet]
 
