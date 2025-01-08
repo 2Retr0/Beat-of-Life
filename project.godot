@@ -25,7 +25,8 @@ driver/output_latency=5
 
 [autoload]
 
-WindowManager="*res://globals/window_manager.gd"
+WindowManager="*res://global/window_manager.gd"
+SettingsManager="*res://global/settings_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [debug]
