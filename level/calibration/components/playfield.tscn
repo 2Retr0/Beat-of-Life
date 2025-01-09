@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://b3urfk13ajffu"]
 
-[ext_resource type="Script" path="res://components/playfield.gd" id="1_8rlbo"]
-[ext_resource type="AudioStream" uid="uid://c7gmpd30i5blq" path="res://assets/samples/hit.mp3" id="2_0sdv3"]
-[ext_resource type="Script" path="res://components/util/beat_indicator.gd" id="2_3he8f"]
+[ext_resource type="Script" path="res://level/calibration/components/playfield.gd" id="1_8rlbo"]
+[ext_resource type="AudioStream" uid="uid://c7gmpd30i5blq" path="res://level/calibration/resources/samples/hit.mp3" id="2_0sdv3"]
+[ext_resource type="Script" path="res://scripts/util/beat_indicator.gd" id="2_3he8f"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bt1jq"]
 bg_color = Color(0.343714, 0.389369, 0.512391, 1)

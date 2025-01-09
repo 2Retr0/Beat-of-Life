@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://daxfedsw5jend"]
 
-[ext_resource type="Script" path="res://components/audio_scrubber.gd" id="1_uib0d"]
+[ext_resource type="Script" path="res://ui/audio_scrubber.gd" id="1_uib0d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bt1jq"]
 bg_color = Color(0.343714, 0.389369, 0.512391, 1)

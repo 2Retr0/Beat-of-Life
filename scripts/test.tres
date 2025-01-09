@@ -1,6 +1,0 @@
-[gd_resource type="Resource" script_class="TestRuleset" load_steps=2 format=3 uid="uid://djons3rr0kq2f"]
-
-[ext_resource type="Script" path="res://Scripts/Rulesets/Rhythm/RhythmRuleset.cs" id="1_o4goy"]
-
-[resource]
-script = ExtResource("1_o4goy")

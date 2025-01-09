@@ -1,6 +1,6 @@
 extends PanelContainer
 
-const CALIBRATION_NOTE := preload('res://components/calibration_note.tscn')
+const CALIBRATION_NOTE := preload('./calibration_note.tscn')
 const AUDIO_LATENCY := 0.033
 
 @export var audio_synchronizer : AudioSynchronizer

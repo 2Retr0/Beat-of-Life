@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b85adn6a0norv"]
 
-[ext_resource type="Script" path="res://components/calibration_note.gd" id="1_5kpkt"]
+[ext_resource type="Script" path="res://level/calibration/components/calibration_note.gd" id="1_5kpkt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nnh0x"]
 bg_color = Color(1, 1, 1, 1)
