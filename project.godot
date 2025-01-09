@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Beat of Life"
 config/version="1.0.0"
-run/main_scene="res://level/calibration/calibration_screen.tscn"
+run/main_scene="res://level/demo/demo.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 0)
@@ -43,7 +43,7 @@ window/size/extend_to_title=true
 window/size/window_width_override=1
 window/size/window_height_override=1
 window/stretch/aspect="ignore"
-window/vsync/vsync_mode=3
+window/vsync/vsync_mode=0
 
 [dotnet]
 

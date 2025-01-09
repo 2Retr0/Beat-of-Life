@@ -1,38 +1,38 @@
 @tool
 class_name Beatmap extends Resource
 
-@export var beatmap_set : BeatmapSet
+@export var beatmap_set: BeatmapSet
 
-@export var ruleset : Ruleset
+@export var ruleset: Ruleset
 
-@export var difficulty_name : StringName
+@export var difficulty_name: StringName
 
-@export var difficulty_creator : StringName
+@export var difficulty_creator: StringName
 
-@export var hit_objects : Array[HitObject]
+@export var hit_objects: Array[HitObject]
 
-@export var timing_points : Array[TimingPoint]
+@export var timing_points: Array[TimingPoint]
 
 func get_start_offset() -> float:
 	if timing_points.is_empty():
 		return 0
 	return timing_points[0].time
 
-func get_current_timing_start(time : float) -> float:
+func get_current_timing_start(time: float) -> float:
 	var latest_time = 0
 	for timing_point in timing_points:
 		if timing_point.time > latest_time  and timing_point.time <= time:
 			latest_time = timing_point.time
 	return latest_time
 
-func get_current_timing_end(time : float) -> float:
+func get_current_timing_end(time: float) -> float:
 	var earliest_time = INF
 	for timing_point in timing_points:
 		if timing_point.time < earliest_time  and timing_point.time > time:
 			earliest_time = timing_point.time
 	return earliest_time
 
-func get_bpm(time : float) -> float:
+func get_bpm(time: float) -> float:
 	var bpm = 60 # Default bpm
 	var latest_time = 0
 	for timing_point in timing_points:
@@ -41,10 +41,10 @@ func get_bpm(time : float) -> float:
 			latest_time = timing_point.time
 	return bpm
 
-func get_beat_interval(time : float) -> float:
+func get_beat_interval(time: float) -> float:
 	return 60 / get_bpm(time)
 
-func get_meter(time : float) -> int:
+func get_meter(time: float) -> int:
 	var meter = 4 # Default meter
 	var latest_time = 0
 	for timing_point in timing_points:
@@ -62,13 +62,13 @@ func get_meter(time : float) -> int:
 # TODO assign proper ruleset so beatmap would actually work
 # TODO load beatmap sets
 
-static func load_beatmap(beatmap_file_path : String) -> Beatmap:
+static func load_beatmap(beatmap_file_path: String) -> Beatmap:
 	var beatmap = Beatmap.new()
 	
 	var beatmap_set = BeatmapSet.new()
 	beatmap.beatmap_set = beatmap_set
 	
-	assert(beatmap_file_path.ends_with('.osu'), 'Beatmap pat must be a .osu file!')
+	assert(beatmap_file_path.ends_with('.osu'), 'Beatmap path must be a .osu file!')
 	var file := FileAccess.open(beatmap_file_path, FileAccess.READ)
 
 	# Read the file line by line

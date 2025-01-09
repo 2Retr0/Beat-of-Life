@@ -22,7 +22,7 @@ class Settings extends Object:
 	@export var enable_vsync : bool = ProjectSettings.get_setting(&'display/window/vsync/vsync_mode') == DisplayServer.VSYNC_ENABLED :
 		set(value):
 			enable_vsync = value
-			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if value else DisplayServer.VSYNC_MAILBOX)
+			DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if value else DisplayServer.VSYNC_DISABLED)
 	
 	@export_group('graphics')
 	

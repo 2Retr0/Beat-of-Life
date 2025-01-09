@@ -1,8 +1,8 @@
 class_name HitObject extends Resource
 
-@export var time : float
+@export var time: float
 
-func _init(time : float = 0):
+func _init(time: float = 0) -> void:
 	self.time = time
 
 func get_default_hit_windows() -> HitWindows:
