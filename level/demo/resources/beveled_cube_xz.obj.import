@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ssihdd0k84cu"
+path="res://.godot/imported/beveled_cube_xz.obj-fb174d759be3ee6f2358ef2e5578a52b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/beveled_cube_xz.obj-fb174d759be3ee6f2358ef2e5578a52b.mesh"]
+
+source_file="res://level/demo/resources/beveled_cube_xz.obj"
+dest_files=["res://.godot/imported/beveled_cube_xz.obj-fb174d759be3ee6f2358ef2e5578a52b.mesh", "res://.godot/imported/beveled_cube_xz.obj-fb174d759be3ee6f2358ef2e5578a52b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

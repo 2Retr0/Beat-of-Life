@@ -1,4 +1,4 @@
-[gd_scene load_steps=8505 format=3 uid="uid://cj17kj5vrbqa1"]
+[gd_scene load_steps=8513 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
 [ext_resource type="AudioStream" uid="uid://4qiuenbwaitp" path="res://beatmaps/last_wish.ogg" id="2_nujyo"]
@@ -10,6 +10,9 @@
 [ext_resource type="Script" path="res://rulesets/mania/mania_beatmap.gd" id="6_pkpxu"]
 [ext_resource type="Script" path="res://scripts/game/beatmaps/timing_point.gd" id="7_77oq2"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/checkerboard.gdshader" id="10_pbh8e"]
+[ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://level/demo/resources/beveled_cube_xz.obj" id="11_4saay"]
+[ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://level/demo/resources/dust.png" id="11_57xmc"]
+[ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://level/demo/resources/cutting_board.obj" id="12_hmrda"]
 
 [sub_resource type="Resource" id="Resource_noqkn"]
 script = ExtResource("3_qjnu0")
@@ -45226,18 +45229,18 @@ shader_parameter/albedo = Color(0.623473, 0.339141, 0.305794, 1)
 shader_parameter/power = 0.214
 shader_parameter/tiling = 3.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_t7k83"]
-size = Vector3(2.5, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_san3k"]
-size = Vector3(2.75, 0.1, 1.25)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ou7"]
-albedo_color = Color(0.549344, 0.460019, 0.373628, 1)
-roughness = 0.5
-
 [sub_resource type="BoxMesh" id="BoxMesh_w50a4"]
 size = Vector3(10, 0.1, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ou7"]
+albedo_color = Color(0.773725, 0.684292, 0.598909, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_t7k83"]
+size = Vector3(2.5, 0.9, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fune"]
+albedo_color = Color(0.849386, 0.500657, 0.733534, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_fu4dw"]
 size = Vector2(20, 1.5)
@@ -45254,20 +45257,56 @@ size = Vector2(1, 2.5)
 [sub_resource type="QuadMesh" id="QuadMesh_v6ylk"]
 size = Vector2(0.1, 2.5)
 
+[sub_resource type="Curve" id="Curve_ihcuc"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.252778, 1), 0.0, 0.0, 0, 0, Vector2(0.502778, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_6x1du"]
+curve = SubResource("Curve_ihcuc")
+
+[sub_resource type="Curve" id="Curve_bq1u6"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_o8x88"]
+curve = SubResource("Curve_bq1u6")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fce6q"]
 emission_shape = 3
 emission_box_extents = Vector3(5, 2, 2)
+angle_min = 1.07288e-05
+angle_max = 180.0
+radial_velocity_min = -0.0500223
+radial_velocity_max = 0.0499776
 gravity = Vector3(0, 0, 0)
-turbulence_enabled = true
+scale_over_velocity_curve = SubResource("CurveTexture_o8x88")
+color = Color(1, 1, 1, 0.0784314)
+alpha_curve = SubResource("CurveTexture_6x1du")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkk6p"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.0509804)
-billboard_mode = 1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwna4"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("11_57xmc")
+shadow_to_opacity = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+distance_fade_mode = 1
+distance_fade_max_distance = 3.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_ucoxw"]
-material = SubResource("StandardMaterial3D_nkk6p")
-size = Vector2(0.1, 0.1)
+material = SubResource("StandardMaterial3D_kwna4")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Curve3D" id="Curve3D_rhwwo"]
+_data = {
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, -0.664265, -0.440682, -1.48275, 1.934, 4, 6.513, 0.000991911, 1.22934, 1.03288, -0.000991911, -1.22934, -1.03288, 0, 1.75, 0.8),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+up_vector_enabled = false
 
 [node name="Demo" type="Node3D"]
 script = ExtResource("1_ih5o8")
@@ -45281,10 +45320,6 @@ environment = SubResource("Environment_ttodm")
 transform = Transform3D(0.907633, -0.363528, 0.209882, 0.253212, 0.872938, 0.416969, -0.334794, -0.32531, 0.884357, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.933455, 0.358694, 0, -0.358694, 0.933455, 0, 1, 2)
-fov = 60.0
-
 [node name="Geometry" type="Node3D" parent="."]
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Geometry"]
@@ -45296,24 +45331,31 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_0hcv8")
 
 [node name="TableMesh" type="MeshInstance3D" parent="Geometry"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_t7k83")
-skeleton = NodePath("../..")
-
-[node name="CounterMesh" type="MeshInstance3D" parent="Geometry/TableMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-cast_shadow = 0
-mesh = SubResource("BoxMesh_san3k")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
-
-[node name="CounterMesh2" type="MeshInstance3D" parent="Geometry/TableMesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 3.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3.25)
 cast_shadow = 0
 mesh = SubResource("BoxMesh_w50a4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
+
+[node name="Playfield" type="Node3D" parent="Geometry"]
+
+[node name="CounterMesh" type="MeshInstance3D" parent="Geometry/Playfield"]
+transform = Transform3D(1.375, 0, 0, 0, 0.05, 0, 0, 0, 0.625, 0, 0.9, 0)
+cast_shadow = 0
+mesh = ExtResource("11_4saay")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
+
+[node name="TableMesh" type="MeshInstance3D" parent="Geometry/Playfield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_t7k83")
+skeleton = NodePath("../../..")
+
+[node name="CuttingBoardMesh" type="MeshInstance3D" parent="Geometry/Playfield"]
+transform = Transform3D(0.998579, 0, 0.0532946, 0, 1, 0, -0.0532946, 0, 0.998579, 0, 0.943286, 0.268152)
+material_override = SubResource("StandardMaterial3D_8fune")
+mesh = ExtResource("12_hmrda")
 
 [node name="WallMeshes" type="Node3D" parent="Geometry"]
 
@@ -45384,6 +45426,22 @@ skeleton = NodePath("../../..")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02012, 0, -1.19647)
-amount = 100
+amount = 512
+lifetime = 5.0
+preprocess = 5.0
+randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_fce6q")
 draw_pass_1 = SubResource("QuadMesh_ucoxw")
+
+[node name="CameraTrack" type="Path3D" parent="."]
+curve = SubResource("Curve3D_rhwwo")
+
+[node name="Path" type="PathFollow3D" parent="CameraTrack"]
+transform = Transform3D(0.912455, -0.10701, 0.394538, -7.44935e-09, 0.965003, 0.261742, -0.408775, -0.238864, 0.880675, 1.934, 4, 6.513)
+cubic_interp = false
+loop = false
+tilt_enabled = false
+
+[node name="Camera3D" type="Camera3D" parent="CameraTrack/Path"]
+transform = Transform3D(1.00002, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+fov = 55.0

@@ -51,7 +51,7 @@ project/assembly_name="BeatOfLife"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/debug_menu/plugin.cfg")
 
 [input]
 
