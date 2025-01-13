@@ -15,7 +15,7 @@ func _get_timestamp(value : float) -> String:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if not track: return
+	if not track or not track.stream: return
 	var time := track.get_playback_position()
 	var duration := track.stream.get_length()
 

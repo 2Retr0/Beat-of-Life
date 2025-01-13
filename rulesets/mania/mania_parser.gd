@@ -3,10 +3,10 @@ class_name ManiaParser extends Object
 static func load_beatmap(beatmap_file_path: String) -> ManiaBeatmap:
 	var beatmap = ManiaBeatmap.new()
 	beatmap.ruleset = load('res://rulesets/mania/mania_ruleset.tres')
-	
+
 	var beatmap_set = BeatmapSet.new()
 	beatmap.beatmap_set = beatmap_set
-	
+
 	assert(beatmap_file_path.ends_with('.osu'), 'Beatmap path must be a .osu file!')
 	var file := FileAccess.open(beatmap_file_path, FileAccess.READ)
 
@@ -51,5 +51,5 @@ static func load_beatmap(beatmap_file_path: String) -> ManiaBeatmap:
 	print('   --- track title:  %s' % beatmap.beatmap_set.title)
 	print('   --- num timings:  %d' % len(beatmap.timing_points))
 	print('   --- num objects:  %d' % len(beatmap.hit_objects))
-	print('   --- start offset: %fs' % beatmap.get_start_offset())
+	print('   --- start offset: %fs' % beatmap.timing_points[0].time)
 	return beatmap

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://5q0crfy66di6"]
 
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/audio_synchronizer.tscn" id="1_qkmuv"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_player2.tscn" id="1_qkmuv"]
 [ext_resource type="Script" path="res://level/calibration/calibration_screen.gd" id="1_r4sw2"]
 [ext_resource type="AudioStream" uid="uid://dlrnm6ipmvjb5" path="res://level/calibration/resources/beatmaps/summer_tea_party!.mp3" id="3_24gjm"]
 [ext_resource type="Script" path="res://scripts/game/beatmaps/beatmap_set.gd" id="4_jc534"]

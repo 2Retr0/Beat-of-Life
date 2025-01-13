@@ -14,11 +14,11 @@ class_name ManiaPlayer extends BeatmapPlayer
 
 func play() -> void:
 	super()
-	
+
 	relevance_index = 0
 
 func _process(delta: float) -> void:
-	super(delta)
+	#super(delta)
 	for i in range(relevance_index, beatmap.hit_objects.size()):
 		var hit_object = beatmap.hit_objects[i]
 		if playables.has(hit_object) and not _is_relevant(hit_object):
@@ -33,20 +33,20 @@ func _process(delta: float) -> void:
 func _create_playable(hit_object: HitObject) -> void:
 	if hit_object is ManiaNote:
 		var note := hit_object as ManiaNote
-		
+
 		var scene = load(note_scene_path);
 		var playable := scene.instantiate() as ManiaNotePlayable;
 		playable.initialize(self, note)
-		
+
 		playfield_center.add_child(playable)
 		playables[hit_object] = playable
 	elif hit_object is ManiaLongNote:
 		var long_note := hit_object as ManiaLongNote
-		
+
 		var scene = load(long_note_scene_path);
 		var playable := scene.instantiate() as ManiaLongNotePlayable;
 		playable.initialize(self, long_note)
-		
+
 		playfield_center.add_child(playable)
 		playables[hit_object] = playable
 
