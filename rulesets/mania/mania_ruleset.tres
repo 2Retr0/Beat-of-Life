@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="Ruleset" load_steps=2 format=3 uid="uid://cdbys7xyglsuq"]
-
-[ext_resource type="Script" path="res://scripts/game/rulesets/ruleset.gd" id="1_en7tx"]
-
-[resource]
-script = ExtResource("1_en7tx")
-player_scene_path = "res://rulesets/mania/mania_player.tscn"
-composer_scene_path = ""

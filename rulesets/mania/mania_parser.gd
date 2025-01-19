@@ -2,7 +2,7 @@ class_name ManiaParser extends Object
 
 static func load_beatmap(beatmap_file_path: String) -> ManiaBeatmap:
 	var beatmap = ManiaBeatmap.new()
-	beatmap.ruleset = load('res://rulesets/mania/mania_ruleset.tres')
+	#beatmap.ruleset = load('res://rulesets/mania/mania_ruleset.tres')
 
 	var beatmap_set = BeatmapSet.new()
 	beatmap.beatmap_set = beatmap_set

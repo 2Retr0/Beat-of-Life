@@ -1,23 +1,23 @@
 class_name BeatmapPlayer extends Node
 
-@export var audio_player: AudioStreamPlayer
+#@export var audio_player: AudioStreamPlayer
 
 @export var beatmap: Beatmap
 
 @export var current_time: float
 
-@export var last_playback_position: float
+#@export var last_playback_position: float
 
-@export var time_increase: float
+#@export var time_increase: float
 
 func initialize(beatmap: Beatmap) -> void:
 	self.beatmap = beatmap
 	#audio_player.stream = beatmap.beatmap_set.track
 #
-func play() -> void:
-	# TODO support playing after a certain delay
-	last_playback_position = -1
-	time_increase = 0
+#func play() -> void:
+	## TODO support playing after a certain delay
+	#last_playback_position = -1
+	#time_increase = 0
 #
 	#audio_player.play()
 #

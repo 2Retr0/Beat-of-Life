@@ -3,14 +3,20 @@ class_name Beatmap extends Resource
 
 @export var beatmap_set: BeatmapSet
 
-@export var ruleset: Ruleset
+#@export var ruleset: Ruleset
 
 @export var difficulty_name: StringName
 
 @export var difficulty_creator: StringName
 
+## FIXME: assert that the hit time of all hit objects should be monotonically increasing!
+##for i in range(len(beatmap.hit_objects) - 1):
+##	assert(beatmap.hit_objects[i].time <= beatmap.hit_objects[i + 1].time)
 @export var hit_objects: Array[HitObject]
 
+## FIXME: asser that the start time of all timing points should be monotonically increasing!
+##for i in range(len(beatmap.timing_points) - 1):
+##	assert(beatmap.timing_points[i].time <= beatmap.timing_points[i + 1].time)
 @export var timing_points: Array[TimingPoint]
 
 #func get_start_offset() -> float:

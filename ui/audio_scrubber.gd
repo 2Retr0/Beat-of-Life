@@ -11,7 +11,7 @@ extends PanelContainer
 @onready var time_remaining_label : RichTextLabel = $MarginContainer/VBoxContainer/TimingLabels/TimeRemainingLabel
 
 func _get_timestamp(value : float) -> String:
-	return '%02.0f:%02.0f' % [value / 60.0, fposmod(value, 60.0)]
+	return '%02.0f:%02.0f' % [floor(value / 60.0), fposmod(value, 60.0)]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

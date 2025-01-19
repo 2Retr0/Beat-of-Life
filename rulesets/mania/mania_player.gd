@@ -1,21 +1,18 @@
-class_name ManiaPlayer extends BeatmapPlayer
+class_name ManiaRuleset extends Ruleset
 
-@export_file('*.tscn') var note_scene_path: String
-
-@export_file('*.tscn') var long_note_scene_path: String
+@export var note_scene : PackedScene
+@export var long_note_scene : PackedScene
 
 @export var scroll_speed: float
 
 @export var playfield_center: Node
 
-@export var relevance_index: int
-
-@export var playables: Dictionary
+var playables: Dictionary
+var relevance_index := 0
 
 func play() -> void:
-	super()
-
-	relevance_index = 0
+	pass
+	#relevance_index = 0
 
 func _process(delta: float) -> void:
 	#super(delta)
@@ -31,27 +28,21 @@ func _process(delta: float) -> void:
 				break
 
 func _create_playable(hit_object: HitObject) -> void:
+	var playable : Variant
 	if hit_object is ManiaNote:
-		var note := hit_object as ManiaNote
-
-		var scene = load(note_scene_path);
-		var playable := scene.instantiate() as ManiaNotePlayable;
-		playable.initialize(self, note)
-
-		playfield_center.add_child(playable)
-		playables[hit_object] = playable
+		playable = note_scene.instantiate()
+		playable.player = self
+		playable.note = hit_object
 	elif hit_object is ManiaLongNote:
-		var long_note := hit_object as ManiaLongNote
+		playable = long_note_scene.instantiate()
+		playable.player = self
+		playable.long_note = hit_object
 
-		var scene = load(long_note_scene_path);
-		var playable := scene.instantiate() as ManiaLongNotePlayable;
-		playable.initialize(self, long_note)
-
-		playfield_center.add_child(playable)
-		playables[hit_object] = playable
+	playfield_center.add_child(playable)
+	playables[hit_object] = playable
 
 func _dispose_playable(hit_object: HitObject) -> void:
-	playables[hit_object].call_deferred('queue_free')
+	playables[hit_object].queue_free()
 	playables.erase(hit_object)
 
 func _start_time(hit_object: HitObject) -> float:
@@ -64,5 +55,5 @@ func _end_time(hit_object: HitObject) -> float:
 	return hit_object.time
 
 func _is_relevant(hit_object: HitObject) -> bool:
-	const relevance_leniency = 3
+	const relevance_leniency = 2
 	return _start_time(hit_object) <= current_time + relevance_leniency and _end_time(hit_object) >= current_time - relevance_leniency

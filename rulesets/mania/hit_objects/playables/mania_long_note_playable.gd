@@ -2,14 +2,11 @@ class_name ManiaLongNotePlayable extends Control
 
 @export var body: ColorRect
 
-@export var player: ManiaPlayer
+@export var player: ManiaRuleset
 
 @export var long_note: ManiaLongNote
 
-func initialize(player: ManiaPlayer, long_note: ManiaLongNote) -> void:
-	self.player = player
-	self.long_note = long_note
-
+func _ready() -> void:
 	var beatmap := player.beatmap as ManiaBeatmap
 	position.x = 100 * (long_note.lane - beatmap.lane_count / 2.0 + 0.5)
 	position.y = (player.current_time - long_note.time) * player.scroll_speed

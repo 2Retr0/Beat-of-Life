@@ -1,6 +1,8 @@
 class_name HitObject extends Resource
 
-@export var time: float
+@export var time: float :
+	get:
+		return time + SettingsManager.settings.audio_offset
 
 func _init(time: float = 0) -> void:
 	self.time = time

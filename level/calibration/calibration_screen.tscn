@@ -1,36 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://5q0crfy66di6"]
+[gd_scene load_steps=8 format=3 uid="uid://5q0crfy66di6"]
 
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_player2.tscn" id="1_qkmuv"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_audio_controller.tscn" id="1_qkmuv"]
 [ext_resource type="Script" path="res://level/calibration/calibration_screen.gd" id="1_r4sw2"]
-[ext_resource type="AudioStream" uid="uid://dlrnm6ipmvjb5" path="res://level/calibration/resources/beatmaps/summer_tea_party!.mp3" id="3_24gjm"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/beatmap_set.gd" id="4_jc534"]
-[ext_resource type="Script" path="res://scripts/game/hit_objects/hit_object.gd" id="5_gw3hv"]
 [ext_resource type="Shader" path="res://level/calibration/resources/shaders/background.gdshader" id="5_ok8f4"]
 [ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://level/calibration/resources/double_note.png" id="6_4b4ir"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/beatmap.gd" id="6_knkyp"]
 [ext_resource type="PackedScene" uid="uid://b3urfk13ajffu" path="res://level/calibration/components/playfield.tscn" id="7_273fp"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/audio_scrubber.tscn" id="7_cd2u2"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/timing_point.gd" id="7_e375h"]
-
-[sub_resource type="Resource" id="Resource_4jkn7"]
-script = ExtResource("4_jc534")
-title = &"Summer Tea Party!"
-artist = &"Edamame88"
-track = ExtResource("3_24gjm")
-
-[sub_resource type="Resource" id="Resource_b8v6k"]
-script = ExtResource("7_e375h")
-time = 0.01
-bpm = 120.0
-meter = 4
-
-[sub_resource type="Resource" id="Resource_thduf"]
-script = ExtResource("6_knkyp")
-beatmap_set = SubResource("Resource_4jkn7")
-difficulty_name = &""
-difficulty_creator = &"2Retr0"
-hit_objects = Array[ExtResource("5_gw3hv")]([])
-timing_points = Array[ExtResource("7_e375h")]([SubResource("Resource_b8v6k")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg5xc"]
 shader = ExtResource("5_ok8f4")
@@ -46,8 +21,6 @@ anchors_preset = 0
 script = ExtResource("1_r4sw2")
 
 [node name="AudioSynchronizer" parent="." instance=ExtResource("1_qkmuv")]
-track = ExtResource("3_24gjm")
-beatmap = SubResource("Resource_thduf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -86,7 +59,5 @@ size_flags_horizontal = 3
 [node name="AudioScrubber" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("track") instance=ExtResource("7_cd2u2")]
 layout_mode = 2
 track = NodePath("../../../../../AudioSynchronizer/Track")
-
-[connection signal="on_beat" from="AudioSynchronizer" to="." method="_on_audio_synchronizer_on_beat"]
 
 [editable path="AudioSynchronizer"]

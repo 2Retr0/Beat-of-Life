@@ -1,32 +1,19 @@
 [gd_scene load_steps=40 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
-[ext_resource type="AudioStream" uid="uid://bp01k2slcuke1" path="res://level/common/resources/beatmaps/deltaMAX.mp3" id="2_ox4yn"]
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_player2.tscn" id="3_0joa5"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/beatmap_set.gd" id="3_qjnu0"]
-[ext_resource type="Script" path="res://scripts/game/hit_objects/hit_object.gd" id="4_dgrkh"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/beatmap.gd" id="6_vllb6"]
-[ext_resource type="Script" path="res://scripts/game/beatmaps/timing_point.gd" id="7_77oq2"]
+[ext_resource type="AudioStream" uid="uid://4qiuenbwaitp" path="res://level/common/resources/beatmaps/last_wish.ogg" id="2_nxfsd"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_audio_controller.tscn" id="3_0joa5"]
+[ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
+[ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/playables/mania_note_playable.tscn" id="5_nnn8j"]
+[ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
 [ext_resource type="AudioStream" uid="uid://cxyhwvdovsluw" path="res://level/common/resources/samples/metronome.mp3" id="8_6u1vg"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/audio_scrubber.tscn" id="9_ikp7r"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/checkerboard.gdshader" id="10_pbh8e"]
 [ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://level/demo/resources/beveled_cube_xz.obj" id="11_4saay"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://level/demo/resources/dust.png" id="11_57xmc"]
+[ext_resource type="Script" path="res://level/demo/camera_track.gd" id="11_ao7g8"]
 [ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://level/demo/resources/cutting_board.obj" id="12_hmrda"]
-
-[sub_resource type="Resource" id="Resource_58s8d"]
-script = ExtResource("3_qjnu0")
-title = &""
-artist = &""
-track = ExtResource("2_ox4yn")
-
-[sub_resource type="Resource" id="Resource_4sgbp"]
-script = ExtResource("6_vllb6")
-beatmap_set = SubResource("Resource_58s8d")
-difficulty_name = &""
-difficulty_creator = &""
-hit_objects = Array[ExtResource("4_dgrkh")]([])
-timing_points = Array[ExtResource("7_77oq2")]([])
+[ext_resource type="Shader" path="res://level/demo/resources/shaders/outline_inverted_hull.gdshader" id="12_xqpqb"]
 
 [sub_resource type="Gradient" id="Gradient_1384c"]
 offsets = PackedFloat32Array(0, 0.843284, 1)
@@ -79,7 +66,14 @@ roughness = 0.5
 [sub_resource type="BoxMesh" id="BoxMesh_t7k83"]
 size = Vector3(2.5, 0.9, 1)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eutv1"]
+render_priority = 0
+shader = ExtResource("12_xqpqb")
+shader_parameter/outline_color = Color(0.613133, 0.363821, 0.445922, 1)
+shader_parameter/outline_size = 1.025
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fune"]
+next_pass = SubResource("ShaderMaterial_eutv1")
 albedo_color = Color(0.849386, 0.500657, 0.733534, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_fu4dw"]
@@ -148,15 +142,44 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="Demo" type="Node" node_paths=PackedStringArray("beatmap_player")]
+[node name="Demo" type="Node" node_paths=PackedStringArray("audio_controller", "ruleset")]
 script = ExtResource("1_ih5o8")
-beatmap_file = "res://level/common/resources/beatmaps/deltaMAX.osu"
-audio_stream = ExtResource("2_ox4yn")
-player_scene_path = "res://rulesets/mania/mania_player.tscn"
-beatmap_player = NodePath("BeatmapPlayer2")
+beatmap_file = "res://level/common/resources/beatmaps/last_wish.osu"
+audio_stream = ExtResource("2_nxfsd")
+audio_controller = NodePath("BeatmapAudioController")
+ruleset = NodePath("ManiaRuleset")
 
-[node name="BeatmapPlayer2" parent="." instance=ExtResource("3_0joa5")]
-beatmap = SubResource("Resource_4sgbp")
+[node name="BeatmapAudioController" parent="." instance=ExtResource("3_0joa5")]
+
+[node name="ManiaRuleset" type="Node" parent="." node_paths=PackedStringArray("playfield_center")]
+script = ExtResource("4_r15qc")
+note_scene = ExtResource("5_nnn8j")
+long_note_scene = ExtResource("6_r3dju")
+scroll_speed = 2000.0
+playfield_center = NodePath("PlayfieldCenter")
+
+[node name="PlayfieldCenter" type="Control" parent="ManiaRuleset"]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ManiaRuleset/PlayfieldCenter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -1.0
+offset_right = 500.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MetronomeAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6u1vg")
@@ -173,7 +196,7 @@ offset_top = -85.0
 offset_right = 516.0
 grow_horizontal = 2
 grow_vertical = 0
-track = NodePath("../BeatmapPlayer2/Track")
+track = NodePath("../BeatmapAudioController/Track")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ttodm")
@@ -216,7 +239,7 @@ mesh = SubResource("BoxMesh_t7k83")
 skeleton = NodePath("../../..")
 
 [node name="CuttingBoardMesh" type="MeshInstance3D" parent="Geometry/Playfield"]
-transform = Transform3D(0.998579, 0, 0.0532946, 0, 1, 0, -0.0532946, 0, 0.998579, 0, 0.943286, 0.268152)
+transform = Transform3D(0.998579, 0, 0.0532946, 0, 0.5, 0, -0.0532946, 0, 0.998579, 0, 0.963799, 0.268152)
 material_override = SubResource("StandardMaterial3D_8fune")
 mesh = ExtResource("12_hmrda")
 
@@ -298,6 +321,7 @@ draw_pass_1 = SubResource("QuadMesh_ucoxw")
 
 [node name="CameraTrack" type="Path3D" parent="."]
 curve = SubResource("Curve3D_rhwwo")
+script = ExtResource("11_ao7g8")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
 transform = Transform3D(0.912455, -0.10701, 0.394538, -7.44936e-09, 0.965003, 0.261742, -0.408776, -0.238864, 0.880675, 1.934, 4, 6.513)
@@ -310,7 +334,7 @@ transform = Transform3D(1.00002, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 current = true
 fov = 55.0
 
-[connection signal="on_beat" from="BeatmapPlayer2" to="." method="_on_beatmap_player_2_on_beat"]
-[connection signal="timing_changed" from="BeatmapPlayer2" to="." method="_on_beatmap_player_2_timing_changed"]
+[connection signal="beat" from="BeatmapAudioController" to="." method="_on_beatmap_audio_controller_beat"]
+[connection signal="timing_changed" from="BeatmapAudioController" to="." method="_on_beatmap_audio_controller_timing_changed"]
 
-[editable path="BeatmapPlayer2"]
+[editable path="BeatmapAudioController"]
