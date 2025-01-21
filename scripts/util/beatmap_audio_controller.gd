@@ -4,7 +4,7 @@ class_name BeatmapAudioController extends Node
 ## Called on an BPM aligned interval
 signal beat
 ## Called when the position in the track is changed
-signal position_changed
+signal seeked(delta : float)
 ## Called when beatmap playback is finished
 signal finished
 ## Called when the current timing point changes
@@ -47,8 +47,9 @@ func play(from_position: float = INF) -> void:
 ## Moves the audio track position to [code]to_position[/code], if the track is
 ## currently playing.
 func seek(to_position: float) -> void:
-	if not has_started: return
+	if not has_started or time == to_position: return
 
+	var old_time := time
 	time = minf(to_position, stream.get_length())
 	# Determine whether the audio stream should be playing or not
 	if time >= 0.0 and time < stream.get_length():
@@ -66,7 +67,7 @@ func seek(to_position: float) -> void:
 		_set_new_timing_point(maxi(0, i - 1))
 		break
 	next_beat_time = _get_beat_aligned_time(time + timing_point.beat_length)
-	position_changed.emit()
+	seeked.emit(to_position - old_time)
 
 func _process(delta: float) -> void:
 	if not has_started: return

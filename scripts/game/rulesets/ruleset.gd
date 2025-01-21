@@ -4,8 +4,6 @@ class_name Ruleset extends Node
 
 @export var beatmap: Beatmap
 
-@export var current_time: float
-
 #@export var last_playback_position: float
 
 #@export var time_increase: float

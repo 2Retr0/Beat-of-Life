@@ -8,7 +8,7 @@
 script = ExtResource("1_4mdus")
 note_scene = ExtResource("2_uquip")
 long_note_scene = ExtResource("3_ro47g")
-scroll_speed = 2000.0
+scroll_speed = 0.5
 playfield_center = NodePath("PlayfieldCenter")
 
 [node name="PlayfieldCenter" type="Control" parent="."]

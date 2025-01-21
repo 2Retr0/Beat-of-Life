@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://cj17kj5vrbqa1"]
+[gd_scene load_steps=43 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
 [ext_resource type="AudioStream" uid="uid://4qiuenbwaitp" path="res://level/common/resources/beatmaps/last_wish.ogg" id="2_nxfsd"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/playables/mania_note_playable.tscn" id="5_nnn8j"]
 [ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
 [ext_resource type="AudioStream" uid="uid://cxyhwvdovsluw" path="res://level/common/resources/samples/metronome.mp3" id="8_6u1vg"]
+[ext_resource type="Script" path="res://level/common/resources/shaders/compositor/compositor_effect_gaussian_blur.gd" id="9_1b37s"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/audio_scrubber.tscn" id="9_ikp7r"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/checkerboard.gdshader" id="10_pbh8e"]
 [ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://level/demo/resources/beveled_cube_xz.obj" id="11_4saay"]
@@ -45,6 +46,19 @@ volumetric_fog_ambient_inject = 0.15
 adjustment_enabled = true
 adjustment_saturation = 1.15
 adjustment_color_correction = SubResource("GradientTexture1D_o0bkx")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_8b6su"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("9_1b37s")
+strength = 1.0
+
+[sub_resource type="Compositor" id="Compositor_3ede0"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_8b6su")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0hcv8"]
 render_priority = 0
@@ -143,6 +157,7 @@ point_count = 2
 up_vector_enabled = false
 
 [node name="Demo" type="Node" node_paths=PackedStringArray("audio_controller", "ruleset")]
+process_mode = 3
 script = ExtResource("1_ih5o8")
 beatmap_file = "res://level/common/resources/beatmaps/last_wish.osu"
 audio_stream = ExtResource("2_nxfsd")
@@ -151,35 +166,13 @@ ruleset = NodePath("ManiaRuleset")
 
 [node name="BeatmapAudioController" parent="." instance=ExtResource("3_0joa5")]
 
-[node name="ManiaRuleset" type="Node" parent="." node_paths=PackedStringArray("playfield_center")]
+[node name="ManiaRuleset" type="Node" parent="." node_paths=PackedStringArray("playfield_center", "audio_controller")]
 script = ExtResource("4_r15qc")
 note_scene = ExtResource("5_nnn8j")
 long_note_scene = ExtResource("6_r3dju")
-scroll_speed = 2000.0
-playfield_center = NodePath("PlayfieldCenter")
-
-[node name="PlayfieldCenter" type="Control" parent="ManiaRuleset"]
-layout_mode = 3
-anchor_left = 0.5
-anchor_top = 0.75
-anchor_right = 0.5
-anchor_bottom = 0.75
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="ManiaRuleset/PlayfieldCenter"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -1.0
-offset_right = 500.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+scroll_speed = 0.5
+playfield_center = NodePath("../PlayfieldCenter")
+audio_controller = NodePath("../BeatmapAudioController")
 
 [node name="MetronomeAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6u1vg")
@@ -198,8 +191,33 @@ grow_horizontal = 2
 grow_vertical = 0
 track = NodePath("../BeatmapAudioController/Track")
 
+[node name="PlayfieldCenter" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="PlayfieldCenter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -1.0
+offset_right = 500.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 3
 environment = SubResource("Environment_ttodm")
+compositor = SubResource("Compositor_3ede0")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.907633, -0.363528, 0.209882, 0.253212, 0.872938, 0.416969, -0.334794, -0.32531, 0.884357, 0, 0, 0)
@@ -212,6 +230,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5
 
 [node name="FloorMesh" type="MeshInstance3D" parent="Geometry"]
 material_override = SubResource("ShaderMaterial_0hcv8")
+cast_shadow = 0
 instance_shader_parameters/tick = 2
 mesh = SubResource("PlaneMesh_fssr8")
 skeleton = NodePath("../..")
@@ -241,6 +260,7 @@ skeleton = NodePath("../../..")
 [node name="CuttingBoardMesh" type="MeshInstance3D" parent="Geometry/Playfield"]
 transform = Transform3D(0.998579, 0, 0.0532946, 0, 0.5, 0, -0.0532946, 0, 0.998579, 0, 0.963799, 0.268152)
 material_override = SubResource("StandardMaterial3D_8fune")
+cast_shadow = 0
 mesh = ExtResource("12_hmrda")
 
 [node name="WallMeshes" type="Node3D" parent="Geometry"]
@@ -312,6 +332,7 @@ skeleton = NodePath("../../..")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Geometry"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02012, 0, -1.19647)
+cast_shadow = 0
 amount = 512
 lifetime = 5.0
 preprocess = 5.0
