@@ -1,4 +1,3 @@
-@tool
 class_name Beatmap extends Resource
 
 @export var beatmap_set: BeatmapSet

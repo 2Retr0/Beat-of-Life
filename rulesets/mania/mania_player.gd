@@ -23,22 +23,24 @@ func play() -> void:
 		playables.clear()
 
 		relevance_index = 0
-		#if audio_controller.time < 3.0:
-			#return
 #
 		for i in len(beatmap.hit_objects):
-			if _is_relevant(beatmap.hit_objects[i]):
+			var hit_object := beatmap.hit_objects[i]
+			if _start_time(hit_object) - scroll_speed >= audio_controller.time:
 				relevance_index = i
 				break
-		#for i in range(relevance_index, len(beatmap.hit_objects)):
-			#var hit_object := beatmap.hit_objects[i]
-			#if not playables.has(hit_object) and _is_relevant(hit_object):
-				#_create_playable(hit_object)
-			#else: break
+		for i in range(relevance_index, beatmap.hit_objects.size()):
+			var hit_object := beatmap.hit_objects[i]
+			var is_relevant := _is_relevant(hit_object)
+
+			if not is_relevant:
+				break
+			else:
+				_create_playable(hit_object)
 		)
 
 func _process(delta: float) -> void:
-	#print(relevance_index, ' ', audio_controller.time)
+	print(relevance_index, ' ', audio_controller.time)
 	for i in range(relevance_index, beatmap.hit_objects.size()):
 		var hit_object := beatmap.hit_objects[i]
 		var is_relevant := _is_relevant(hit_object)
@@ -50,7 +52,7 @@ func _process(delta: float) -> void:
 		elif not is_visible:
 			if is_relevant:
 				_create_playable(hit_object)
-			else:
+			else: # Remove me to fix bugs
 				break
 
 func _create_playable(hit_object: HitObject) -> void:

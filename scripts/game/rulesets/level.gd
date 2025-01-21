@@ -14,7 +14,7 @@ func create_player(beatmap: Beatmap) -> BeatmapPlayer:
 	#player.initialize(beatmap)
 #
 	#return player
-	assert('FIXME')
+	assert(false, 'FIXME')
 	return null
 
 func create_composer() -> BeatmapComposer:

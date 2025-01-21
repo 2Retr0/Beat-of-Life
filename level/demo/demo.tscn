@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
 [ext_resource type="AudioStream" uid="uid://cxyhwvdovsluw" path="res://level/common/resources/samples/metronome.mp3" id="8_6u1vg"]
 [ext_resource type="Script" path="res://level/common/resources/shaders/compositor/compositor_effect_gaussian_blur.gd" id="9_1b37s"]
-[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/audio_scrubber.tscn" id="9_ikp7r"]
+[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://level/common/ui/audio_scrubber.tscn" id="9_ikp7r"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/checkerboard.gdshader" id="10_pbh8e"]
 [ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://level/demo/resources/beveled_cube_xz.obj" id="11_4saay"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://level/demo/resources/dust.png" id="11_57xmc"]

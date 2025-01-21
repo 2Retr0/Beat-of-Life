@@ -12,7 +12,7 @@ class Settings extends Object:
 
 	@export_category('sound')
 	@export var this_should_be_in_general_group := false
-	@export var audio_offset := -52.0*1e-3
+	@export var audio_offset := 0.0
 
 	@export_category('visual')
 	@export_group('display')

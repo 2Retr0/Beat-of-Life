@@ -69,7 +69,6 @@ func _render_callback(p_effect_callback_type: int, render_data: RenderData) -> v
 
 	var view_count := render_scene_buffers.get_view_count()
 	for view in range(view_count):
-		var scene_data := render_scene_data.get_uniform_buffer()
 		var color_image := render_scene_buffers.get_color_layer(view)
 		var transposed_image := render_scene_buffers.get_texture_slice(&'gaussian_blur', &'transpose', view, 0, 1, 1)
 

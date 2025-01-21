@@ -17,7 +17,7 @@ func _ready() -> void:
 
 	audio_controller.timing_points = beatmap.timing_points
 	audio_controller.stream = audio_stream
-	audio_controller.play()
+	audio_controller.play(30.0)
 	ruleset.play()
 
 #region --- SIGNALS FOR DEBUGGING REMOVE LATER!!! ---
