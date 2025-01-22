@@ -1,59 +1,69 @@
-class_name ManiaRuleset extends Ruleset
+class_name ManiaPlayer extends BeatmapPlayer
 
 @export var note_scene : PackedScene
+
 @export var long_note_scene : PackedScene
 
 ## Time (in seconds) for a hit object to travel to the playfield center
-@export var scroll_speed: float
+@export var scroll_time: float
 
 @export var playfield_center: Node
 
-@export var audio_controller : BeatmapAudioController
+@export var playables: Dictionary
 
-var playables: Dictionary
-var relevance_index := 0
+@export var create_index: int = 0
 
-func play() -> void:
+@export var dispose_index: int = 0
+
+func initialize(beatmap: Beatmap) -> void:
+	assert(beatmap is ManiaBeatmap, 'Beatmap is not mania beatmap')
+	
+	super.initialize(beatmap)
+	
+	for playable in playables.values():
+		playable.free()
+	playables.clear()
+	create_index = 0
+	dispose_index = 0
+	
 	# When seeked, fix relevance index
-	audio_controller.seeked.connect(func(delta : float):
+	audio_controller.seeked.connect(func(new_time: float):
 		await get_tree().process_frame
-
+		
 		for playable in playables.values():
 			playable.free()
 		playables.clear()
-
-		relevance_index = 0
-#
+		
 		for i in len(beatmap.hit_objects):
-			var hit_object := beatmap.hit_objects[i]
-			if _start_time(hit_object) - scroll_speed >= audio_controller.time:
-				relevance_index = i
+			if _is_relevant(beatmap.hit_objects[i]):
+				create_index = i
 				break
-		for i in range(relevance_index, beatmap.hit_objects.size()):
-			var hit_object := beatmap.hit_objects[i]
-			var is_relevant := _is_relevant(hit_object)
-
-			if not is_relevant:
-				break
-			else:
-				_create_playable(hit_object)
-		)
+		dispose_index = create_index
+	)
 
 func _process(delta: float) -> void:
-	print(relevance_index, ' ', audio_controller.time)
-	for i in range(relevance_index, beatmap.hit_objects.size()):
-		var hit_object := beatmap.hit_objects[i]
-		var is_relevant := _is_relevant(hit_object)
-		var is_visible := playables.has(hit_object)
-
-		if is_visible and not is_relevant:
-			_dispose_playable(hit_object)
-			relevance_index = i + 1
-		elif not is_visible:
-			if is_relevant:
-				_create_playable(hit_object)
-			else: # Remove me to fix bugs
+	for i in range(create_index, beatmap.hit_objects.size()):
+		var hit_object: HitObject = beatmap.hit_objects[i]
+		
+		if _is_relevant(hit_object):
+			_create_playable(hit_object)
+			create_index = i + 1
+		else:
+			if hit_object.time < audio_controller.time:
+				create_index = i + 1
+			else:
 				break
+	
+	var step_index: bool = true
+	for i in range(dispose_index, create_index):
+		var hit_object: HitObject = beatmap.hit_objects[i]
+		
+		if _is_relevant(hit_object):
+			step_index = false
+		else:
+			_dispose_playable(hit_object)
+			if step_index:
+				dispose_index = i + 1
 
 func _create_playable(hit_object: HitObject) -> void:
 	var playable : Variant
@@ -70,8 +80,9 @@ func _create_playable(hit_object: HitObject) -> void:
 	playables[hit_object] = playable
 
 func _dispose_playable(hit_object: HitObject) -> void:
-	playables[hit_object].queue_free()
-	playables.erase(hit_object)
+	if playables.has(hit_object):
+		playables[hit_object].free()
+		playables.erase(hit_object)
 
 func _start_time(hit_object: HitObject) -> float:
 	return hit_object.time
@@ -83,7 +94,7 @@ func _end_time(hit_object: HitObject) -> float:
 	return hit_object.time
 
 func _is_relevant(hit_object: HitObject) -> bool:
-	var early_relevance_time = scroll_speed
-	var late_relevance_time = 0.5
+	var early_relevance_time = scroll_time
+	var late_relevance_time = scroll_time / 2
 	return _start_time(hit_object) - early_relevance_time <= audio_controller.time and \
 			 _end_time(hit_object) + late_relevance_time >= audio_controller.time

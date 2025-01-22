@@ -1,8 +1,8 @@
 [gd_scene load_steps=43 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
-[ext_resource type="AudioStream" uid="uid://4qiuenbwaitp" path="res://level/common/resources/beatmaps/last_wish.ogg" id="2_nxfsd"]
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_audio_controller.tscn" id="3_0joa5"]
+[ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo/demo_level.tres" id="2_31n42"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="3_0joa5"]
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
 [ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/playables/mania_note_playable.tscn" id="5_nnn8j"]
 [ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
@@ -156,23 +156,19 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="Demo" type="Node" node_paths=PackedStringArray("audio_controller", "ruleset")]
+[node name="Demo" type="Node"]
 process_mode = 3
 script = ExtResource("1_ih5o8")
-beatmap_file = "res://level/common/resources/beatmaps/last_wish.osu"
-audio_stream = ExtResource("2_nxfsd")
-audio_controller = NodePath("BeatmapAudioController")
-ruleset = NodePath("ManiaRuleset")
+level = ExtResource("2_31n42")
 
-[node name="BeatmapAudioController" parent="." instance=ExtResource("3_0joa5")]
-
-[node name="ManiaRuleset" type="Node" parent="." node_paths=PackedStringArray("playfield_center", "audio_controller")]
+[node name="ManiaPlayer" type="Node" parent="." node_paths=PackedStringArray("playfield_center")]
 script = ExtResource("4_r15qc")
 note_scene = ExtResource("5_nnn8j")
 long_note_scene = ExtResource("6_r3dju")
-scroll_speed = 0.5
+scroll_time = 0.5
 playfield_center = NodePath("../PlayfieldCenter")
-audio_controller = NodePath("../BeatmapAudioController")
+
+[node name="AudioController" parent="ManiaPlayer" instance=ExtResource("3_0joa5")]
 
 [node name="MetronomeAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6u1vg")
@@ -189,7 +185,7 @@ offset_top = -85.0
 offset_right = 516.0
 grow_horizontal = 2
 grow_vertical = 0
-track = NodePath("../BeatmapAudioController/Track")
+track = NodePath("../ManiaPlayer/AudioController/AudioPlayer")
 
 [node name="PlayfieldCenter" type="Control" parent="."]
 layout_mode = 3
@@ -355,7 +351,7 @@ transform = Transform3D(1.00002, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 current = true
 fov = 55.0
 
-[connection signal="beat" from="BeatmapAudioController" to="." method="_on_beatmap_audio_controller_beat"]
-[connection signal="timing_changed" from="BeatmapAudioController" to="." method="_on_beatmap_audio_controller_timing_changed"]
+[connection signal="beat_reached" from="ManiaPlayer/AudioController" to="." method="_on_audio_controller_beat_reached"]
+[connection signal="timing_changed" from="ManiaPlayer/AudioController" to="." method="_on_audio_controller_timing_changed"]
 
-[editable path="BeatmapAudioController"]
+[editable path="ManiaPlayer/AudioController"]

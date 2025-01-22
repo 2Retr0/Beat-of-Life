@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://5q0crfy66di6"]
 
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/beatmap_audio_controller.tscn" id="1_qkmuv"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="1_qkmuv"]
 [ext_resource type="Script" path="res://level/calibration/calibration_screen.gd" id="1_r4sw2"]
 [ext_resource type="Shader" path="res://level/calibration/resources/shaders/background.gdshader" id="5_ok8f4"]
 [ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://level/calibration/resources/double_note.png" id="6_4b4ir"]

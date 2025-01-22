@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1qbfbxp0ditp"]
+
+[ext_resource type="Script" path="res://scripts/game/audio_controller.gd" id="1_8oxub"]
+
+[node name="AudioController" type="Node"]
+process_mode = 1
+script = ExtResource("1_8oxub")
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -5.0
+
+[connection signal="finished" from="AudioPlayer" to="." method="_on_track_finished"]

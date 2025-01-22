@@ -1,22 +1,24 @@
-class_name ManiaParser extends Object
+class_name LoadManiaBeatmap extends BeatmapSource
 
-static func load_beatmap(beatmap_file_path: String) -> ManiaBeatmap:
+@export_file('*.osu') var path : String
+
+func get_beatmap() -> Beatmap:
 	var beatmap = ManiaBeatmap.new()
-	#beatmap.ruleset = load('res://rulesets/mania/mania_ruleset.tres')
-
-	var beatmap_set = BeatmapSet.new()
-	beatmap.beatmap_set = beatmap_set
-
-	assert(beatmap_file_path.ends_with('.osu'), 'Beatmap path must be a .osu file!')
-	var file := FileAccess.open(beatmap_file_path, FileAccess.READ)
-
+	
+	assert(path.ends_with('.osu'), 'Beatmap path must be a .osu file!')
+	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
+	
 	# Read the file line by line
 	while !file.eof_reached():
 		var line = file.get_line().strip_edges()
-		if line == '[Metadata]':
-			beatmap_set.title = file.get_line().trim_prefix('Title:').strip_edges()
+		if line == '[General]':
+			var audio_filename = file.get_line().trim_prefix('AudioFilename:').strip_edges()
+			var audio_path = '%s/%s' % [path.get_base_dir(), audio_filename]
+			beatmap.track = load(audio_path) as AudioStream
+		elif line == '[Metadata]':
+			beatmap.title = file.get_line().trim_prefix('Title:').strip_edges()
 			file.get_line() # Skip title unicode
-			beatmap_set.artist = file.get_line().trim_prefix('Artist:').strip_edges()
+			beatmap.artist = file.get_line().trim_prefix('Artist:').strip_edges()
 			file.get_line() # Skip artist unicode
 			beatmap.difficulty_creator = file.get_line().trim_prefix('Creator:').strip_edges()
 			beatmap.difficulty_name = file.get_line().trim_prefix('Version:').strip_edges()
@@ -46,9 +48,10 @@ static func load_beatmap(beatmap_file_path: String) -> ManiaBeatmap:
 				elif type == 1 << 7:
 					var duration = (line_parsed[5].split(':')[0] as int) * 1e-3 - time
 					beatmap.hit_objects.push_back(ManiaLongNote.new(time, lane, duration))
+	
 	file.close()
-	print('(beatmap) loaded: ' + beatmap_file_path)
-	print('   --- track title:  %s' % beatmap.beatmap_set.title)
+	print('(beatmap) loaded: ' + path)
+	print('   --- track title:  %s' % beatmap.title)
 	print('   --- num timings:  %d' % len(beatmap.timing_points))
 	print('   --- num objects:  %d' % len(beatmap.hit_objects))
 	print('   --- start offset: %fs' % beatmap.timing_points[0].time)
