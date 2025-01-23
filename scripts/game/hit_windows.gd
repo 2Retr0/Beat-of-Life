@@ -5,6 +5,9 @@ class_name HitWindows extends Resource
 func _init(hit_windows: Array[HitWindow] = []) -> void:
 	self.hit_windows = hit_windows
 
+func get_max_extent() -> float:
+	return hit_windows[len(hit_windows) - 1].extent
+
 func get_result(delta: float) -> HitResult.Enum:
 	var result = HitResult.Enum.None
 	var least_extent = INF

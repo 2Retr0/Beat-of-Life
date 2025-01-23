@@ -8,7 +8,7 @@ class_name ManiaLongNotePlayable extends Control
 
 func _ready() -> void:
 	var beatmap := player.beatmap as ManiaBeatmap
-	position.x = 100 * (long_note.lane - beatmap.lane_count / 2.0 + 0.5)
+	position.x = 150 * (long_note.lane - beatmap.lane_count / 2.0 + 0.5)
 	position.y = (player.audio_controller.time - long_note.time) * player.playfield_center.position.y / player.scroll_time
 
 	body.position.y = -long_note.duration * player.playfield_center.position.y / player.scroll_time
@@ -18,3 +18,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	position.y = (player.audio_controller.time - long_note.time) * player.playfield_center.position.y / player.scroll_time
+
+func update_result(hit_result: HitResult.Enum) -> void:
+	if hit_result == HitResult.Enum.None:
+		modulate = Color.WHITE
+	elif hit_result == HitResult.Enum.Miss:
+		modulate = Color.RED
+	elif hit_result == HitResult.Enum.Good:
+		modulate = Color.YELLOW
+	elif hit_result == HitResult.Enum.Perfect:
+		modulate = Color.GREEN_YELLOW
