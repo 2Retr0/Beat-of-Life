@@ -174,7 +174,7 @@ level = ExtResource("2_31n42")
 script = ExtResource("4_r15qc")
 note_scene = ExtResource("5_nnn8j")
 long_note_scene = ExtResource("6_r3dju")
-scroll_time = 0.5
+scroll_time = 0.75
 playfield_center = NodePath("../PlayfieldCenter")
 
 [node name="AudioController" parent="ManiaPlayer" instance=ExtResource("3_0joa5")]
