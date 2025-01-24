@@ -29,18 +29,29 @@ class_name ManiaPlayer extends BeatmapPlayer
 @export var capturing_objects: Array[HitObject]
 
 # List of hit objects capable of capturing each lane/key
-@export var capturables: Array[Array]
-
-# List of master hit object list indices for each hit object in the above list
-@export var index_list: Array[Array]
+@export var lane_objects: Array[Array]
 
 # Indices of first hit objects able to capture each lane/key
-@export var capturable_indices: Array[int]
+@export var lane_search_indices: Array[int]
 
 # Hit results of all hit objects
 @export var hit_results: Array[HitResult.Enum]
 
 @onready var capture_dummy: HitObject = HitObject.new(-1)
+
+@export var results: int
+
+@export var cumulative_accuracy: float
+
+@export var accuracy: float
+
+@export var score: int
+
+@export var combo: int
+
+@export var auto: bool
+
+@export var auto_index: int
 
 func initialize(beatmap: Beatmap) -> void:
 	assert(beatmap is ManiaBeatmap, 'Beatmap is not mania beatmap')
@@ -54,17 +65,15 @@ func initialize(beatmap: Beatmap) -> void:
 	dispose_index = 0
 	
 	capturing_objects.clear()
-	capturables.clear()
-	index_list.clear()
-	capturable_indices.clear()
+	lane_objects.clear()
+	lane_search_indices.clear()
 	hit_results.clear()
 	
 	var lane_count = (beatmap as ManiaBeatmap).lane_count
 	for i in range(lane_count):
 		capturing_objects.append(null)
-		capturables.append([])
-		index_list.append([])
-		capturable_indices.append(0)
+		lane_objects.append([])
+		lane_search_indices.append(0)
 	
 	for i in range(len(beatmap.hit_objects)):
 		hit_results.append(HitResult.Enum.None)
@@ -73,12 +82,18 @@ func initialize(beatmap: Beatmap) -> void:
 		var hit_object: HitObject = beatmap.hit_objects[i]
 		if hit_object is ManiaNote:
 			var lane: int = (hit_object as ManiaNote).lane
-			capturables[lane].append(hit_object)
-			index_list[lane].append(i)
+			lane_objects[lane].append(i)
 		elif hit_object is ManiaLongNote:
 			var lane: int = (hit_object as ManiaLongNote).lane
-			capturables[lane].append(hit_object)
-			index_list[lane].append(i)
+			lane_objects[lane].append(i)
+	
+	results = 0
+	cumulative_accuracy = 0
+	accuracy = 1
+	score = 0
+	combo = 0
+	
+	auto_index = 0
 	
 	# When seeked, fix relevance index
 	audio_controller.seeked.connect(func(new_time: float):
@@ -123,43 +138,47 @@ func _process(delta: float) -> void:
 	var input_map = input_maps[mania_beatmap.lane_count]
 	
 	var audio_time = audio_controller.time
-	for i in range(len(capturable_indices)):
-		var capture_list = capturables[i]
-		var current_index = capturable_indices[i]
-		while current_index < len(capture_list):
-			var current_object: HitObject = capture_list[current_index]
+	for i in range(len(lane_search_indices)):
+		var current_list = lane_objects[i]
+		var current_index = lane_search_indices[i]
+		while current_index < len(current_list):
+			var master_index = current_list[current_index]
+			var current_object: HitObject = beatmap.hit_objects[master_index]
 			var object_time: float = current_object.time
 			if object_time < audio_time and not current_object.is_capturable(audio_time):
-				var master_index = index_list[i][current_index]
-				hit_results[master_index] = HitResult.Enum.Miss
-				if playables.has(current_object):
-					playables[current_object].update_result(hit_results[master_index])
+				_record_result(master_index, HitResult.Enum.Miss)
 				current_index += 1
 			else:
 				break
-		capturable_indices[i] = current_index
+		lane_search_indices[i] = current_index
 	
 	for i in range(len(input_map)):
 		var is_pressed = Input.is_key_pressed(input_map[i])
 		var is_captured = capturing_objects[i] != null
 		
-		var capture_list = capturables[i]
-		var current_index = capturable_indices[i]
+		var current_list = lane_objects[i]
+		var current_index = lane_search_indices[i]
 		
 		if is_pressed and not is_captured:
-			if current_index < len(capture_list):
-				var current_object: HitObject = capture_list[current_index]
+			if current_index < len(current_list):
+				var master_index = current_list[current_index]
+				var current_object: HitObject = beatmap.hit_objects[master_index]
 				if current_object.is_capturable(audio_time):
 					capturing_objects[i] = current_object
-					var master_index = index_list[i][current_index]
-					hit_results[master_index] = current_object.get_result(audio_time)
-					if playables.has(current_object):
-						playables[current_object].update_result(hit_results[master_index])
-					capturable_indices[i] = current_index + 1
+					_record_result(master_index, current_object.get_result(audio_time))
+					lane_search_indices[i] = current_index + 1
 				else:
 					capturing_objects[i] = capture_dummy
 		elif not is_pressed and is_captured:
 			capturing_objects[i] = null
+	
+	if auto:
+		for i in range(auto_index, len(beatmap.hit_objects)):
+			if beatmap.hit_objects[i].time <= audio_controller.time:
+				_record_result(i, HitResult.Enum.Perfect)
+				auto_index += 1
+			else:
+				break
 
 func _create_playable(hit_object: HitObject) -> void:
 	var playable : Variant
@@ -194,3 +213,19 @@ func _is_relevant(hit_object: HitObject) -> bool:
 	var late_relevance_time = scroll_time / 2
 	return _start_time(hit_object) - early_relevance_time <= audio_controller.time and \
 			 _end_time(hit_object) + late_relevance_time >= audio_controller.time
+
+func _record_result(index: int, result: HitResult.Enum):
+	if hit_results[index] == HitResult.Enum.None and result != HitResult.Enum.None:
+		hit_results[index] = result
+		
+		var hit_object: HitObject = beatmap.hit_objects[index]
+		if playables.has(hit_object):
+			playables[hit_object].update_result(result)
+		
+		results += 1
+		
+		cumulative_accuracy += HitResult.get_accuracy(result)
+		accuracy = cumulative_accuracy / results
+		
+		score += HitResult.get_score(result) * (1 + combo / 100.0)
+		combo = HitResult.get_combo(result, combo)

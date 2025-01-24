@@ -6,6 +6,16 @@ extends Node
 
 @onready var audio_controller: AudioController = $ManiaPlayer/AudioController
 
+@onready var score_text = $ScoreText
+
+@onready var combo_text = $ComboText
+
+@onready var accuracy_text = $AccuracyText
+
+@onready var metronome = $MetronomeAudioPlayer
+
+@onready var scrubber = $AudioScrubber
+
 func _ready() -> void:
 	var beatmap = level.beatmaps[0].get_beatmap()
 	beatmap_player.initialize(beatmap)
@@ -34,19 +44,22 @@ func _input(event: InputEvent) -> void:
 				effect.enabled = false
 
 func _process(delta: float) -> void:
-	if audio_controller.timing != null:
-		$AudioScrubber.title = 'BPM: %d, T: %d, P#: %d, CI: %d, DI: %d' % [audio_controller.timing.bpm, audio_controller.time, len(beatmap_player.playables), beatmap_player.create_index, beatmap_player.dispose_index]
+	score_text.text = '%d' % beatmap_player.score
+	combo_text.text = '%dx' % beatmap_player.combo
+	accuracy_text.text = '%d%%' % (beatmap_player.accuracy * 100)
+	
+	#if audio_controller.timing != null:
+		#$AudioScrubber.title = 'BPM: %d, T: %d, P#: %d, CI: %d, DI: %d' % [audio_controller.timing.bpm, audio_controller.time, len(beatmap_player.playables), beatmap_player.create_index, beatmap_player.dispose_index]
 
 ## ALERT: Remove this signal callback later
 var tick := 0
 func _on_audio_controller_beat_reached(new_beat: Beat) -> void:
-	$MetronomeAudioPlayer.play()
+	metronome.play()
 	tick += 1
 	$Geometry/FloorMesh.set_instance_shader_parameter('tick', tick)
 
 ## FIXME: Remove this signal callback later
 func _on_audio_controller_timing_changed(new_timing_point: TimingPoint) -> void:
 	if new_timing_point != null:
-		pass
-		#$AudioScrubber.title = 'BPM: %d' % new_timing_point.bpm
+		scrubber.title = 'BPM: %d' % new_timing_point.bpm
 #endregion

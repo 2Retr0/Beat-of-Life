@@ -13,9 +13,9 @@ playfield_center = NodePath("PlayfieldCenter")
 [node name="PlayfieldCenter" type="Control" parent="."]
 layout_mode = 3
 anchor_left = 0.5
-anchor_top = 0.75
+anchor_top = 0.8
 anchor_right = 0.5
-anchor_bottom = 0.75
+anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 

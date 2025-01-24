@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cj17kj5vrbqa1"]
+[gd_scene load_steps=46 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
 [ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo/demo_level.tres" id="2_31n42"]
@@ -15,6 +15,15 @@
 [ext_resource type="Script" path="res://level/demo/camera_track.gd" id="11_ao7g8"]
 [ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://level/demo/resources/cutting_board.obj" id="12_hmrda"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/outline_inverted_hull.gdshader" id="12_xqpqb"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2qmyt"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_xdar3"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrv80"]
+font_size = 30
 
 [sub_resource type="Gradient" id="Gradient_1384c"]
 offsets = PackedFloat32Array(0, 0.843284, 1)
@@ -172,7 +181,7 @@ playfield_center = NodePath("../PlayfieldCenter")
 
 [node name="MetronomeAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_6u1vg")
-volume_db = 5.0
+volume_db = -10.0
 
 [node name="AudioScrubber" parent="." node_paths=PackedStringArray("track") instance=ExtResource("9_ikp7r")]
 anchors_preset = 7
@@ -187,12 +196,36 @@ grow_horizontal = 2
 grow_vertical = 0
 track = NodePath("../ManiaPlayer/AudioController/AudioPlayer")
 
+[node name="ScoreText" type="Label" parent="."]
+offset_right = 86.0
+offset_bottom = 42.0
+text = "12345"
+label_settings = SubResource("LabelSettings_2qmyt")
+
+[node name="ComboText" type="Label" parent="."]
+offset_top = 40.0
+offset_right = 86.0
+offset_bottom = 82.0
+text = "123x"
+label_settings = SubResource("LabelSettings_xdar3")
+
+[node name="AccuracyText" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -77.0
+offset_bottom = 42.0
+grow_horizontal = 0
+text = "100%"
+label_settings = SubResource("LabelSettings_vrv80")
+horizontal_alignment = 2
+
 [node name="PlayfieldCenter" type="Control" parent="."]
 layout_mode = 3
 anchor_left = 0.5
-anchor_top = 0.75
+anchor_top = 0.8
 anchor_right = 0.5
-anchor_bottom = 0.75
+anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 2
 

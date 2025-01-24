@@ -4,15 +4,18 @@ class_name HitObject extends Resource
 	get:
 		return time + SettingsManager.settings.audio_offset
 
+static var default_hit_windows: HitWindows = HitWindows.new([
+	HitWindow.new(HitResult.Enum.Perfect, 0.05),
+	HitWindow.new(HitResult.Enum.Good, 0.1),
+	HitWindow.new(HitResult.Enum.Miss, 0.15)
+])
+
 func _init(time: float = 0) -> void:
 	self.time = time
 
 func get_default_hit_windows() -> HitWindows:
-	return HitWindows.new([
-		HitWindow.new(HitResult.Enum.Perfect, 0.05),
-		HitWindow.new(HitResult.Enum.Good, 0.1),
-		HitWindow.new(HitResult.Enum.Miss, 0.15)
-	])
+	return default_hit_windows
+	
 
 func is_capturable(time: float) -> bool:
 	return abs(time - self.time) <= get_default_hit_windows().get_max_extent()
