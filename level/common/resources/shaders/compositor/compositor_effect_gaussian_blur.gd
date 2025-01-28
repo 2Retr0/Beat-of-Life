@@ -48,7 +48,6 @@ func _render_callback(p_effect_callback_type: int, render_data: RenderData) -> v
 	# Get our render scene buffers object, this gives us access to our render buffers.
 	# Note that implementation differs per renderer hence the need for the cast.
 	var render_scene_buffers : RenderSceneBuffersRD = render_data.get_render_scene_buffers()
-	var render_scene_data : RenderSceneDataRD = render_data.get_render_scene_data()
 	if not render_scene_buffers: return
 
 	# Get our render size, this is the 3D render resolution!

@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6pwjcfnbddri"]
+[gd_scene load_steps=4 format=3 uid="uid://c6pwjcfnbddri"]
 
 [ext_resource type="Script" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.gd" id="1_5h8h3"]
+
+[sub_resource type="Shader" id="Shader_cfm08"]
+code = "shader_type canvas_item;
+
+uniform float uv_cutoff : hint_range(0, 1) = 0.8;
+
+void fragment() {
+	// Fade in
+	COLOR = mix(vec4(1), COLOR, clamp(SCREEN_UV.y*4.0 + 0.5, 0.0, 1.0));
+	// Godot doesn't permit canvas item shaders to have shader instance parameter,
+	// so we use the alpha channel of the modulate to determine whether to cutoff
+	// or not!
+	COLOR.a *= step(SCREEN_UV.y*step(1.0, COLOR.a), uv_cutoff);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pugiy"]
+shader = SubResource("Shader_cfm08")
+shader_parameter/uv_cutoff = 0.8
 
 [node name="ManiaLongNotePlayable" type="Control"]
 modulate = Color(1, 1, 1, 0)
@@ -9,14 +27,16 @@ anchors_preset = 0
 script = ExtResource("1_5h8h3")
 
 [node name="Body" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_pugiy")
 layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -70.0
-offset_top = -100.0
+offset_top = -15.0
 offset_right = 70.0
+offset_bottom = 15.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2

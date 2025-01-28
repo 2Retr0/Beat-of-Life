@@ -44,10 +44,11 @@ func _input(event: InputEvent) -> void:
 				effect.enabled = false
 
 func _process(delta: float) -> void:
-	score_text.text = '%d' % beatmap_player.score
-	combo_text.text = '%dx' % beatmap_player.combo
-	accuracy_text.text = '%d%%' % (beatmap_player.accuracy * 100)
-	
+	# NOTE: Some nice value smoothing courtesy of me :3
+	score_text.text = '%d' % lerpf(int(score_text.text), beatmap_player.score.score, clampf(abs(int(score_text.text) - beatmap_player.score.score)*0.035*delta, 0.0, 1.0))
+	combo_text.text = '%dx' % beatmap_player.score.combo
+	accuracy_text.text = '%.2f%%' % (beatmap_player.score.accuracy * 100.0)
+
 	#if audio_controller.timing != null:
 		#$AudioScrubber.title = 'BPM: %d, T: %d, P#: %d, CI: %d, DI: %d' % [audio_controller.timing.bpm, audio_controller.time, len(beatmap_player.playables), beatmap_player.create_index, beatmap_player.dispose_index]
 

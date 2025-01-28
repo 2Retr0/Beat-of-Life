@@ -4,10 +4,10 @@ class_name LoadManiaBeatmap extends BeatmapSource
 
 func get_beatmap() -> Beatmap:
 	var beatmap = ManiaBeatmap.new()
-	
+
 	assert(path.ends_with('.osu'), 'Beatmap path must be a .osu file!')
 	var file: FileAccess = FileAccess.open(path, FileAccess.READ)
-	
+
 	# Read the file line by line
 	while !file.eof_reached():
 		var line = file.get_line().strip_edges()
@@ -48,7 +48,7 @@ func get_beatmap() -> Beatmap:
 				elif type == 1 << 7:
 					var duration = (line_parsed[5].split(':')[0] as int) * 1e-3 - time
 					beatmap.hit_objects.push_back(ManiaLongNote.new(time, lane, duration))
-	
+
 	file.close()
 	print('(beatmap) loaded: ' + path)
 	print('   --- track title:  %s' % beatmap.title)

@@ -9,10 +9,7 @@ func get_max_extent() -> float:
 	return hit_windows[len(hit_windows) - 1].extent
 
 func get_result(delta: float) -> HitResult.Enum:
-	var result = HitResult.Enum.None
-	var least_extent = INF
 	for hit_window in hit_windows:
-		if hit_window.extent < least_extent and hit_window.extent >= abs(delta):
-			result = hit_window.result
-			least_extent = hit_window.extent
-	return result
+		if abs(delta) >= hit_window.extent: continue
+		return hit_window.result
+	return HitResult.Enum.Miss

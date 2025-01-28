@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_pdcda"]
 script = ExtResource("2_upjhf")
-path = "res://level/common/resources/beatmaps/coffee.osu"
+path = "res://level/common/resources/beatmaps/wizdomiot.osu"
 
 [resource]
 script = ExtResource("2_nvd76")

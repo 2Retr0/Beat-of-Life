@@ -9,7 +9,7 @@ class_name Level extends Resource
 func play(source: BeatmapSource) -> BeatmapPlayer:
 	if not beatmaps.has(source):
 		return
-	
+
 	var scene = load(player_scene_path)
 
 	var player := scene.instantiate() as BeatmapPlayer
