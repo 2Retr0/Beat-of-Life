@@ -1,3 +1,4 @@
+# A single hit window with half-width equal to extent and an associated result
 class_name HitWindow extends Resource
 
 @export var result: HitResult.Enum

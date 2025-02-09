@@ -1,3 +1,4 @@
+# Helps determine the bpm and timings of a beatmap
 class_name TimingPoint extends Resource
 
 @export var time: float

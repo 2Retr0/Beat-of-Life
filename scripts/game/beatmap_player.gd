@@ -1,3 +1,4 @@
+# Responsible for controlling all the elements of a beatmap in play
 class_name BeatmapPlayer extends Node
 
 @export var beatmap: Beatmap

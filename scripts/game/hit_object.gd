@@ -1,3 +1,4 @@
+# Represents a single object in a beatmap
 class_name HitObject extends Resource
 
 @export var time: float :

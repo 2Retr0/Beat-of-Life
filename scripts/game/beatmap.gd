@@ -1,3 +1,4 @@
+# Represents a difficulty of a level
 class_name Beatmap extends Resource
 
 @export var title: StringName
@@ -25,6 +26,7 @@ func get_object_start() -> float:
 		return INF
 	return hit_objects[0].time
 
+# Get the beat at or immediately before this time
 func get_beat(time: float) -> Beat:
 	var timing = get_current_timing(time)
 	if timing == null:

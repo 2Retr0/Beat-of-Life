@@ -1,3 +1,5 @@
+# Synchronizes the game time with the audio time
+# Has signals for whenever a new beat or timing point is reached
 class_name AudioController extends Node
 
 @export var beatmap_player: BeatmapPlayer
@@ -39,6 +41,8 @@ func initialize(beatmap_player: BeatmapPlayer):
 func play() -> void:
 	started = true
 
+	# Initialize the time to the beginning of the audio file
+	# Or a measure's time ahead of the first object's timing point, whichever is earlier
 	var start_timing = beatmap.get_current_timing(beatmap.get_object_start())
 	var measure_ahead = start_timing.time - start_timing.beat_length * start_timing.meter
 	time = min(measure_ahead, 0)
@@ -80,8 +84,10 @@ func _process(delta: float) -> void:
 		return
 
 	if time >= 0:
+		# Synchronize time to audio
 		time = audio_player.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
 	else:
+		# Audio has not yet started
 		time += delta
 		if time >= 0:
 			audio_player.play()
@@ -106,6 +112,6 @@ func _process(delta: float) -> void:
 		next_beat_time = INF if next_beat == null else next_beat.time
 		next_timing_time = INF if next_timing == null else next_timing.time
 
-
 func _on_track_finished() -> void:
+	audio_player.stop()
 	finished.emit()

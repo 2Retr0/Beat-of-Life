@@ -1,3 +1,4 @@
+# A series of hit windows that determines the result based on the player's hit error
 class_name HitWindows extends Resource
 
 @export var hit_windows: Array[HitWindow]
