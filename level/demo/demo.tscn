@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://level/common/resources/samples/metronome.wav" id="7_knupc"]
 [ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://level/common/resources/samples/hit.wav" id="8_qs0pt"]
-[ext_resource type="Script" path="res://level/common/resources/shaders/compositor/compositor_effect_gaussian_blur.gd" id="9_1b37s"]
+[ext_resource type="Script" path="res://level/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="9_1b37s"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://level/common/ui/audio_scrubber.tscn" id="9_ikp7r"]
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/checkerboard.gdshader" id="10_pbh8e"]
 [ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://level/demo/resources/beveled_cube_xz.obj" id="11_4saay"]
@@ -65,7 +65,8 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("9_1b37s")
-strength = 1.0
+radius = 64.0
+blend_cascades = true
 
 [sub_resource type="Compositor" id="Compositor_3ede0"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_8b6su")])

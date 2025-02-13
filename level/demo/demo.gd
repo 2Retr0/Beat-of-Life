@@ -35,11 +35,11 @@ func _input(event: InputEvent) -> void:
 			if audio_controller.get_tree().paused:
 				effect.enabled = true
 				pause_tween = create_tween().set_ease(Tween.EASE_OUT)
-				pause_tween.tween_property(effect, 'strength', 1.0, 0.04).from(0.0)
+				pause_tween.tween_property(effect, 'radius', 48.0, 0.05).from(0.0)
 			else:
 				pause_tween.kill()
 				pause_tween = create_tween().set_ease(Tween.EASE_OUT)
-				pause_tween.tween_property(effect, 'strength', 0.0, 0.1).from_current()
+				pause_tween.tween_property(effect, 'radius', 0.0, 0.035).from_current()
 				await pause_tween.finished
 				effect.enabled = false
 
