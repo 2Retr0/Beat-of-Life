@@ -19,3 +19,6 @@ func get_hit_windows() -> HitWindows:
 
 func get_result(time: float) -> HitResult.Enum:
 	return get_hit_windows().get_result(time - self.time)
+
+func create_state() -> HitObjectState:
+	return null

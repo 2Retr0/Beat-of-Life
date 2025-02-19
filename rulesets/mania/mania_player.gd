@@ -28,105 +28,117 @@ const input_maps: Dictionary = {
 var score_playback := TimeSeriesData.new()
 var score := LevelScore.new()
 
-# Each array element represents a lane. Each dictionary element maps HitObject -> HitObjectPlayable.
-var playables : Array[Dictionary]
+var indices: Array[Array]
+var playables : Array[Dictionary] # Hit object index -> playable
 var create_index: int = 0
+
+var last_key_states: Array[bool]
 
 func initialize(beatmap: Beatmap) -> void:
 	assert(beatmap is ManiaBeatmap, 'Beatmap is not mania beatmap')
+	
+	for state in states:
+		state.action_handled.disconnect(_play_sound)
+		state.result_changed.disconnect(_record_result)
+	
 	super.initialize(beatmap)
+	
+	for state in states:
+		state.action_handled.connect(_play_sound)
+		state.result_changed.connect(_record_result)
 
-	for lane in playables:
-		for hit_object in lane:
-			lane[hit_object].free()
+	indices.clear()
+	for i in range(beatmap.lane_count):
+		indices.append([])
+	for i in range(beatmap.hit_objects.size()):
+		indices[beatmap.hit_objects[i].lane].append(i)
 
+	for lane_playables in playables:
+		for index in lane_playables:
+			lane_playables[index].free()
 	playables.clear()
 	for i in range(beatmap.lane_count):
 		playables.append({})
-
+	
+	last_key_states.clear()
+	for i in range(beatmap.lane_count):
+		last_key_states.append(false)
+	
 	if auto: set_process_input(false) # Disable input if auto mode is on
 
 	audio_controller.seeked.connect(_on_audio_controller_seeked)
 
 
 func _process(delta: float) -> void:
+	for lane in range(beatmap.lane_count):
+		var lane_playables = playables[lane]
+		for index in lane_playables:
+			var state : HitObjectState = states[index]
+			state.process_tick(self)
+
 	var time := audio_controller.time
-	for i in len(playables):
-		var lane := playables[i]
-		for hit_object in lane:
-			var playable : HitObjectPlayable = lane[hit_object]
-			if not _is_relevant(hit_object):
+	for lane in range(beatmap.lane_count):
+		var lane_playables = playables[lane]
+		for index in lane_playables:
+			var state : HitObjectState = states[index]
+			if not _is_relevant(beatmap.hit_objects[index]):
 				# Free irrelevant playables
-				lane[hit_object].queue_free()
-			elif playable.is_actionable(time):
+				lane_playables[index].queue_free()
+			elif state.can_perform_action(self):
 				if auto:
-					_perform_auto_action(playable)
-				elif Input.is_key_pressed(input_maps[beatmap.lane_count][i]):
-					# Account for input holding
-					# NOTE: HOLD STATE IS UNUSED ATM SINCE YOU CAN DETERMINE HOLD BY CHECKING
-					#       IF AN INPUT THAT WAS PRESSED WAS LATER RELEASED!
-					playable.perform_action(HitObjectPlayable.ActionType.HELD)
+					_perform_auto_action(state)
+				else:
+					var is_pressed : bool = Input.is_physical_key_pressed(input_maps[beatmap.lane_count][lane])
+					var was_pressed : bool = last_key_states[lane]
+					if is_pressed and was_pressed:
+						state.perform_action(self, HitObjectState.ActionType.HELD)
+					elif is_pressed and not was_pressed:
+						state.perform_action(self, HitObjectState.ActionType.PRESSED)
+					elif not is_pressed and was_pressed:
+						state.perform_action(self, HitObjectState.ActionType.RELEASED)
+					last_key_states[lane] = is_pressed
 				break
 
 	# Instantiate new relevant playables
 	for i in range(create_index, len(beatmap.hit_objects)):
 		var hit_object := beatmap.hit_objects[i]
 		if _is_relevant(hit_object):
-			_create_playable(hit_object)
+			_create_playable(create_index)
 			create_index = i + 1
 		else:
 			break
 
 
-func _perform_auto_action(playable : HitObjectPlayable) -> void:
-	var hit_object : HitObject = playable.hit_object
+func _perform_auto_action(state : HitObjectState) -> void:
+	var hit_object : HitObject = state.hit_object
 	var time := audio_controller.time
-	if time <= hit_object.time: return
+	if time < hit_object.time: return
 
-	var event := InputEventKey.new()
-	event.keycode = input_maps[beatmap.lane_count][hit_object.lane]
-	if playable.result == HitResult.Enum.None:
-		event.pressed = true
-		_input(event)
-	elif hit_object is ManiaLongNote and time >= hit_object.get_end_time():
-		event.pressed = false
-		_input(event)
+	if hit_object is ManiaNote:
+		if state.result == HitResult.Enum.None:
+			state.perform_action(self, HitObjectState.ActionType.PRESSED)
+	elif hit_object is ManiaLongNote:
+		if state.press_result == HitResult.Enum.None:
+			state.perform_action(self, HitObjectState.ActionType.PRESSED)
+		elif state.release_result == HitResult.Enum.None:
+			if time >= hit_object.get_end_time():
+				state.perform_action(self, HitObjectState.ActionType.RELEASED)
 
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey and not event.is_echo():
-		if event.is_pressed(): hit_audio_player.play()
-
-		var input_map : Array = input_maps[beatmap.lane_count]
-		var key_index := input_map.find(event.keycode)
-		if key_index < 0: return
-
-		# Find perform the relevant action on the first playable that can be hit.
-		var lane := playables[key_index]
-		for hit_object in lane:
-			var playable : HitObjectPlayable = lane[hit_object]
-			if not playable.is_actionable(audio_controller.time): continue
-
-			if event.is_pressed():
-				playable.perform_action(HitObjectPlayable.ActionType.PRESSED)
-			elif event.is_released():
-				playable.perform_action(HitObjectPlayable.ActionType.RELEASED)
-			return
-
-func _create_playable(hit_object: HitObject) -> void:
+func _create_playable(index: int) -> void:
+	var hit_object : HitObject = beatmap.hit_objects[index]
+	
 	var playable : Variant
 	if hit_object is ManiaNote:
 		playable = note_scene.instantiate()
 	elif hit_object is ManiaLongNote:
 		playable = long_note_scene.instantiate()
 	playable.player = self
-	playable.hit_object = hit_object
+	playable.state = states[index]
 
-	playable.result_changed.connect(_record_result)
-	playable.tree_exiting.connect(func(): playables[hit_object.lane].erase(hit_object))
+	playable.tree_exiting.connect(func(): playables[hit_object.lane].erase(index))
 
 	playfield_center.add_child(playable)
-	playables[hit_object.lane][hit_object] = playable
+	playables[hit_object.lane][index] = playable
 
 #region --- OBJECT COLORS FOR FUN REMOVE LATER!!! ---
 	if beatmap.lane_count % 2 == 1 and hit_object.lane == beatmap.lane_count / 2:
@@ -146,6 +158,9 @@ func _is_relevant(hit_object: HitObject) -> bool:
 func _record_result(result : HitResult.Enum) -> void:
 	score.update(result)
 	score_playback.record(score, audio_controller.time)
+
+func _play_sound() -> void:
+	hit_audio_player.play()
 
 func _on_audio_controller_seeked(new_time: float) -> void:
 	# Revert score to one stored in history
@@ -170,4 +185,4 @@ func _on_audio_controller_seeked(new_time: float) -> void:
 		elif _is_relevant(hit_object):
 			# Instantiate playables that are already relevant
 			# (e.g., long notes that have started before the current time)
-			_create_playable(hit_object)
+			_create_playable(i)
