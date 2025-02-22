@@ -24,9 +24,6 @@ func can_perform_action(player: BeatmapPlayer) -> bool:
 	return result == HitResult.Enum.None and abs(player.get_time() - hit_object.time) <= hit_object.get_hit_windows().get_max_extent()
 
 func perform_action(player: BeatmapPlayer, action: ActionType) -> void:
-	process_action(player, action)
-
-func process_action(player: BeatmapPlayer, action: ActionType) -> void:
 	pass
 
 func set_result(value : HitResult.Enum) -> void:
