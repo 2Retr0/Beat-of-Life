@@ -22,7 +22,7 @@ func can_perform_action(player: BeatmapPlayer) -> bool:
 	var extent := hit_object.get_hit_windows().get_max_extent()
 	return result == HitResult.Enum.None and player.get_time() - hit_object.get_start_time() >= -extent and player.get_time() - hit_object.get_end_time() <= +extent
 
-func process_action(player: BeatmapPlayer, action: ActionType) -> void:
+func perform_action(player: BeatmapPlayer, action: ActionType) -> void:
 	match action:
 		ActionType.PRESSED:
 			if press_result == HitResult.Enum.None:
