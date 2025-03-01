@@ -1,13 +1,13 @@
-class_name ManiaLongNoteState extends HitObjectState
+class_name ManiaLongNotePlayable extends PlayableObject
 
 @export var press_result: HitResult.Enum = HitResult.Enum.None
 
 @export var release_result: HitResult.Enum = HitResult.Enum.None
 
-func _init(hit_object: HitObject) -> void:
-	super(hit_object)
+func _init(player: BeatmapPlayer, hit_object: HitObject) -> void:
+	super(player, hit_object)
 
-func process_tick(player: BeatmapPlayer) -> void:
+func process_tick() -> void:
 	if press_result == HitResult.Enum.None:
 		if player.get_time() > hit_object.time + hit_object.get_hit_windows().get_max_extent():
 			press_result = HitResult.Enum.Miss
@@ -18,11 +18,11 @@ func process_tick(player: BeatmapPlayer) -> void:
 			release_result = HitResult.Enum.Miss
 			set_result(HitResult.Enum.Good)
 
-func can_perform_action(player: BeatmapPlayer) -> bool:
+func can_perform_action() -> bool:
 	var extent := hit_object.get_hit_windows().get_max_extent()
-	return result == HitResult.Enum.None and player.get_time() - hit_object.get_start_time() >= -extent and player.get_time() - hit_object.get_end_time() <= +extent
+	return !is_judged() and player.get_time() - hit_object.get_start_time() >= -extent and player.get_time() - hit_object.get_end_time() <= +extent
 
-func perform_action(player: BeatmapPlayer, action: ActionType) -> void:
+func perform_action(action: ActionType) -> void:
 	match action:
 		ActionType.PRESSED:
 			if press_result == HitResult.Enum.None:
@@ -30,7 +30,7 @@ func perform_action(player: BeatmapPlayer, action: ActionType) -> void:
 				if press_result == HitResult.Enum.Miss:
 					release_result = HitResult.Enum.Miss
 					set_result(HitResult.Enum.Miss)
-				action_handled.emit()
+				player.play_sound()
 		ActionType.RELEASED:
 			if press_result != HitResult.Enum.None:
 				release_result = (hit_object as ManiaLongNote).get_release_result(player.get_time())
@@ -39,4 +39,4 @@ func perform_action(player: BeatmapPlayer, action: ActionType) -> void:
 					set_result(HitResult.Enum.Good)
 				else:
 					set_result(press_result)
-				action_handled.emit()
+				player.play_sound()

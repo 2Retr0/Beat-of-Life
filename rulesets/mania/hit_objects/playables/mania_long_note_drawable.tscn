@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c6pwjcfnbddri"]
 
-[ext_resource type="Script" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.gd" id="1_5h8h3"]
+[ext_resource type="Script" path="res://rulesets/mania/hit_objects/playables/mania_long_note_drawable.gd" id="1_5h8h3"]
 
 [sub_resource type="Shader" id="Shader_cfm08"]
 code = "shader_type canvas_item;
@@ -20,7 +20,7 @@ void fragment() {
 shader = SubResource("Shader_cfm08")
 shader_parameter/uv_cutoff = 0.8
 
-[node name="ManiaLongNotePlayable" type="Control"]
+[node name="ManiaLongNoteDrawable" type="Control"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0

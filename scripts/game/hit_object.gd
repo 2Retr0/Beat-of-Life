@@ -14,11 +14,14 @@ static var default_hit_windows: HitWindows = HitWindows.new([
 func _init(time: float) -> void:
 	self.time = time
 
+func get_playable_time() -> PlayableTime:
+	return PlayableTime.new(self)
+
 func get_hit_windows() -> HitWindows:
 	return default_hit_windows
 
 func get_result(time: float) -> HitResult.Enum:
 	return get_hit_windows().get_result(time - self.time)
 
-func create_state() -> HitObjectState:
+func create_playable(player: BeatmapPlayer) -> PlayableObject:
 	return null

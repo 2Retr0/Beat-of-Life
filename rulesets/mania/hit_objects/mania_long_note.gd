@@ -18,5 +18,5 @@ func get_end_time() -> float:
 func get_release_result(time: float) -> HitResult.Enum:
 	return get_hit_windows().get_result(time - get_end_time())
 
-func create_state() -> HitObjectState:
-	return ManiaLongNoteState.new(self)
+func create_playable(player: BeatmapPlayer) -> PlayableObject:
+	return ManiaLongNotePlayable.new(player, self)
