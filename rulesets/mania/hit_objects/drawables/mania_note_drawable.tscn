@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cu4afsmaoq5wr"]
 
-[ext_resource type="Script" path="res://rulesets/mania/hit_objects/playables/mania_note_drawable.gd" id="1_ndq5i"]
+[ext_resource type="Script" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.gd" id="1_ndq5i"]
 
 [node name="ManiaNoteDrawable" type="Control"]
 modulate = Color(1, 1, 1, 0)

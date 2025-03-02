@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://kfrjw2cm6j45"]
 
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="1_4mdus"]
-[ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/playables/mania_note_drawable.tscn" id="2_uquip"]
-[ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_drawable.tscn" id="3_ro47g"]
+[ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.tscn" id="2_uquip"]
+[ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/drawables/mania_long_note_drawable.tscn" id="3_ro47g"]
 
 [node name="ManiaPlayer" type="Node" node_paths=PackedStringArray("playfield_center")]
 script = ExtResource("1_4mdus")
