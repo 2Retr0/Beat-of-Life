@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform vec3 background_color : source_color = vec3(0.82, 0.67, 0.71);
+//uniform vec3 background_color : source_color = vec3(0.82, 0.67, 0.71);
 uniform float tiling : hint_range(1.0, 50.0) = 15.0;
 uniform float gap : hint_range(1.0, 10.0) = 1.5;
 uniform int tick = 0;
@@ -27,5 +27,5 @@ void fragment() {
 
 	// Disregard UV values outside of range 0..1
 	float mix_factor = texture(tiled_texture, uv).a*0.125 * float(dot(step(vec2(0), uv)*step(uv, vec2(1)), vec2(1)) == 2.0);
-	COLOR.rgb = mix(background_color, vec3(1.0), mix_factor);
+	COLOR.rgb = mix(COLOR.rgb, vec3(dot(COLOR.rgb, vec3(0.2125, 0.7154, 0.0721)))*1.75, mix_factor);
 }

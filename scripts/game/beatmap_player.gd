@@ -3,7 +3,7 @@ class_name BeatmapPlayer extends Node
 
 @export var beatmap: Beatmap
 
-@export var states: Array[HitObjectState]
+@export var judgments: Array[Judgment]
 
 @onready var audio_controller: AudioController = $AudioController
 
@@ -11,10 +11,6 @@ signal finished
 
 func initialize(beatmap: Beatmap) -> void:
 	self.beatmap = beatmap
-	
-	states.clear()
-	for hit_object in beatmap.hit_objects:
-		states.append(hit_object.create_state())
 	
 	if audio_controller == null:
 		audio_controller = AudioController.new()
@@ -30,3 +26,12 @@ func seek(new_time: float) -> void:
 
 func get_time() -> float:
 	return audio_controller.time
+
+func create_playable(hit_object: HitObject) -> PlayableObject:
+	return hit_object.create_playable(self)
+
+func dispose_playable(playable: PlayableObject) -> void:
+	pass
+
+func report_judgment(judgment: Judgment) -> void:
+	judgments.append(judgment)

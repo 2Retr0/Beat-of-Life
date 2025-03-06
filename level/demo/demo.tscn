@@ -4,8 +4,8 @@
 [ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo_level.tres" id="2_31n42"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="3_0joa5"]
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
-[ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/playables/mania_note_playable.tscn" id="5_nnn8j"]
-[ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/playables/mania_long_note_playable.tscn" id="6_r3dju"]
+[ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.tscn" id="5_nnn8j"]
+[ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/drawables/mania_long_note_drawable.tscn" id="6_r3dju"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://level/common/resources/samples/metronome.wav" id="7_knupc"]
 [ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://level/common/resources/samples/hit.wav" id="8_qs0pt"]
 [ext_resource type="Script" path="res://level/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="9_1b37s"]
@@ -179,6 +179,7 @@ long_note_scene = ExtResource("6_r3dju")
 playfield_center = NodePath("../PlayfieldCenter")
 hit_audio_player = NodePath("../HitAudioPlayer")
 scroll_time = 0.75
+auto = true
 
 [node name="AudioController" parent="ManiaPlayer" instance=ExtResource("3_0joa5")]
 

@@ -1,29 +1,14 @@
-class_name ManiaNotePlayable extends Control
+class_name ManiaNotePlayable extends PlayableObject
 
-@export var player: ManiaPlayer
+func _init(player: BeatmapPlayer, hit_object: HitObject) -> void:
+	super(player, hit_object)
 
-@export var state: HitObjectState
+func process_tick() -> void:
+	if !is_judged() and player.get_time() > hit_object.time + hit_object.get_hit_windows().get_max_extent():
+		set_result(HitResult.Enum.Miss)
 
-func _ready() -> void:
-	position = _get_position(player.audio_controller.time)
-	modulate = Color.WHITE
-	
-	state.result_changed.connect(_on_set_result)
-
-func _process(delta: float) -> void:
-	var time := player.audio_controller.time
-	position.y = _get_position(time).y
-
-func _get_position(time : float) -> Vector2:
-	# IMPLEMENTAITON NOTE: Returning a Vector2 allows more dynamic properties such as moving the lane
-	#                      during gameplay.
-	return Vector2(
-		150 * (state.hit_object.lane - player.beatmap.lane_count / 2.0 + 0.5),
-		(time - state.hit_object.time) * player.playfield_center.position.y / player.scroll_time)
-
-func _on_set_result(value: HitResult.Enum) -> void:
-	match value:
-		HitResult.Enum.Miss:
-			modulate.a = 0.25
-		_:
-			queue_free()
+func perform_action(action: ActionType) -> void:
+	match action:
+		ActionType.PRESSED:
+			set_result(hit_object.get_result(player.get_time()))
+			player.play_sound()

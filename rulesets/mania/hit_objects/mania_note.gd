@@ -12,5 +12,5 @@ func get_start_time() -> float:
 func get_end_time() -> float:
 	return self.time
 
-func create_state() -> HitObjectState:
-	return ManiaNoteState.new(self)
+func create_playable(player: BeatmapPlayer) -> PlayableObject:
+	return ManiaNotePlayable.new(player, self)
