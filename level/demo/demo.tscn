@@ -1,7 +1,7 @@
 [gd_scene load_steps=47 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
-[ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo_level.tres" id="2_31n42"]
+[ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo/demo_level.tres" id="2_31n42"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="3_0joa5"]
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
 [ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.tscn" id="5_nnn8j"]
