@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfjmcq7h1amm4"]
+
+[ext_resource type="Script" path="res://level/common/ui/loading_screens/columns/loading_screen_columns.gd" id="1_ricja"]
+[ext_resource type="PackedScene" uid="uid://dp2xqdsq3j1sh" path="res://level/common/ui/loading_screens/columns/loading_screen_columns_subdivision.tscn" id="2_om8bh"]
+[ext_resource type="AudioStream" uid="uid://cm6ottf73t52a" path="res://level/common/resources/samples/knock.wav" id="3_akj4n"]
+
+[node name="LoadingScreenColumns" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ricja")
+color = Color(0.889977, 0.743146, 0.719838, 1)
+subdivision_scene = ExtResource("2_om8bh")
+
+[node name="Columns" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_akj4n")
+max_polyphony = 4

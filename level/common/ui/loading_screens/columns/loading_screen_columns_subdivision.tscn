@@ -1,16 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://dp2xqdsq3j1sh"]
 
-[ext_resource type="Shader" path="res://level/calibration/resources/shaders/background.gdshader" id="1_ydke6"]
-[ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://level/calibration/resources/double_note.png" id="2_nawhw"]
+[ext_resource type="Shader" path="res://level/common/resources/shaders/background.gdshader" id="1_poagf"]
+[ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://level/common/resources/double_note_black.png" id="2_4sauk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6nhtp"]
-shader = ExtResource("1_ydke6")
+shader = ExtResource("1_poagf")
 shader_parameter/tiling = 15.572
 shader_parameter/gap = 2.109
 shader_parameter/tick = 0
-shader_parameter/tiled_texture = ExtResource("2_nawhw")
+shader_parameter/tiled_texture = ExtResource("2_4sauk")
 
-[node name="LoadingScreenSubdivision" type="ColorRect"]
+[node name="LoadingScreenColumnsSubdivision" type="ColorRect"]
 modulate = Color(0.743054, 0.571909, 0.586485, 1)
 material = SubResource("ShaderMaterial_6nhtp")
 anchors_preset = 15

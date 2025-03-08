@@ -28,6 +28,7 @@ driver/output_latency=5
 WindowManager="*res://global/window_manager.gd"
 SettingsManager="*res://global/settings_manager.gd"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+SceneManager="*res://global/scene_manager.gd"
 
 [debug]
 
@@ -65,6 +66,7 @@ playfield_hit={
 
 [rendering]
 
+anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
 viewport/hdr_2d=true
 anti_aliasing/quality/use_debanding=true

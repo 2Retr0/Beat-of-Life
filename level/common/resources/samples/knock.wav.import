@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cm6ottf73t52a"
-path="res://.godot/imported/knock.wav-10ae899725081cb8430880b0f4180eb8.sample"
+path="res://.godot/imported/knock.wav-a129eb1ed7514a66b2d652089e028437.sample"
 
 [deps]
 
-source_file="res://level/main_menu/resources/samples/knock.wav"
-dest_files=["res://.godot/imported/knock.wav-10ae899725081cb8430880b0f4180eb8.sample"]
+source_file="res://level/common/resources/samples/knock.wav"
+dest_files=["res://.godot/imported/knock.wav-a129eb1ed7514a66b2d652089e028437.sample"]
 
 [params]
 

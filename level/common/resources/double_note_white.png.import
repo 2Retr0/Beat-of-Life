@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxpa483t4ifqm"
-path="res://.godot/imported/double_note.png-cd7aa37d1798600df9e5f7d537cf2c9e.ctex"
+uid="uid://jw2ubvs721bm"
+path="res://.godot/imported/double_note_white.png-a05052411bbfbd1f5e7f0aaa4233b699.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level/calibration/resources/double_note.png"
-dest_files=["res://.godot/imported/double_note.png-cd7aa37d1798600df9e5f7d537cf2c9e.ctex"]
+source_file="res://level/common/resources/double_note_white.png"
+dest_files=["res://.godot/imported/double_note_white.png-a05052411bbfbd1f5e7f0aaa4233b699.ctex"]
 
 [params]
 
