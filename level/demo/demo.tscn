@@ -1,7 +1,6 @@
-[gd_scene load_steps=47 format=3 uid="uid://cj17kj5vrbqa1"]
+[gd_scene load_steps=46 format=3 uid="uid://cj17kj5vrbqa1"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_ih5o8"]
-[ext_resource type="Resource" uid="uid://bbh4p52j8axwj" path="res://level/demo/demo_level.tres" id="2_31n42"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="3_0joa5"]
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
 [ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.tscn" id="5_nnn8j"]
@@ -170,7 +169,6 @@ up_vector_enabled = false
 [node name="Demo" type="Node"]
 process_mode = 3
 script = ExtResource("1_ih5o8")
-level = ExtResource("2_31n42")
 
 [node name="ManiaPlayer" type="Node" parent="." node_paths=PackedStringArray("playfield_center", "hit_audio_player")]
 script = ExtResource("4_r15qc")
