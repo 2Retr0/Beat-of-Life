@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://5q0crfy66di6"]
 
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/scenes/audio_controller.tscn" id="1_qkmuv"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/audio_controller.tscn" id="1_qkmuv"]
 [ext_resource type="Script" path="res://level/calibration/calibration_screen.gd" id="1_r4sw2"]
 [ext_resource type="Shader" path="res://level/common/resources/shaders/background.gdshader" id="5_ok8f4"]
-[ext_resource type="Texture2D" uid="uid://cxpa483t4ifqm" path="res://level/common/resources/double_note_black.png" id="6_4b4ir"]
+[ext_resource type="Texture2D" uid="uid://b8m24qduv1xe0" path="res://level/common/resources/double_note_black.png" id="6_4b4ir"]
 [ext_resource type="PackedScene" uid="uid://b3urfk13ajffu" path="res://level/calibration/components/playfield.tscn" id="7_273fp"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://level/common/ui/audio_scrubber.tscn" id="7_cd2u2"]
 

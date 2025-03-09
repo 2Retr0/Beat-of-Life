@@ -50,6 +50,12 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="BeatOfLife"
 
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="C:/Users/Retr0/Documents/Projects/Godot/Beat-of-Life/demo.avi"
+movie_writer/disable_vsync=true
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/debug_menu/plugin.cfg")
@@ -68,5 +74,3 @@ playfield_hit={
 
 anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
-viewport/hdr_2d=true
-anti_aliasing/quality/use_debanding=true

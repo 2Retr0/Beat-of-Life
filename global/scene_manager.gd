@@ -16,9 +16,9 @@ func _init() -> void:
 	visible = false
 
 func load_scene_async(scene_path: String, loading_screen_scene: PackedScene) -> void:
-	if loading_screen and loading_screen.is_inside_tree(): 
+	if loading_screen and loading_screen.is_inside_tree():
 		await loading_screen.tree_exiting
-	
+
 	self.loading_screen = loading_screen_scene.instantiate()
 	self.load_scene_path = scene_path
 	ResourceLoader.load_threaded_request(scene_path)
@@ -29,9 +29,6 @@ func _process(delta: float) -> void:
 	var progress := []
 	var loaded_status = ResourceLoader.load_threaded_get_status(load_scene_path, progress)
 
-	# Smooth interpolation for loading bar
-	loading_screen.value = lerpf(loading_screen.value, progress[0], delta*10.0)
-
 	if loaded_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED and loading_screen.has_stage_finished:
 		loading_screen.value = 1.0
 		loading_screen.stage = LoadingScreen.Stage.UNLOAD
@@ -39,3 +36,6 @@ func _process(delta: float) -> void:
 		await loading_screen.stage_finished
 		process_mode = PROCESS_MODE_DISABLED
 		self.loading_screen.queue_free()
+	elif loaded_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
+		# Smooth interpolation for loading bar
+		loading_screen.value = lerpf(loading_screen.value, progress[0], delta*10.0)

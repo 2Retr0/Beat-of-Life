@@ -1,3 +1,4 @@
+@tool
 extends LoadingScreen
 
 const DELAY_FRACTION := 0.7
@@ -15,17 +16,15 @@ const DELAY_FRACTION := 0.7
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in subdivisions:
-		var subdivision := subdivision_scene.instantiate()
-		subdivision.visible = false
 		columns.add_child(subdivision_scene.instantiate())
+
 	super._ready()
 
 func _animate() -> void:
-	if not columns: return
+	if not is_node_ready(): return
 
 	for i in columns.get_child_count():
 		var subdivision := columns.get_child(i)
-		subdivision.visible = true
 		subdivision.position.y = -viewport.get_visible_rect().size.y if stage == Stage.LOAD else 0
 
 		var tween := subdivision.create_tween()
@@ -45,3 +44,10 @@ func _animate() -> void:
 			$AudioStreamPlayer.play())
 
 	super._animate()
+
+	await get_tree().process_frame
+	$Columns.modulate.a = 1.0
+
+
+func _on_stage_finished() -> void:
+	if stage == Stage.UNLOAD: $Columns.modulate.a = 0.0

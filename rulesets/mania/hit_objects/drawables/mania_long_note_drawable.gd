@@ -18,7 +18,7 @@ func _ready() -> void:
 	var scale_modifier : float = playable.hit_object.duration * player.playfield_center.position.y / player.scroll_time
 	body.position.y = -(scale_modifier + scale_current*0.5)
 	body.size.y = scale_modifier + scale_current
-	
+
 	playable.result_set.connect(_on_set_result)
 
 func _process(delta: float) -> void:

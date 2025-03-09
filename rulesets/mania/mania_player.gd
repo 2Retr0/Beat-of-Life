@@ -37,16 +37,16 @@ var last_key_states: Array[bool]
 
 func initialize(beatmap: Beatmap) -> void:
 	assert(beatmap is ManiaBeatmap, 'Beatmap is not mania beatmap')
-	
+
 	super.initialize(beatmap)
-	
+
 	playables.resize(beatmap.lane_count)
 	for i in range(beatmap.lane_count):
 		playables[i] = []
-	
+
 	last_key_states.resize(beatmap.lane_count)
 	last_key_states.fill(false)
-	
+
 	if auto:
 		set_process_input(false) # Disable input if auto mode is on
 
@@ -104,7 +104,7 @@ func _perform_auto_action(playable: PlayableObject) -> void:
 func create_playable(hit_object: HitObject) -> PlayableObject:
 	var playable: PlayableObject = super.create_playable(hit_object)
 	playables[hit_object.lane].append(playable)
-	
+
 	var drawable: Variant
 	if hit_object is ManiaNote:
 		drawable = note_scene.instantiate()
@@ -114,7 +114,7 @@ func create_playable(hit_object: HitObject) -> PlayableObject:
 	drawables[playable] = drawable
 
 	playfield_center.add_child(drawable)
-	
+
 #region --- OBJECT COLORS FOR FUN REMOVE LATER!!! ---
 	if beatmap.lane_count % 2 == 1 and hit_object.lane == beatmap.lane_count / 2:
 		drawable.modulate = Color.CRIMSON
@@ -126,7 +126,7 @@ func create_playable(hit_object: HitObject) -> PlayableObject:
 
 func dispose_playable(playable: PlayableObject) -> void:
 	drawables[playable].queue_free()
-	
+
 	playables[playable.hit_object.lane].erase(playable)
 	drawables.erase(playable)
 

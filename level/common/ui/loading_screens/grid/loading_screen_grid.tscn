@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://x7ldslkyb77f"]
+
+[ext_resource type="Shader" path="res://level/common/ui/loading_screens/grid/loading_screen_grid.gdshader" id="1_tu7jd"]
+[ext_resource type="Texture2D" uid="uid://b8m24qduv1xe0" path="res://level/common/resources/double_note_black.png" id="2_iwm1l"]
+[ext_resource type="Script" path="res://level/common/ui/loading_screens/grid/loading_screen_grid.gd" id="3_qb5l8"]
+[ext_resource type="AudioStream" uid="uid://cm6ottf73t52a" path="res://level/common/resources/samples/knock.wav" id="4_4ftww"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k0v24"]
+shader = ExtResource("1_tu7jd")
+shader_parameter/tiling = 15.0
+shader_parameter/gap = 2.0
+shader_parameter/tick = 0
+shader_parameter/tiled_texture = ExtResource("2_iwm1l")
+shader_parameter/tiling2 = 12.0
+shader_parameter/progress = 1.0
+shader_parameter/viewport_aspect_ratio = 0.632409
+
+[node name="LoadingScreenGrid" type="ColorRect"]
+visible = false
+modulate = Color(0.470984, 0.67244, 0.674505, 1)
+material = SubResource("ShaderMaterial_k0v24")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_qb5l8")
+duration = 0.8
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_4ftww")
+volume_db = 7.29688
+pitch_scale = 2.53125
+max_polyphony = 4
+
+[connection signal="stage_finished" from="." to="." method="_on_stage_finished"]
