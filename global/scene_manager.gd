@@ -15,11 +15,11 @@ func _init() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	visible = false
 
-func load_scene_async(scene_path: String, loading_screen_scene: PackedScene) -> void:
+func load_scene_async(scene_path: String, loading_screen: LoadingScreen) -> void:
 	if loading_screen and loading_screen.is_inside_tree():
 		await loading_screen.tree_exiting
 
-	self.loading_screen = loading_screen_scene.instantiate()
+	self.loading_screen = loading_screen
 	self.load_scene_path = scene_path
 	ResourceLoader.load_threaded_request(scene_path)
 	process_mode = PROCESS_MODE_ALWAYS
