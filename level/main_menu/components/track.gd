@@ -1,11 +1,11 @@
 @tool
 extends Path3D
 
-@export var distance_between_planks = 1.0:
+@export var distance_between_planks = 0.70185:
 	set(value):
 		distance_between_planks = value
 		is_dirty = true
-	
+
 var is_dirty = false
 
 # Called when the node enters the scene tree for the first time.
@@ -33,14 +33,14 @@ func _update_multimesh():
 		var position = curve.sample_baked(curve_distance, true)
 
 		var basis = Basis()
-		
+
 		var up = curve.sample_baked_up_vector(curve_distance, true)
 		var forward = position.direction_to(curve.sample_baked(curve_distance + 0.1, true))
 
 		basis.y = up
 		basis.x = forward.cross(up).normalized()
 		basis.z = -forward
-		
+
 		var transform = Transform3D(basis, position)
 		mm.set_instance_transform(i, transform)
 

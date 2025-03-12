@@ -9,4 +9,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$track/CSGPolygon3D.rotate_x(-delta*10.0)
+	if not is_node_ready(): return
+	$Track/MultiMeshInstance3D.rotate_x(-delta*10.0)
