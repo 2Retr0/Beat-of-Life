@@ -6,20 +6,16 @@ extends Control
 @export_file("*.tscn") var play_scene_path
 @export_file("*.tscn") var options_scene_path
 
+const LOADING_SCREEN_COLUMNS := preload('res://level/common/ui/loading_screens/columns/loading_screen_columns.tscn')
+const LOADING_SCREEN_GRID := preload('res://level/common/ui/loading_screens/grid/loading_screen_grid.tscn')
+const LOADING_SCREEN_STARTUP := preload('res://level/common/ui/loading_screens/startup/loading_screen_startup.tscn')
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	play_button.pressed.connect(_on_play)
+	options_button.pressed.connect(_on_options)
 
+func _on_play() -> void:
+	get_tree().change_scene_to_packed(load(play_scene_path))
 
-func _on_play_button_pressed() -> void:
-	var play_scene = load(play_scene_path).instantiate()
-	var root = get_tree().get_root()
-	root.add_child(play_scene)
-	queue_free()
-
-
-func _on_options_button_pressed() -> void:
-	var options_scene = load(options_scene_path).instantiate()
-	var root = get_tree().get_root()
-	root.add_child(options_scene)
+func _on_options() -> void:
+	get_tree().change_scene_to_packed(load(options_scene_path))

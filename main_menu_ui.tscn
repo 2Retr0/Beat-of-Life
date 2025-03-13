@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fe5q8")
-play_scene_path = "res://level/demo/demo.tscn"
+play_scene_path = "res://level/main_menu/components/level_select.tscn"
 options_scene_path = "res://dummy_options_menu.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -27,15 +27,17 @@ expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 740.0
-offset_top = 483.0
-offset_right = -47.0
-offset_bottom = -47.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_left = -412.0
+offset_top = -178.0
+offset_right = -104.0
+offset_bottom = -60.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_constants/separation = 18
 
 [node name="play button" type="Button" parent="VBoxContainer"]
@@ -49,6 +51,3 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("1_3ulx3")
 text = "Options"
-
-[connection signal="pressed" from="VBoxContainer/play button" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/options button" to="." method="_on_options_button_pressed"]

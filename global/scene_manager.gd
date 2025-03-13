@@ -16,8 +16,9 @@ func _init() -> void:
 	visible = false
 
 func load_scene_async(scene_path: String, loading_screen: LoadingScreen) -> void:
-	if loading_screen and loading_screen.is_inside_tree():
-		await loading_screen.tree_exiting
+	if self.loading_screen and self.loading_screen.is_inside_tree():
+		self.loading_screen.queue_free()
+		await self.loading_screen.tree_exiting
 
 	self.loading_screen = loading_screen
 	self.load_scene_path = scene_path
@@ -33,7 +34,8 @@ func _process(delta: float) -> void:
 		loading_screen.value = 1.0
 		loading_screen.stage = LoadingScreen.Stage.UNLOAD
 		get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(load_scene_path))
-		await loading_screen.stage_finished
+		if not loading_screen.has_stage_finished:
+			await loading_screen.stage_finished
 		process_mode = PROCESS_MODE_DISABLED
 		self.loading_screen.queue_free()
 	elif loaded_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:

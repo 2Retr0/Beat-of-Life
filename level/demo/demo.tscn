@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/game/beatmap_source.gd" id="2_ggc7q"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/audio_controller.tscn" id="3_0joa5"]
 [ext_resource type="Script" path="res://scripts/game/level.gd" id="3_6t2kb"]
-[ext_resource type="Script" path="res://scripts/game/load_mania_beatmap.gd" id="3_28ghv"]
+[ext_resource type="Script" path="res://rulesets/mania/load_mania_beatmap.gd" id="3_28ghv"]
 [ext_resource type="Script" path="res://rulesets/mania/mania_player.gd" id="4_r15qc"]
 [ext_resource type="PackedScene" uid="uid://cu4afsmaoq5wr" path="res://rulesets/mania/hit_objects/drawables/mania_note_drawable.tscn" id="5_nnn8j"]
 [ext_resource type="PackedScene" uid="uid://c6pwjcfnbddri" path="res://rulesets/mania/hit_objects/drawables/mania_long_note_drawable.tscn" id="6_r3dju"]

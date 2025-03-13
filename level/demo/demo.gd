@@ -2,9 +2,9 @@ extends Node
 
 @export var level: Level
 
-@onready var beatmap_player: ManiaPlayer = $ManiaPlayer
+@onready var beatmap_player: BirthdayPlayer = $BirthdayPlayer
 
-@onready var audio_controller: AudioController = $ManiaPlayer/AudioController
+@onready var audio_controller: AudioController = $BirthdayPlayer/AudioController
 
 @onready var score_text = $ScoreText
 

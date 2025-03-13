@@ -10,11 +10,7 @@ const input_maps: Dictionary = {
 	9: [KEY_A, KEY_S, KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON],
 }
 
-@export var lane_count: int
-
 @export var note_scene : PackedScene
-
-@export var long_note_scene : PackedScene
 
 @export var playfield_center: Node
 
@@ -91,36 +87,21 @@ func _perform_auto_action(playable: PlayableObject) -> void:
 	var time := audio_controller.time
 	if time < hit_object.time: return
 
-	if hit_object is ManiaNote:
+	if hit_object is BirthdayNote:
 		if !playable.is_judged():
 			playable.perform_action(PlayableObject.ActionType.PRESSED)
-	elif hit_object is ManiaLongNote:
-		if playable.press_result == HitResult.Enum.None:
-			playable.perform_action(PlayableObject.ActionType.PRESSED)
-		elif playable.release_result == HitResult.Enum.None:
-			if time >= hit_object.get_end_time():
-				playable.perform_action(PlayableObject.ActionType.RELEASED)
 
 func create_playable(hit_object: HitObject) -> PlayableObject:
 	var playable: PlayableObject = super.create_playable(hit_object)
 	playables[hit_object.lane].append(playable)
 
 	var drawable: Variant
-	if hit_object is ManiaNote:
+	if hit_object is BirthdayNote:
 		drawable = note_scene.instantiate()
-	elif hit_object is ManiaLongNote:
-		drawable = long_note_scene.instantiate()
 	drawable.init(self, playable)
 	drawables[playable] = drawable
 
 	playfield_center.add_child(drawable)
-
-#region --- OBJECT COLORS FOR FUN REMOVE LATER!!! ---
-	if beatmap.lane_count % 2 == 1 and hit_object.lane == beatmap.lane_count / 2:
-		drawable.modulate = Color.CRIMSON
-	else:
-		drawable.modulate = Color.STEEL_BLUE if hit_object.lane % 2 == 0 else Color.DARK_SEA_GREEN
-#endregion
 
 	return playable
 
@@ -134,8 +115,8 @@ func dispose_playable(playable: PlayableObject) -> void:
 func _is_relevant(hit_object: HitObject) -> bool:
 	var early_relevance_time = scroll_time*1.25
 	var late_relevance_time = scroll_time*0.5
-	return hit_object.get_start_time() - early_relevance_time <= audio_controller.time and \
-		   hit_object.get_end_time() + late_relevance_time >= audio_controller.time
+	return hit_object.get_show_time(self) - early_relevance_time <= audio_controller.time and \
+		   hit_object.time + late_relevance_time >= audio_controller.time
 
 func report_judgment(judgment: Judgment) -> void:
 	super.report_judgment(judgment)

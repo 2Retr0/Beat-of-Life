@@ -25,6 +25,9 @@ var is_animating := false :
 @onready var compositor: Compositor = $WorldEnvironment.compositor
 @onready var track: Path3D = $Path3D
 
+func _ready() -> void:
+	animate()
+
 func animate() -> void:
 	if is_animating or not is_node_ready(): return
 	is_animating = true

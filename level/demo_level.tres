@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/game/beatmap_source.gd" id="1_j3a3s"]
 [ext_resource type="Script" path="res://scripts/game/level.gd" id="2_nvd76"]
-[ext_resource type="Script" path="res://scripts/game/load_mania_beatmap.gd" id="2_upjhf"]
+[ext_resource type="Script" path="res://rulesets/mania/load_mania_beatmap.gd" id="2_upjhf"]
 
 [sub_resource type="Resource" id="Resource_pdcda"]
 script = ExtResource("2_upjhf")
