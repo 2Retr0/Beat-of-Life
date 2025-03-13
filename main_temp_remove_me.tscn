@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://il36e01fu5n0"]
+
+[ext_resource type="Script" path="res://main_temp_remove_me.gd" id="1_bgn0b"]
+
+[node name="MainTempRemoveMe" type="Node"]
+process_mode = 4
+script = ExtResource("1_bgn0b")

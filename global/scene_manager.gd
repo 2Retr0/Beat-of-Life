@@ -4,9 +4,11 @@ var load_scene_path: String
 var loading_screen: LoadingScreen :
 	set(value):
 		loading_screen = value
+		if not loading_screen: return
 		loading_screen.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 		loading_screen.z_as_relative = false
-		add_child(loading_screen)
+		loading_screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		add_child.call_deferred(loading_screen)
 		visible = true
 
 # Called when the node enters the scene tree for the first time.
@@ -38,6 +40,7 @@ func _process(delta: float) -> void:
 			await loading_screen.stage_finished
 		process_mode = PROCESS_MODE_DISABLED
 		self.loading_screen.queue_free()
+		self.loading_screen = null
 	elif loaded_status == ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
 		# Smooth interpolation for loading bar
 		loading_screen.value = lerpf(loading_screen.value, progress[0], delta*10.0)

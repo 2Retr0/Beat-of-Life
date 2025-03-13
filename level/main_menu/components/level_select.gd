@@ -26,6 +26,8 @@ var is_animating := false :
 @onready var track: Path3D = $Path3D
 
 func _ready() -> void:
+	$Path3D.global_position.y = 0.0
+	await get_tree().create_timer(0.2).timeout
 	animate()
 
 func animate() -> void:

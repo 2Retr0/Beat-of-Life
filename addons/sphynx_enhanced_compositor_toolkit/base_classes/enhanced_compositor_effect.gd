@@ -27,7 +27,7 @@ const shader_stages_category_prefix: String = "shader_stages/"
 		debug = value
 		_generate_all_shader_stages.call_deferred()
 
-var rd: RenderingDevice
+var rd: RenderingDevice = RenderingServer.get_rendering_device()
 
 var linear_sampler: RID
 
@@ -300,7 +300,9 @@ func _update_all_shader_stages():
 	var all_shader_stage_properties: Array[Dictionary] = _get_shader_stage_properties()
 	for shader_stage_property: Dictionary in all_shader_stage_properties:
 		var shader_stage: ShaderStageResource = get(shader_stage_property.name)
-		shader_stage.changed.connect(_generate_shader_stage.bind(weakref(shader_stage)))
+		var callable := _generate_shader_stage.bind(weakref(shader_stage))
+		if not shader_stage.changed.is_connected(callable):
+			shader_stage.changed.connect(callable)
 		_all_shader_stages[shader_stage] = 0
 
 

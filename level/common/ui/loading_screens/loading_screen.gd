@@ -31,6 +31,9 @@ func _animate() -> void:
 	if not loading_bar:
 		loading_bar = LOADING_BAR.instantiate()
 		add_child(loading_bar)
+		
+	# FIXME: REMOVE THIS LATER
+	loading_bar.visibility_timer.stop()
 
 	match stage:
 		Stage.LOAD: value = 0.0

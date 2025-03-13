@@ -13,10 +13,9 @@ shader_parameter/tick = 0
 shader_parameter/tiled_texture = ExtResource("2_iwm1l")
 shader_parameter/tiling2 = 12.0
 shader_parameter/progress = 1.0
-shader_parameter/viewport_aspect_ratio = 0.632409
+shader_parameter/viewport_aspect_ratio = 0.518998
 
 [node name="LoadingScreenGrid" type="ColorRect"]
-visible = false
 modulate = Color(0.470984, 0.67244, 0.674505, 1)
 material = SubResource("ShaderMaterial_k0v24")
 anchors_preset = 15

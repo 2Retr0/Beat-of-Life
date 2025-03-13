@@ -15,7 +15,8 @@ func _ready() -> void:
 	options_button.pressed.connect(_on_options)
 
 func _on_play() -> void:
-	get_tree().change_scene_to_packed(load(play_scene_path))
+	#get_tree().change_scene_to_packed(load(play_scene_path))
+	SceneManager.load_scene_async(play_scene_path, LOADING_SCREEN_GRID.instantiate())
 
 func _on_options() -> void:
-	get_tree().change_scene_to_packed(load(options_scene_path))
+	SceneManager.load_scene_async(play_scene_path, LOADING_SCREEN_COLUMNS.instantiate())

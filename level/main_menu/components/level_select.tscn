@@ -180,7 +180,7 @@ draw_pass_1 = SubResource("QuadMesh_hp4hm")
 draw_skin = SubResource("Skin_m422k")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(-4.37057e-08, 0, -0.999871, 0, 1, 0, 0.999871, 0, -4.37057e-08, 0, -310, -0.66666)
+transform = Transform3D(-4.37057e-08, 0, -0.99987, 0, 1, 0, 0.99987, 0, -4.37057e-08, 0, 0, -0.667)
 curve = SubResource("Curve3D_5wkvc")
 script = ExtResource("15_g7vmh")
 num_instances = 100

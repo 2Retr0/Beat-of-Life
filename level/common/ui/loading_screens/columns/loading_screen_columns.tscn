@@ -16,7 +16,6 @@ color = Color(0.889977, 0.743146, 0.719838, 1)
 subdivision_scene = ExtResource("2_om8bh")
 
 [node name="Columns" type="HBoxContainer" parent="."]
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
