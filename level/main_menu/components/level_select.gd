@@ -40,7 +40,6 @@ func animate() -> void:
 
 	# --- FILM REEL MOTION TWEENING ---
 	var tween: Tween = create_tween()
-	track.global_position.z = -1
 	tween.parallel().tween_property(track, ^'global_position:y', -310, DURATION).from(0.0) \
 		.set_ease(Tween.EASE_IN_OUT) \
 		.set_trans(Tween.TRANS_EXPO)
