@@ -1,49 +1,65 @@
 @tool
 extends Path3D
 
-@export var distance_between_planks = 0.70185:
+@export var num_instances := 4 :
 	set(value):
-		distance_between_planks = value
-		is_dirty = true
+		num_instances = maxi(1, value)
+		_generate_multimeshes()
 
-var is_dirty = false
+@export var distance_between_instances := 0.6748:
+	set(value):
+		distance_between_instances = value
+		_generate_multimeshes()
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export var regenerate_multimeshes = false :
+	set(value):
+		if value: _generate_multimeshes()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if is_dirty:
-		_update_multimesh()
+func _ready() -> void:
+	_generate_multimeshes()
 
-		is_dirty = false
+func _generate_multimeshes():
+	if not is_node_ready(): return
+	
+	# Free existing multimeshes (except first)
+	var children := get_children()
+	for child in children.slice(1):
+		child.free()
+	
+	# Add new multimeshes The number of multimeshes
+	# balances draw calls with amount of uploaded geometry.
+	for i in range(num_instances - 1):
+		var new_instance := children[0].duplicate()
+		new_instance.multimesh = children[0].multimesh.duplicate()
+		add_child(new_instance)
+	
+	var path_length := curve.get_baked_length()
+	var total_instances := floori(path_length / distance_between_instances)
+	var current_instance := 0
+	
+	# Distribute multimeshes such that instances conform along the path.
+	for multimesh_instance: MultiMeshInstance3D in get_children():
+		var multimesh := multimesh_instance.multimesh
+		multimesh.instance_count = mini(total_instances - current_instance, ceili(float(total_instances) / get_child_count()))
+		for i in range(0, multimesh.instance_count):
+			var curve_distance := distance_between_instances * (current_instance + 0.5)
+			var position := curve.sample_baked(curve_distance, true)
 
-func _update_multimesh():
-	var path_length: float = curve.get_baked_length()
-	var count = floor(path_length / distance_between_planks)
+			var basis := Basis()
+			var up := curve.sample_baked_up_vector(curve_distance, true)
+			var forward := position.direction_to(curve.sample_baked(curve_distance + 0.1, true))
 
-	var mm: MultiMesh = $MultiMeshInstance3D.multimesh
-	mm.instance_count = count
-	var offset = distance_between_planks/2.0
+			basis.y = up
+			basis.x = forward.cross(up).normalized()
+			basis.z = -forward
 
-	for i in range(0, count):
-		var curve_distance = offset + distance_between_planks * i
-		var position = curve.sample_baked(curve_distance, true)
-
-		var basis = Basis()
-
-		var up = curve.sample_baked_up_vector(curve_distance, true)
-		var forward = position.direction_to(curve.sample_baked(curve_distance + 0.1, true))
-
-		basis.y = up
-		basis.x = forward.cross(up).normalized()
-		basis.z = -forward
-
-		var transform = Transform3D(basis, position)
-		mm.set_instance_transform(i, transform)
+			multimesh.set_instance_transform(i, Transform3D(basis, position))
+			current_instance += 1
+		
+		# Overwrite current instance's multimesh with unique multimesh resource.
+		multimesh_instance.multimesh = multimesh
 
 
 func _on_curve_changed():
-	is_dirty = true
+	_generate_multimeshes()

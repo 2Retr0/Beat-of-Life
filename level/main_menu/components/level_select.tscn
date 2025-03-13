@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c3gtq5mjxutk0"]
+[gd_scene load_steps=36 format=3 uid="uid://c3gtq5mjxutk0"]
 
 [ext_resource type="Script" path="res://level/main_menu/components/level_select.gd" id="1_1qgpx"]
 [ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_movement_component.tres" id="1_r18fv"]
@@ -19,15 +19,30 @@
 [ext_resource type="ArrayMesh" uid="uid://bfk7xtnfjmic5" path="res://level/main_menu/components/film_reel_segment.obj" id="16_ymr1g"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://level/demo/resources/dust.png" id="17_xr5ka"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_er1tt"]
+
+[sub_resource type="Sky" id="Sky_88vv8"]
+sky_material = SubResource("ProceduralSkyMaterial_er1tt")
+
 [sub_resource type="Environment" id="Environment_ktbl0"]
 background_mode = 1
+background_color = Color(0.288518, 0.288518, 0.288518, 1)
+sky = SubResource("Sky_88vv8")
 tonemap_mode = 2
 glow_enabled = true
+glow_normalized = true
+glow_bloom = 0.6
+glow_blend_mode = 1
+volumetric_fog_density = 0.25
+volumetric_fog_albedo = Color(0.927805, 0.719881, 0.607047, 1)
+volumetric_fog_emission = Color(0.274495, 0.0297131, 1.20327e-08, 1)
+volumetric_fog_length = 4.0
+volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_o67md"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -39,10 +54,10 @@ object_movement_component = ExtResource("3_jdaqf")
 debug = false
 shader_stages/pre_blur_processor_stage = ExtResource("4_5nmis")
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_kqgcj"]
+[sub_resource type="CompositorEffect" id="CompositorEffect_i1gg6"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -67,7 +82,7 @@ shader_stages/neighbor_max_stage = ExtResource("7_5bjva")
 shader_stages/tile_variance_stage = ExtResource("12_t15k3")
 
 [sub_resource type="Compositor" id="Compositor_k3f24"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_o67md"), SubResource("CompositorEffect_kqgcj")])
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_o67md"), SubResource("CompositorEffect_i1gg6")])
 script = ExtResource("13_g6mec")
 samples = 16
 intensity = 1.0
@@ -75,30 +90,6 @@ center_fade = 0.0
 framerate_independent = true
 uncapped_independence = false
 target_constant_framerate = 30.0
-
-[sub_resource type="Curve3D" id="Curve3D_wd5g6"]
-_data = {
-"points": PackedVector3Array(0, -1.38974, -1.05885, 0, 1.38974, 1.05885, 0, 2.51797, -5.87894, 0, -0.485305, -1.50003, 0, 0.485305, 1.50003, 0, 5.60628, -2.57005, 0, 1.52209, -2.58094, 0, -1.52209, 2.58094, 0, 5.23127, 3.40802, 0, 0, 0, 0, 0, 0, 0, 1.26059, 6.62868, 0, 1.27944, 0.926492, 0, -1.27944, -0.926492, 0, -3.41598, 5.68013, 0, 0.507364, 1.65445, 0, -0.507364, -1.65445, 0, -6.15133, 2.23888, 0, -0.860312, 1.54415, 0, 0.860312, -1.54415, 0, -5.44543, -3.36418, 0, 0, 0, 0, 0, 0, 0, -2.1586, -5.79071, 0, -1.38974, -1.05885, 0, 1.38974, 1.05885, 0, 2.51797, -5.87894),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 9
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mwvqc"]
-cull_mode = 2
-albedo_color = Color(0.0646965, 0.0646965, 0.0646965, 1)
-
-[sub_resource type="MultiMesh" id="MultiMesh_w00wn"]
-transform_format = 1
-instance_count = 57
-mesh = ExtResource("16_ymr1g")
-buffer = PackedFloat32Array(-1, 0, 0, 0, 0, 0.599841, -0.80059, 2.79815, 0, -0.800119, -0.599212, -5.66742, -1, 0, 0, 0, 0, 0.602901, -0.797001, 3.36001, 0, -0.797816, -0.603977, -5.24674, -1, 0, 0, 0, 0, 0.632136, -0.772315, 3.91342, 0, -0.774858, -0.63524, -4.81514, -1, 0, 0, 0, 0, 0.692231, -0.716525, 4.44077, 0, -0.721676, -0.697562, -4.35238, -1, 0, 0, 0, 0, 0.779696, -0.617616, 4.91659, 0, -0.626158, -0.78648, -3.83722, -1, 0, 0, 0, 0, 0.874537, -0.473579, 5.30889, 0, -0.484958, -0.880752, -3.2564, -1, 0, 0, 0, 0, 0.947732, -0.314544, 5.5912, 0, -0.319068, -0.949243, -2.61506, -1, 0, 0, 0, 0, 0.956762, -0.288142, 5.80474, 0, -0.290872, -0.957588, -1.94643, -1, 0, 0, 0, 0, 0.973255, -0.224096, 5.98985, 0, -0.229726, -0.974567, -1.26957, -1, 0, 0, 0, 0, 0.990828, -0.127412, 6.11972, 0, -0.135131, -0.99185, -0.580103, -1, 0, 0, 0, 0, 0.999845, -0.00871574, 6.17441, 0, -0.0175924, -0.999962, 0.119103, -1, 0, 0, 0, 0, 0.993965, 0.121964, 6.14177, 0, 0.109702, -0.992535, 0.82687, -1, 0, 0, 0, 0, 0.9724, 0.241691, 6.02135, 0, 0.233319, -0.970353, 1.51094, -1, 0, 0, 0, 0, 0.939144, 0.350745, 5.81798, 0, 0.343523, -0.936471, 2.18217, -1, 0, 0, 0, 0, 0.899758, 0.442324, 5.54319, 0, 0.436389, -0.896855, 2.8278, -1, 0, 0, 0, 0, 0.858447, 0.518461, 5.20928, 0, 0.512902, -0.855101, 3.44504, -1, 0, 0, 0, 0, 0.806321, 0.596949, 4.82145, 0, 0.591478, -0.802279, 4.02991, -1, 0, 0, 0, 0, 0.746136, 0.670889, 4.38003, 0, 0.665794, -0.741558, 4.575, -1, 0, 0, 0, 0, 0.679115, 0.738634, 3.88839, 0, 0.734032, -0.674107, 5.07553, -1, 0, 0, 0, 0, 0.606483, 0.799178, 3.35119, 0, 0.795096, -0.601095, 5.52709, -1, 0, 0, 0, 0, 0.528741, 0.85244, 2.77332, 0, 0.848783, -0.522825, 5.92612, -1, 0, 0, 0, 0, 0.444164, 0.899108, 2.16053, 0, 0.895946, -0.437726, 6.26809, -1, 0, 0, 0, 0, 0.340264, 0.943357, 1.51555, 0, 0.94033, -0.33178, 6.54572, -1, 0, 0, 0, 0, -0.042496, 0.998981, 0.828923, 0, 0.999097, 0.0451224, 6.6162, -1, 0, 0, 0, 0, -0.0785798, 0.9967, 0.128537, 0, 0.996908, 0.0811759, 6.57366, -1, 0, 0, 0, 0, -0.117691, 0.99268, -0.569891, 0, 0.99305, 0.12077, 6.50519, -1, 0, 0, 0, 0, -0.166354, 0.985416, -1.26485, 0, 0.986066, 0.170161, 6.40631, -1, 0, 0, 0, 0, -0.232637, 0.971153, -1.95288, 0, 0.972564, 0.238455, 6.26775, -1, 0, 0, 0, 0, -0.334942, 0.938918, -2.62699, 0, 0.942239, 0.34414, 6.0715, -1, 0, 0, 0, 0, -0.516197, 0.843777, -3.26427, 0, 0.85647, 0.536695, 5.78008, -1, 0, 0, 0, 0, -0.608308, 0.791651, -3.83321, 0, 0.793701, 0.610974, 5.37015, -1, 0, 0, 0, 0, -0.657543, 0.749626, -4.37755, 0, 0.753417, 0.661862, 4.92742, -1, 0, 0, 0, 0, -0.72765, 0.680023, -4.88438, 0, 0.685949, 0.733191, 4.44243, -1, 0, 0, 0, 0, -0.807503, 0.582167, -5.3336, 0, 0.589864, 0.813069, 3.90383, -1, 0, 0, 0, 0, -0.879695, 0.467176, -5.70797, 0, 0.475539, 0.884164, 3.31094, -1, 0, 0, 0, 0, -0.932524, 0.35342, -6.0011, 0, 0.361108, 0.935465, 2.67364, -1, 0, 0, 0, 0, -0.970215, 0.232012, -6.21588, 0, 0.242244, 0.972713, 2.00612, -1, 0, 0, 0, 0, -0.993189, 0.108498, -6.33988, 0, 0.116512, 0.994097, 1.31571, -1, 0, 0, 0, 0, -0.999887, 0.00839101, -6.38488, 0, 0.0150554, 0.999965, 0.615508, -1, 0, 0, 0, 0, -0.997414, -0.0777461, -6.36426, 0, -0.071875, 0.996973, -0.0859545, -1, 0, 0, 0, 0, -0.988519, -0.156583, -6.28571, 0, -0.151094, 0.987665, -0.783294, -1, 0, 0, 0, 0, -0.973666, -0.233475, -6.15268, 0, -0.227979, 0.972363, -1.47234, -1, 0, 0, 0, 0, -0.951527, -0.313408, -5.96505, 0, -0.307564, 0.949619, -2.14857, -1, 0, 0, 0, 0, -0.918434, -0.402236, -5.71902, 0, -0.395574, 0.915536, -2.80571, -1, 0, 0, 0, 0, -0.859862, -0.52419, -5.40566, 0, -0.510527, 0.851601, -3.43294, -1, 0, 0, 0, 0, -0.73879, -0.682787, -4.98489, 0, -0.673936, 0.730617, -3.99313, -1, 0, 0, 0, 0, -0.635912, -0.777149, -4.47446, 0, -0.771761, 0.629317, -4.47427, -1, 0, 0, 0, 0, -0.55245, -0.83708, -3.90943, 0, -0.833546, 0.54708, -4.89029, -1, 0, 0, 0, 0, -0.482756, -0.878351, -3.30841, 0, -0.875755, 0.478016, -5.25311, -1, 0, 0, 0, 0, -0.419016, -0.90951, -2.68165, 0, -0.907979, 0.415682, -5.56967, -1, 0, 0, 0, 0, -0.339996, -0.954752, -2.03374, 0, -0.940427, 0.297402, -5.83188, -1, 0, 0, 0, 0, -0.244269, -0.970676, -1.35732, 0, -0.969708, 0.24039, -6.02357, -1, 0, 0, 0, 0, -0.185528, -0.983452, -0.672376, 0, -0.982639, 0.181169, -6.17487, -1, 0, 0, 0, 0, -0.112854, -0.994279, 0.0216158, 0, -0.993612, 0.106817, -6.28086, -1, 0, 0, 0, 0, -0.0126777, -0.99999, 0.721884, 0, -0.99992, 0.0044023, -6.32721, -1, 0, 0, 0, 0, 0.137425, -0.988622, 1.4221, 0, -0.990512, -0.150423, -6.28766, -1, 0, 0, 0, 0, 0.377985, -0.91688, 2.10023, 0, -0.925812, -0.399162, -6.11374)
-
-[sub_resource type="SphereMesh" id="SphereMesh_pbml7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tc11"]
-emission_enabled = true
-emission = Color(0.875115, 0, 0.421801, 1)
-emission_energy_multiplier = 16.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_u78mf"]
 size = Vector2(20, 10)
@@ -108,75 +99,61 @@ render_priority = 0
 shader = ExtResource("2_h5bhk")
 
 [sub_resource type="Curve" id="Curve_3lf0q"]
-_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.252778, 1), 0.0, 0.0, 0, 0, Vector2(0.502778, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.245136, 1), 0.0, 0.0, 0, 0, Vector2(0.536965, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_6x1du"]
 curve = SubResource("Curve_3lf0q")
 
-[sub_resource type="Curve" id="Curve_h111m"]
-max_value = 3.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_o8x88"]
-curve = SubResource("Curve_h111m")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cg1eb"]
 emission_shape = 3
-emission_box_extents = Vector3(5, 2, 2)
+emission_box_extents = Vector3(4, 4, 2)
 angle_min = 1.07288e-05
 angle_max = 180.0
 radial_velocity_min = -0.0500223
 radial_velocity_max = 0.0499776
 gravity = Vector3(0, 0, 0)
-scale_over_velocity_curve = SubResource("CurveTexture_o8x88")
-color = Color(1, 1, 1, 0.0784314)
+color = Color(1, 1, 1, 0.643)
 alpha_curve = SubResource("CurveTexture_6x1du")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwna4"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhluw"]
+transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("17_xr5ka")
-shadow_to_opacity = true
-billboard_mode = 3
-billboard_keep_scale = true
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-distance_fade_mode = 1
-distance_fade_max_distance = 3.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_hp4hm"]
-material = SubResource("StandardMaterial3D_kwna4")
+material = SubResource("StandardMaterial3D_vhluw")
 size = Vector2(0.05, 0.05)
+
+[sub_resource type="Skin" id="Skin_m422k"]
+
+[sub_resource type="Curve3D" id="Curve3D_5wkvc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.28565, 0.0378568, 0.0112745, -4.17269, 3.72529e-09, -0.0112745, 4.17269, -3.72529e-09, 0.016101, 54.1997, 0.0378418, 0.00630701, -14.6903, -2.23517e-08, -0.00630701, 14.6903, 2.23517e-08, -0.0155428, 95.0149, 0.0378418, -0.0299342, -12.8742, 4.09782e-08, 0.0299342, 12.8742, -4.09782e-08, 0.0368968, 130.349, 0.0378418, -0.0184354, -11.8941, -1.49012e-08, 0.0184354, 11.8941, 1.49012e-08, -0.0524765, 170.045, 0.0378418, -0.0440928, -12.3346, 2.6077e-08, 0.0440928, 12.3346, -2.6077e-08, 0.0177267, 199.303, 0.0378418, 0.0117904, -13.3097, 0, -0.0117904, 13.3097, 0, -0.0179112, 256.952, 0.0378418, 0, 0, 0, -0.00449675, 0.877563, 3.72529e-09, -0.000547048, 302.534, 0.0378418, 0, 0, 0, 0, 0, 0, 0.00355727, 433.736, 0.0378418),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32jm8"]
+albedo_color = Color(0.136826, 0.136826, 0.136826, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_gi1f4"]
+transform_format = 1
+instance_count = 25
+mesh = ExtResource("16_ymr1g")
+buffer = PackedFloat32Array(-2.58764e-11, 1, -0.000565144, 0.000201477, -3.13948e-07, -0.000565886, -1, 2.64008, -1, 1.51783e-10, 3.13948e-07, 0.0378567, 1.75012e-11, 1, -0.000559271, 0.000593568, -2.96549e-07, -0.000559568, -1, 3.33716, -1, 1.83441e-10, 2.96549e-07, 0.0378565, -4.01229e-12, 1, -0.000554613, 0.000985326, -3.35056e-07, -0.000554919, -1, 4.04023, -1, 1.81917e-10, 3.35056e-07, 0.0378563, 2.85913e-11, 1, -0.000550553, 0.00137357, -3.35516e-07, -0.000550747, -1, 4.74251, -1, 2.13376e-10, 3.35516e-07, 0.037856, -1.19124e-07, 1, -0.000546807, 0.00175894, -2.61213e-07, -0.000547171, -1, 5.44455, -1, -1.18981e-07, 2.61278e-07, 0.0378558, -1.1916e-07, 1, -0.000543257, 0.00214158, -2.97564e-07, -0.000543475, -1, 6.14629, -1, -1.18999e-07, 2.97629e-07, 0.0378556, 1.19209e-07, 1, -0.000539844, 0.00252197, -2.98197e-07, -0.000540018, -1, 6.84839, -1, 1.1937e-07, 2.98133e-07, 0.0378554, -3.83245e-12, 1, -0.00053653, 0.00289992, -3.34967e-07, -0.00053668, -1, 7.55035, -1, 1.75938e-10, 3.34967e-07, 0.0378552, 3.59746e-11, 1, -0.000533268, 0.00327558, -2.60389e-07, -0.000533462, -1, 8.25236, -1, 1.74882e-10, 2.60389e-07, 0.0378549, 7.89445e-12, 1, -0.000530052, 0.00364909, -3.72542e-07, -0.000530243, -1, 8.9546, -1, 2.05432e-10, 3.72542e-07, 0.0378547, 3.14193e-11, 1, -0.000526866, 0.00402022, -2.98025e-07, -0.000527143, -1, 9.65658, -1, 1.88521e-10, 2.98025e-07, 0.0378545, 5.07726e-11, 1, -0.000523683, 0.00438914, -2.6072e-07, -0.000523925, -1, 10.3586, -1, 1.8737e-10, 2.6072e-07, 0.0378543, 3.10534e-11, 1, -0.000520492, 0.00475578, -2.97991e-07, -0.000520706, -1, 11.0606, -1, 1.86219e-10, 2.97991e-07, 0.0378541, -1.19148e-07, 1, -0.000517306, 0.0051202, -2.9796e-07, -0.000517607, -1, 11.7626, -1, -1.18993e-07, 2.98022e-07, 0.0378539, 1.19205e-07, 1, -0.000514092, 0.00548239, -3.35323e-07, -0.000514269, -1, 12.4646, -1, 1.19378e-07, 3.35262e-07, 0.0378536, -1.19164e-07, 1, -0.000510862, 0.00584231, -2.9791e-07, -0.00051105, -1, 13.1666, -1, -1.19011e-07, 2.97971e-07, 0.0378534, -3.40456e-11, 1, -0.000507605, 0.00619998, -3.35262e-07, -0.000507832, -1, 13.8686, -1, 1.36211e-10, 3.35262e-07, 0.0378532, 8.26837e-11, 1, -0.000504311, 0.00655531, -2.23536e-07, -0.000504494, -1, 14.5706, -1, 1.95456e-10, 2.23536e-07, 0.037853, 9.33892e-11, 1, -0.000500971, 0.00690834, -2.60687e-07, -0.000501156, -1, 15.2726, -1, 2.24034e-10, 2.60687e-07, 0.0378528, -1.19176e-07, 1, -0.000497571, 0.007259, -2.60715e-07, -0.000497937, -1, 15.9746, -1, -1.19046e-07, 2.60774e-07, 0.0378526, 4.04692e-11, 1, -0.000494127, 0.00760729, -3.35371e-07, -0.000494361, -1, 16.6766, -1, 2.06263e-10, 3.35371e-07, 0.0378523, -1.1918e-07, 1, -0.000490646, 0.00795311, -2.97878e-07, -0.000490904, -1, 17.3786, -1, -1.19034e-07, 2.97937e-07, 0.0378521, 1.19253e-07, 1, -0.000487089, 0.00829647, -2.98052e-07, -0.000487328, -1, 18.0806, -1, 1.19398e-07, 2.97994e-07, 0.0378519, 2.52333e-11, 1, -0.000483457, 0.00863732, -3.35268e-07, -0.000483751, -1, 18.7826, -1, 1.8742e-10, 3.35268e-07, 0.0378517, -1.78907e-11, 1, -0.00047974, 0.0089756, -3.353e-07, -0.000479937, -1, 19.4846, -1, 1.43032e-10, 3.353e-07, 0.0378515)
 
 [node name="LevelSelect" type="Node3D"]
 script = ExtResource("1_1qgpx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0.499406, -0.724661, 0.474828, -0.0244424, 0.536064, 0.843824, 0, 0, 0)
-shadow_enabled = true
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ktbl0")
 compositor = SubResource("Compositor_k3f24")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-
-[node name="Track" type="Path3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.608)
-curve = SubResource("Curve3D_wd5g6")
-script = ExtResource("15_g7vmh")
-
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="Track"]
-transform = Transform3D(1, 0, 0, 0, 0.766667, -0.64212, 0, 0.64212, 0.766667, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_mwvqc")
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_w00wn")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Track"]
-mesh = SubResource("SphereMesh_pbml7")
-surface_material_override/0 = SubResource("StandardMaterial3D_4tc11")
 
 [node name="Background" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108192, 0, -5.05442)
@@ -186,14 +163,27 @@ mesh = SubResource("QuadMesh_u78mf")
 surface_material_override/0 = SubResource("ShaderMaterial_3g02s")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02012, 0, -1.19647)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.30097)
 cast_shadow = 0
 amount = 512
 lifetime = 5.0
 preprocess = 5.0
 randomness = 0.5
+visibility_aabb = AABB(-4, -4, -1, 8, 8, 2)
 process_material = SubResource("ParticleProcessMaterial_cg1eb")
 draw_pass_1 = SubResource("QuadMesh_hp4hm")
+draw_skin = SubResource("Skin_m422k")
 
-[connection signal="curve_changed" from="Track" to="Track" method="_on_curve_changed"]
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(-4.37061e-08, 0, -0.999878, 0, 1, 0, 0.999878, 0, -4.37061e-08, 0, -310, -1)
+curve = SubResource("Curve3D_5wkvc")
+script = ExtResource("15_g7vmh")
+num_instances = 25
+distance_between_instances = 0.702
+
+[node name="FilmReelMultimesh" type="MultiMeshInstance3D" parent="Path3D"]
+material_override = SubResource("StandardMaterial3D_32jm8")
+cast_shadow = 0
+multimesh = SubResource("MultiMesh_gi1f4")
+
+[connection signal="curve_changed" from="Path3D" to="Path3D" method="_on_curve_changed"]
