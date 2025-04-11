@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cmidcapvfg8su"]
+[gd_scene load_steps=60 format=3 uid="uid://cmidcapvfg8su"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_vxtjt"]
 [ext_resource type="Script" path="res://scripts/game/beatmap_source.gd" id="2_ylt4a"]
@@ -16,12 +16,17 @@
 [ext_resource type="Shader" path="res://level/demo/resources/shaders/outline_inverted_hull.gdshader" id="15_0jsas"]
 [ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://level/demo/resources/cutting_board.obj" id="16_6ctq0"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://level/demo/resources/dust.png" id="17_skuvf"]
+[ext_resource type="Script" path="res://rulesets/birthday/misc/birthday_friend.gd" id="17_v0510"]
 [ext_resource type="Texture2D" uid="uid://bi0rwih3gy00u" path="res://level/birthday/table.png" id="17_yuvu8"]
 [ext_resource type="Script" path="res://level/demo/camera_track.gd" id="18_pn4vo"]
 [ext_resource type="Texture2D" uid="uid://cgcilasvu6b58" path="res://level/birthday/friend_1_normal.png" id="18_sykws"]
+[ext_resource type="Texture2D" uid="uid://bkm4ymtmth230" path="res://level/birthday/friend_1_bad.png" id="19_dk7mf"]
 [ext_resource type="Texture2D" uid="uid://cx6gi37dg6scm" path="res://level/birthday/friend_2_normal.png" id="19_n1l7b"]
 [ext_resource type="Texture2D" uid="uid://c7280hap71r88" path="res://level/birthday/friend_3_normal.png" id="20_34ebl"]
 [ext_resource type="Texture2D" uid="uid://do83cfmqs26ky" path="res://level/birthday/friend_4_normal.png" id="21_hfobf"]
+[ext_resource type="Texture2D" uid="uid://btup40lk2u1vg" path="res://level/birthday/friend_2_bad.png" id="21_nqfsp"]
+[ext_resource type="Texture2D" uid="uid://vrdgwvoglabq" path="res://level/birthday/friend_3_bad.png" id="23_t75xs"]
+[ext_resource type="Texture2D" uid="uid://d2narob2ko0u8" path="res://level/birthday/friend_4_bad.png" id="25_tnuau"]
 
 [sub_resource type="Resource" id="Resource_egi6j"]
 script = ExtResource("3_pocxa")
@@ -116,22 +121,6 @@ shader_parameter/outline_size = 1.025
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fune"]
 next_pass = SubResource("ShaderMaterial_eutv1")
 albedo_color = Color(0.849386, 0.500657, 0.733534, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2fdp"]
-atlas = ExtResource("18_sykws")
-region = Rect2(0, 0, 437, 667)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n40wm"]
-atlas = ExtResource("19_n1l7b")
-region = Rect2(0, 0, 572, 755)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xg6er"]
-atlas = ExtResource("20_34ebl")
-region = Rect2(0, 0, 384, 726)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fo6kc"]
-atlas = ExtResource("21_hfobf")
-region = Rect2(0, 0, 355, 789)
 
 [sub_resource type="QuadMesh" id="QuadMesh_fu4dw"]
 size = Vector2(20, 1.5)
@@ -343,25 +332,52 @@ texture = ExtResource("17_yuvu8")
 [node name="Friends" type="Node3D" parent="Geometry/Playfield"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
 
-[node name="Friend1" type="Sprite3D" parent="Geometry/Playfield/Friends"]
+[node name="Friend1" type="Sprite3D" parent="Geometry/Playfield/Friends" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
 pixel_size = 0.002
-texture = SubResource("AtlasTexture_y2fdp")
+hframes = 3
+script = ExtResource("17_v0510")
+normal_sprites = ExtResource("18_sykws")
+normal_sprites_count = 3
+bad_sprites = ExtResource("19_dk7mf")
+bad_sprites_count = 2
+player = NodePath("../../../../BirthdayPlayer")
 
-[node name="Friend2" type="Sprite3D" parent="Geometry/Playfield/Friends"]
+[node name="Friend2" type="Sprite3D" parent="Geometry/Playfield/Friends" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.2, 0)
 pixel_size = 0.002
-texture = SubResource("AtlasTexture_n40wm")
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 1
+normal_sprites = ExtResource("19_n1l7b")
+normal_sprites_count = 3
+bad_sprites = ExtResource("21_nqfsp")
+bad_sprites_count = 2
+player = NodePath("../../../../BirthdayPlayer")
 
-[node name="Friend3" type="Sprite3D" parent="Geometry/Playfield/Friends"]
+[node name="Friend3" type="Sprite3D" parent="Geometry/Playfield/Friends" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, 0)
 pixel_size = 0.002
-texture = SubResource("AtlasTexture_xg6er")
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 2
+normal_sprites = ExtResource("20_34ebl")
+normal_sprites_count = 3
+bad_sprites = ExtResource("23_t75xs")
+bad_sprites_count = 2
+player = NodePath("../../../../BirthdayPlayer")
 
-[node name="Friend4" type="Sprite3D" parent="Geometry/Playfield/Friends"]
+[node name="Friend4" type="Sprite3D" parent="Geometry/Playfield/Friends" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
 pixel_size = 0.002
-texture = SubResource("AtlasTexture_fo6kc")
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 3
+normal_sprites = ExtResource("21_hfobf")
+normal_sprites_count = 3
+bad_sprites = ExtResource("25_tnuau")
+bad_sprites_count = 2
+player = NodePath("../../../../BirthdayPlayer")
 
 [node name="WallMeshes" type="Node3D" parent="Geometry"]
 

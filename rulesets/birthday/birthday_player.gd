@@ -32,6 +32,8 @@ var drawables: Dictionary # Dictionary[PlayableObject, Node]
 
 var last_key_states: Array[bool]
 
+signal judgment_received(judgment)
+
 func initialize(beatmap: Beatmap) -> void:
 
 	super.initialize(beatmap)
@@ -122,6 +124,7 @@ func report_judgment(judgment: Judgment) -> void:
 	super.report_judgment(judgment)
 	score.update(judgment.result)
 	score_playback.record(score, audio_controller.time)
+	judgment_received.emit(judgment)
 
 func play_sound() -> void:
 	hit_audio_player.play()
