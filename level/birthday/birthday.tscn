@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://cmidcapvfg8su"]
+[gd_scene load_steps=61 format=3 uid="uid://cmidcapvfg8su"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_vxtjt"]
 [ext_resource type="Script" path="res://scripts/game/beatmap_source.gd" id="2_ylt4a"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://btup40lk2u1vg" path="res://level/birthday/friend_2_bad.png" id="21_nqfsp"]
 [ext_resource type="Texture2D" uid="uid://vrdgwvoglabq" path="res://level/birthday/friend_3_bad.png" id="23_t75xs"]
 [ext_resource type="Texture2D" uid="uid://d2narob2ko0u8" path="res://level/birthday/friend_4_bad.png" id="25_tnuau"]
+[ext_resource type="Texture2D" uid="uid://brqt50uvyl7qj" path="res://level/birthday/bg.png" id="26_14sdp"]
 
 [sub_resource type="Resource" id="Resource_egi6j"]
 script = ExtResource("3_pocxa")
@@ -182,7 +183,7 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Curve3D" id="Curve3D_rhwwo"]
 _data = {
-"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.3, -0.5, 0, 2, 3, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 1.5, 2),
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.2, -0.5, 0, 2, 3, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 1.7, 2),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -325,7 +326,7 @@ material_override = SubResource("StandardMaterial3D_8fune")
 cast_shadow = 0
 mesh = ExtResource("16_6ctq0")
 
-[node name="Sprite3D" type="Sprite3D" parent="Geometry/Playfield"]
+[node name="Cake" type="Sprite3D" parent="Geometry/Playfield"]
 pixel_size = 0.002
 texture = ExtResource("17_yuvu8")
 
@@ -378,6 +379,11 @@ normal_sprites_count = 3
 bad_sprites = ExtResource("25_tnuau")
 bad_sprites_count = 2
 player = NodePath("../../../../BirthdayPlayer")
+
+[node name="Bg" type="Sprite3D" parent="Geometry/Playfield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+pixel_size = 0.002
+texture = ExtResource("26_14sdp")
 
 [node name="WallMeshes" type="Node3D" parent="Geometry"]
 
@@ -461,7 +467,7 @@ curve = SubResource("Curve3D_rhwwo")
 script = ExtResource("18_pn4vo")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
-transform = Transform3D(0.999837, 0, 0, 0, 0.857381, 0.514433, 0, -0.514428, 0.857388, 0, 2, 3)
+transform = Transform3D(0.999837, 0, 0, 0, 0.928355, 0.371345, 0, -0.371342, 0.928363, 0, 2, 3)
 cubic_interp = false
 loop = false
 tilt_enabled = false
