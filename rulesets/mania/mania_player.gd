@@ -24,10 +24,6 @@ const input_maps: Dictionary = {
 
 @export var auto: bool = false
 
-# FIXME: This can later be used for replays maybe
-var score_playback := TimeSeriesData.new()
-var score := LevelScore.new()
-
 var create_index: int = 0
 
 var playables: Array[Array] # Array[Array[PlayableObject]]
@@ -139,16 +135,13 @@ func _is_relevant(hit_object: HitObject) -> bool:
 
 func report_judgment(judgment: Judgment) -> void:
 	super.report_judgment(judgment)
-	score.update(judgment.result)
-	score_playback.record(score, audio_controller.time)
 
 func play_sound() -> void:
 	hit_audio_player.play()
 
 func _on_audio_controller_seeked(new_time: float) -> void:
 	# Revert score to one stored in history
-	score_playback.commit()
-	score = score_playback.rollback(new_time)
+	# TODO either fix or remove
 	if not score:
 		score = LevelScore.new()
 

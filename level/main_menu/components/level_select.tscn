@@ -44,7 +44,7 @@ volumetric_fog_sky_affect = 0.0
 [sub_resource type="CompositorEffect" id="CompositorEffect_o67md"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -59,7 +59,7 @@ shader_stages/pre_blur_processor_stage = ExtResource("4_5nmis")
 [sub_resource type="CompositorEffect" id="CompositorEffect_i1gg6"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -150,6 +150,7 @@ size = Vector3(1, 0.76, 0.07)
 
 [node name="LevelSelect" type="Node3D"]
 script = ExtResource("1_1qgpx")
+run_animation = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
@@ -170,6 +171,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_3g02s")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.30097)
 cast_shadow = 0
+emitting = false
 amount = 512
 lifetime = 5.0
 preprocess = 5.0
@@ -180,7 +182,7 @@ draw_pass_1 = SubResource("QuadMesh_hp4hm")
 draw_skin = SubResource("Skin_m422k")
 
 [node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(-4.37057e-08, 0, -0.99987, 0, 1, 0, 0.99987, 0, -4.37057e-08, 0, 0, -0.667)
+transform = Transform3D(0.0350752, 0, -0.999254, 0, 1, 0, 0.999254, 0, 0.0350752, 0, -309.929, -0.667)
 curve = SubResource("Curve3D_5wkvc")
 script = ExtResource("15_g7vmh")
 num_instances = 100

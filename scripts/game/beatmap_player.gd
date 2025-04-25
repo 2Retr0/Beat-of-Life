@@ -3,7 +3,7 @@ class_name BeatmapPlayer extends Node
 
 @export var beatmap: Beatmap
 
-@export var judgments: Array[Judgment]
+@export var score: LevelScore = LevelScore.new()
 
 @onready var audio_controller: AudioController = $AudioController
 
@@ -11,6 +11,8 @@ signal finished
 
 func initialize(beatmap: Beatmap) -> void:
 	self.beatmap = beatmap
+	
+	score.reset()
 
 	if audio_controller == null:
 		audio_controller = AudioController.new()
@@ -34,4 +36,4 @@ func dispose_playable(playable: PlayableObject) -> void:
 	pass
 
 func report_judgment(judgment: Judgment) -> void:
-	judgments.append(judgment)
+	score.update(judgment)
