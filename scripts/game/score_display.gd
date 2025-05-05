@@ -1,4 +1,4 @@
-extends Control
+class_name ScoreDisplay extends Control
 
 @export var score_label: Label
 
@@ -16,5 +16,5 @@ func set_score(score: LevelScore):
 	good_label.text = "%d" % score.count(HitResult.Enum.Good)
 	miss_label.text = "%d" % score.count(HitResult.Enum.Miss)
 	
-	accuracy_label.text = "%d" % score.accuracy
+	accuracy_label.text = "%.2f" % (score.accuracy * 100)
 	max_combo_label.text = "%d" % score.max_combo

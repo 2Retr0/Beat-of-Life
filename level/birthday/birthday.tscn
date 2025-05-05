@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cmidcapvfg8su"]
+[gd_scene load_steps=62 format=3 uid="uid://cmidcapvfg8su"]
 
 [ext_resource type="Script" path="res://level/demo/demo.gd" id="1_vxtjt"]
 [ext_resource type="Script" path="res://scripts/game/beatmap_source.gd" id="2_ylt4a"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://rulesets/birthday/hit_objects/drawables/birthday_note_drawable.tscn" id="6_fsr2k"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://scripts/util/audio_controller.tscn" id="8_snhv2"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://level/common/resources/samples/metronome.wav" id="9_5moi1"]
+[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://level/common/ui/results_screen/results_screen.tscn" id="10_lr8a8"]
 [ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://level/common/resources/samples/hit.wav" id="10_rictb"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://level/common/ui/audio_scrubber.tscn" id="11_pr1iu"]
 [ext_resource type="Script" path="res://level/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="12_sjtsb"]
@@ -194,11 +195,12 @@ process_mode = 3
 script = ExtResource("1_vxtjt")
 level = SubResource("Resource_voaye")
 
-[node name="BirthdayPlayer" type="Node" parent="." node_paths=PackedStringArray("playfield_center", "hit_audio_player")]
+[node name="BirthdayPlayer" type="Node" parent="." node_paths=PackedStringArray("playfield_center", "hit_audio_player", "score_display")]
 script = ExtResource("5_1xy51")
 note_scene = ExtResource("6_fsr2k")
 playfield_center = NodePath("../PlayfieldCenter")
 hit_audio_player = NodePath("../HitAudioPlayer")
+score_display = NodePath("../ResultsScreen")
 
 [node name="AudioController" parent="BirthdayPlayer" instance=ExtResource("8_snhv2")]
 
@@ -211,6 +213,8 @@ stream = ExtResource("10_rictb")
 volume_db = -8.0
 pitch_scale = 1.15
 max_polyphony = 5
+
+[node name="ResultsScreen" parent="." instance=ExtResource("10_lr8a8")]
 
 [node name="AudioScrubber" parent="." node_paths=PackedStringArray("track") instance=ExtResource("11_pr1iu")]
 anchors_preset = 7

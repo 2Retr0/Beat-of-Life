@@ -6,9 +6,9 @@ class_name AudioController extends Node
 
 @export var beatmap: Beatmap
 
-@export var started: bool
-
 @export var time: float
+
+@export var is_playing: bool
 
 @export var timing: TimingPoint
 
@@ -30,8 +30,8 @@ func initialize(beatmap_player: BeatmapPlayer):
 	self.beatmap_player = beatmap_player
 	beatmap = beatmap_player.beatmap
 
-	started = false
 	time = 0
+	is_playing = false
 	timing = null
 	next_beat = null
 	next_timing = null
@@ -39,7 +39,7 @@ func initialize(beatmap_player: BeatmapPlayer):
 	audio_player.stream = beatmap.track
 
 func play() -> void:
-	started = true
+	is_playing = true
 
 	# Initialize the time to the beginning of the audio file
 	# Or a measure's time ahead of the first object's timing point, whichever is earlier
@@ -56,7 +56,7 @@ func play() -> void:
 	next_timing = beatmap.get_next_timing(time)
 
 func seek(new_time: float) -> void:
-	if not started:
+	if not is_playing:
 		return
 
 	time = clamp(new_time, 0, beatmap.track.get_length())
@@ -68,6 +68,7 @@ func seek(new_time: float) -> void:
 		time += AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
 	else:
 		audio_player.stop()
+		is_playing = false
 
 	timing = beatmap.get_current_timing(time)
 	timing_changed.emit(timing)
@@ -80,7 +81,7 @@ func seek(new_time: float) -> void:
 	seeked.emit(time)
 
 func _process(delta: float) -> void:
-	if not started:
+	if not is_playing:
 		return
 
 	if time >= 0:
@@ -114,4 +115,5 @@ func _process(delta: float) -> void:
 
 func _on_track_finished() -> void:
 	audio_player.stop()
+	is_playing = false
 	finished.emit()
