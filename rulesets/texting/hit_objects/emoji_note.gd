@@ -1,11 +1,14 @@
-extends Node
+class_name EmojiNote extends HitObject
 
+@export var lane: int
+@export var show_offset: int = 2 #number of beats between showtime and hit
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _init(time: float = 0, lane: int = 0) -> void:
+	super(time)
+	self.lane = lane
 
+func get_show_time(player: BeatmapPlayer) -> float:
+	return time - show_offset * player.beatmap.get_beat_length(time)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func create_playable(player: BeatmapPlayer) -> PlayableObject:
+	return EmojiNotePlayable.new(player, self)

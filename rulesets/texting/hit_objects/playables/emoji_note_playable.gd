@@ -1,11 +1,14 @@
-extends Node
+class_name EmojiNotePlayable extends PlayableObject
 
+func _init(player: BeatmapPlayer, hit_object: HitObject) -> void:
+	super(player, hit_object)
+	
+func process_tick() -> void:
+	if !is_judged() and player.get_time() > hit_object.time + hit_object.get_hit_windows().get_max_extent():
+		set_result(HitResult.Enum.Miss)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func perform_action(action: ActionType) -> void:
+	match action:
+		ActionType.PRESSED:
+			set_result(hit_object.get_result(player.get_time()))
+			player.play_sound()
