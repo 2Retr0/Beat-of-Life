@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://ibc7ssuy7q54"
+path="res://.godot/imported/dual_kawase_upsample.glsl-ac138b0c402b45c6b22e0cdc33761c4d.res"
+
+[deps]
+
+source_file="res://levels/common/resources/compositor/blur/dual_kawase_upsample.glsl"
+dest_files=["res://.godot/imported/dual_kawase_upsample.glsl-ac138b0c402b45c6b22e0cdc33761c4d.res"]
+
+[params]
+

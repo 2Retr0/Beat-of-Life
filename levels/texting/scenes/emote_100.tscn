@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://chaad3w5nvpqo"]
+
+[ext_resource type="Texture2D" uid="uid://bepfmy2bpske2" path="res://levels/texting/textures/emote_100.png" id="1_25oja"]
+[ext_resource type="Script" path="res://levels/texting/scripts/emoji_note_drawable.gd" id="1_wcqlm"]
+
+[node name="Emote100" type="Node3D"]
+script = ExtResource("1_wcqlm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+sorting_offset = 1.0
+texture = ExtResource("1_25oja")
+hframes = 4

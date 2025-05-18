@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://ctkjob353w7pj" path="res://theme.tres" id="1_3ulx3"]
 [ext_resource type="Script" path="res://main_menu_ui.gd" id="1_fe5q8"]
-[ext_resource type="Texture2D" uid="uid://jkw0ktlype66" path="res://beat_of_life_menu_demo.png" id="1_kvp6w"]
+[ext_resource type="Texture2D" uid="uid://jkw0ktlype66" path="res://ui/textures/menu_demo.png" id="1_kvp6w"]
 
 [node name="Main Menu UI" type="Control"]
 layout_mode = 3

@@ -1,0 +1,483 @@
+[gd_scene load_steps=59 format=3 uid="uid://cmidcapvfg8su"]
+
+[ext_resource type="Script" path="res://levels/birthday/scripts/birthday_player.gd" id="5_1xy51"]
+[ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_ldion"]
+[ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="6_fsr2k"]
+[ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_ngo2o"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
+[ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
+[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="10_lr8a8"]
+[ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="10_rictb"]
+[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
+[ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="12_nqxdm"]
+[ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="12_sjtsb"]
+[ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="13_c42ww"]
+[ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://levels/demo/resources/beveled_cube_xz.obj" id="14_3jbfs"]
+[ext_resource type="Shader" path="res://levels/demo/resources/shaders/outline_inverted_hull.gdshader" id="15_0jsas"]
+[ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://levels/demo/resources/cutting_board.obj" id="16_6ctq0"]
+[ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="17_skuvf"]
+[ext_resource type="Script" path="res://levels/birthday/scripts/birthday_friend.gd" id="17_v0510"]
+[ext_resource type="Texture2D" uid="uid://bi0rwih3gy00u" path="res://levels/birthday/textures/table.png" id="17_yuvu8"]
+[ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="18_pn4vo"]
+[ext_resource type="Texture2D" uid="uid://cgcilasvu6b58" path="res://levels/birthday/textures/friend_1_normal.png" id="18_sykws"]
+[ext_resource type="Texture2D" uid="uid://bkm4ymtmth230" path="res://levels/birthday/textures/friend_1_bad.png" id="19_dk7mf"]
+[ext_resource type="Texture2D" uid="uid://cx6gi37dg6scm" path="res://levels/birthday/textures/friend_2_normal.png" id="19_n1l7b"]
+[ext_resource type="Texture2D" uid="uid://c7280hap71r88" path="res://levels/birthday/textures/friend_3_normal.png" id="20_34ebl"]
+[ext_resource type="Texture2D" uid="uid://do83cfmqs26ky" path="res://levels/birthday/textures/friend_4_normal.png" id="21_hfobf"]
+[ext_resource type="Texture2D" uid="uid://btup40lk2u1vg" path="res://levels/birthday/textures/friend_2_bad.png" id="21_nqfsp"]
+[ext_resource type="Texture2D" uid="uid://vrdgwvoglabq" path="res://levels/birthday/textures/friend_3_bad.png" id="23_t75xs"]
+[ext_resource type="Texture2D" uid="uid://d2narob2ko0u8" path="res://levels/birthday/textures/friend_4_bad.png" id="25_tnuau"]
+[ext_resource type="Texture2D" uid="uid://brqt50uvyl7qj" path="res://levels/birthday/textures/bg.png" id="26_14sdp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2qmyt"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_xdar3"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_vrv80"]
+font_size = 30
+
+[sub_resource type="Gradient" id="Gradient_1384c"]
+offsets = PackedFloat32Array(0, 0.843284, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.949009, 0.787971, 0.647804, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nct4l"]
+gradient = SubResource("Gradient_1384c")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_r370g"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+energy_multiplier = 1.5
+
+[sub_resource type="Sky" id="Sky_j2u3i"]
+sky_material = SubResource("ProceduralSkyMaterial_r370g")
+
+[sub_resource type="Environment" id="Environment_ttodm"]
+background_mode = 2
+sky = SubResource("Sky_j2u3i")
+tonemap_mode = 2
+glow_enabled = true
+fog_light_color = Color(0.818886, 0.64777, 0.637606, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+volumetric_fog_albedo = Color(0.723087, 0.49699, 0.492727, 1)
+volumetric_fog_emission = Color(0.28485, 0.28485, 0.28485, 1)
+volumetric_fog_length = 10.0
+volumetric_fog_ambient_inject = 0.15
+adjustment_enabled = true
+adjustment_saturation = 1.15
+adjustment_color_correction = SubResource("GradientTexture1D_nct4l")
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_8b6su"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = false
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("12_sjtsb")
+radius = 64.0
+blend_cascades = true
+
+[sub_resource type="Compositor" id="Compositor_3ede0"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_8b6su")])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hcv8"]
+render_priority = 0
+shader = ExtResource("13_c42ww")
+shader_parameter/albedo = Color(0.623473, 0.339141, 0.305794, 1)
+shader_parameter/power = 0.175
+shader_parameter/tiling = 2.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fssr8"]
+size = Vector2(20, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w50a4"]
+size = Vector3(10, 0.1, 1.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ou7"]
+albedo_color = Color(0.773725, 0.684292, 0.598909, 1)
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_t7k83"]
+size = Vector3(2.5, 0.9, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qwmg"]
+render_priority = 0
+shader = ExtResource("15_0jsas")
+shader_parameter/outline_color = Color(0.613133, 0.363821, 0.445922, 1)
+shader_parameter/outline_size = 1.025
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fune"]
+next_pass = SubResource("ShaderMaterial_6qwmg")
+albedo_color = Color(0.849386, 0.500657, 0.733534, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_fu4dw"]
+size = Vector2(20, 1.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_52cqf"]
+size = Vector2(20, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_j0oiy"]
+size = Vector2(5, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gv4g8"]
+size = Vector2(1, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_v6ylk"]
+size = Vector2(0.1, 2.5)
+
+[sub_resource type="Curve" id="Curve_ihcuc"]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.252778, 1), 0.0, 0.0, 0, 0, Vector2(0.502778, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0ap1x"]
+curve = SubResource("Curve_ihcuc")
+
+[sub_resource type="Curve" id="Curve_bq1u6"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m60uy"]
+curve = SubResource("Curve_bq1u6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fce6q"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 2, 2)
+angle_min = 1.07288e-05
+angle_max = 180.0
+radial_velocity_min = -0.0500223
+radial_velocity_max = 0.0499776
+gravity = Vector3(0, 0, 0)
+scale_over_velocity_curve = SubResource("CurveTexture_m60uy")
+color = Color(1, 1, 1, 0.0784314)
+alpha_curve = SubResource("CurveTexture_0ap1x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jdp7"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("17_skuvf")
+shadow_to_opacity = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+distance_fade_mode = 1
+distance_fade_max_distance = 3.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ucoxw"]
+material = SubResource("StandardMaterial3D_3jdp7")
+size = Vector2(0.05, 0.05)
+
+[sub_resource type="Curve3D" id="Curve3D_rhwwo"]
+_data = {
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.2, -0.5, 0, 2, 3, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 1.7, 2),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+up_vector_enabled = false
+
+[node name="BirthdayPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
+script = ExtResource("5_1xy51")
+note_scene = ExtResource("6_fsr2k")
+playfield_center = NodePath("playfield")
+hit_audio_player = NodePath("HitAudioPlayer")
+audio_controller = NodePath("AudioController")
+score_display = NodePath("ui/results")
+
+[node name="AudioController" parent="." instance=ExtResource("8_snhv2")]
+
+[node name="metronome" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("audio_controller")]
+stream = ExtResource("9_5moi1")
+volume_db = -10.0
+script = ExtResource("5_ldion")
+audio_controller = NodePath("../AudioController")
+
+[node name="HitAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_rictb")
+volume_db = -8.0
+pitch_scale = 1.15
+max_polyphony = 5
+
+[node name="ui" type="Control" parent="." node_paths=PackedStringArray("beatmap_player", "score_text", "combo_text", "accuracy_text")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_ngo2o")
+beatmap_player = NodePath("..")
+score_text = NodePath("score")
+combo_text = NodePath("combo")
+accuracy_text = NodePath("accuracy")
+
+[node name="results" parent="ui" instance=ExtResource("10_lr8a8")]
+layout_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="scrubber" parent="ui" node_paths=PackedStringArray("audio_controller") instance=ExtResource("11_pr1iu")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -516.0
+offset_top = -85.0
+offset_right = 516.0
+grow_horizontal = 2
+grow_vertical = 0
+audio_controller = NodePath("../../AudioController")
+metadata/_edit_use_anchors_ = true
+
+[node name="score" type="Label" parent="ui"]
+layout_mode = 0
+offset_right = 86.0
+offset_bottom = 42.0
+text = "12345"
+label_settings = SubResource("LabelSettings_2qmyt")
+metadata/_edit_use_anchors_ = true
+
+[node name="combo" type="Label" parent="ui"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 86.0
+offset_bottom = 82.0
+text = "123x"
+label_settings = SubResource("LabelSettings_xdar3")
+metadata/_edit_use_anchors_ = true
+
+[node name="accuracy" type="Label" parent="ui"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -77.0
+offset_bottom = 42.0
+grow_horizontal = 0
+text = "100%"
+label_settings = SubResource("LabelSettings_vrv80")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="playfield" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.8
+anchor_right = 0.5
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.7, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+process_mode = 3
+environment = SubResource("Environment_ttodm")
+compositor = SubResource("Compositor_3ede0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.907633, -0.363528, 0.209882, 0.253212, 0.872938, 0.416969, -0.334794, -0.32531, 0.884357, 0, 0, 0)
+shadow_enabled = true
+
+[node name="scene" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0)
+
+[node name="FloorMesh" type="MeshInstance3D" parent="scene" node_paths=PackedStringArray("audio_controller")]
+material_override = SubResource("ShaderMaterial_0hcv8")
+cast_shadow = 0
+instance_shader_parameters/tick = 0
+mesh = SubResource("PlaneMesh_fssr8")
+skeleton = NodePath("../../..")
+script = ExtResource("12_nqxdm")
+audio_controller = NodePath("../../AudioController")
+
+[node name="TableMesh" type="MeshInstance3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3.25)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_w50a4")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
+
+[node name="Playfield" type="Node3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="CounterMesh" type="MeshInstance3D" parent="scene/Playfield"]
+transform = Transform3D(1.375, 0, 0, 0, 0.05, 0, 0, 0, 0.625, 0, 0.9, 0)
+visible = false
+cast_shadow = 0
+mesh = ExtResource("14_3jbfs")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
+
+[node name="TableMesh" type="MeshInstance3D" parent="scene/Playfield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("BoxMesh_t7k83")
+skeleton = NodePath("../../../..")
+
+[node name="CuttingBoardMesh" type="MeshInstance3D" parent="scene/Playfield"]
+transform = Transform3D(0.998579, 0, 0.0532946, 0, 0.5, 0, -0.0532946, 0, 0.998579, 0, 0.963799, 0.268152)
+visible = false
+material_override = SubResource("StandardMaterial3D_8fune")
+cast_shadow = 0
+mesh = ExtResource("16_6ctq0")
+
+[node name="Cake" type="Sprite3D" parent="scene/Playfield"]
+pixel_size = 0.002
+texture = ExtResource("17_yuvu8")
+
+[node name="Friends" type="Node3D" parent="scene/Playfield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="Friend1" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+pixel_size = 0.002
+hframes = 3
+script = ExtResource("17_v0510")
+normal_sprites = ExtResource("18_sykws")
+normal_sprites_count = 3
+bad_sprites = ExtResource("19_dk7mf")
+bad_sprites_count = 2
+player = NodePath("../../../..")
+
+[node name="Friend2" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.2, 0)
+pixel_size = 0.002
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 1
+normal_sprites = ExtResource("19_n1l7b")
+normal_sprites_count = 3
+bad_sprites = ExtResource("21_nqfsp")
+bad_sprites_count = 2
+player = NodePath("../../../..")
+
+[node name="Friend3" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, 0)
+pixel_size = 0.002
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 2
+normal_sprites = ExtResource("20_34ebl")
+normal_sprites_count = 3
+bad_sprites = ExtResource("23_t75xs")
+bad_sprites_count = 2
+player = NodePath("../../../..")
+
+[node name="Friend4" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+pixel_size = 0.002
+hframes = 3
+script = ExtResource("17_v0510")
+lane = 3
+normal_sprites = ExtResource("21_hfobf")
+normal_sprites_count = 3
+bad_sprites = ExtResource("25_tnuau")
+bad_sprites_count = 2
+player = NodePath("../../../..")
+
+[node name="Bg" type="Sprite3D" parent="scene/Playfield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+pixel_size = 0.002
+texture = ExtResource("26_14sdp")
+
+[node name="WallMeshes" type="Node3D" parent="scene"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 4)
+mesh = SubResource("QuadMesh_fu4dw")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 4)
+mesh = SubResource("QuadMesh_fu4dw")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.14492, 4)
+mesh = SubResource("QuadMesh_52cqf")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.02108, 4)
+mesh = SubResource("QuadMesh_52cqf")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2.60767, 4)
+mesh = SubResource("QuadMesh_j0oiy")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2.60767, 4)
+mesh = SubResource("QuadMesh_j0oiy")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0902449, 2.59433, 4)
+mesh = SubResource("QuadMesh_gv4g8")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.76585, 2.59433, 4)
+mesh = SubResource("QuadMesh_gv4g8")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64645, 2.59433, 4)
+mesh = SubResource("QuadMesh_gv4g8")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.05808, 2.59433, 4)
+mesh = SubResource("QuadMesh_v6ylk")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.27267, 2.59433, 4)
+mesh = SubResource("QuadMesh_v6ylk")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41636, 2.59433, 4)
+mesh = SubResource("QuadMesh_v6ylk")
+skeleton = NodePath("../../../..")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="scene/WallMeshes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1548, 2.59433, 4)
+mesh = SubResource("QuadMesh_v6ylk")
+skeleton = NodePath("../../../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02012, 0, -1.19647)
+cast_shadow = 0
+amount = 512
+lifetime = 5.0
+preprocess = 5.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_fce6q")
+draw_pass_1 = SubResource("QuadMesh_ucoxw")
+
+[node name="CameraTrack" type="Path3D" parent="."]
+curve = SubResource("Curve3D_rhwwo")
+script = ExtResource("18_pn4vo")
+
+[node name="Path" type="PathFollow3D" parent="CameraTrack"]
+transform = Transform3D(0.999837, 0, 0, 0, 0.928355, 0.371345, 0, -0.371342, 0.928363, 0, 2, 3)
+cubic_interp = false
+loop = false
+tilt_enabled = false
+
+[node name="Camera3D" type="Camera3D" parent="CameraTrack/Path"]
+transform = Transform3D(1.00002, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+current = true
+fov = 55.0
+
+[editable path="AudioController"]

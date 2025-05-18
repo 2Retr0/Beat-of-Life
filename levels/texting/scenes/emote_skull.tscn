@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkpv3ih6clnf5"]
+
+[ext_resource type="Texture2D" uid="uid://c584y3sc78d0h" path="res://levels/texting/textures/emote_skull.png" id="1_0ketf"]
+[ext_resource type="Script" path="res://levels/texting/scripts/emoji_note_drawable.gd" id="1_iegq7"]
+
+[node name="EmoteSkull" type="Node3D"]
+script = ExtResource("1_iegq7")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+sorting_offset = 1.0
+texture = ExtResource("1_0ketf")
+hframes = 3

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp3106ydw2gee"]
+
+[ext_resource type="Script" path="res://levels/texting/scripts/emoji_note_drawable.gd" id="1_3gv0w"]
+[ext_resource type="Texture2D" uid="uid://ca4sd3hf8puqe" path="res://levels/texting/textures/emote_smiley.png" id="1_4617u"]
+
+[node name="EmoteSmiley" type="Node3D"]
+script = ExtResource("1_3gv0w")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+sorting_offset = 1.0
+texture = ExtResource("1_4617u")
+hframes = 3

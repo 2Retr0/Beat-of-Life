@@ -11,24 +11,32 @@ var loading_screen: LoadingScreen :
 		add_child.call_deferred(loading_screen)
 		visible = true
 
+var callback: Callable
+var pending_callback: bool
+
 # Called when the node enters the scene tree for the first time.
 func _init() -> void:
 	layer = 999
 	process_mode = PROCESS_MODE_DISABLED
 	visible = false
 
-func load_scene_async(scene_path: String, loading_screen: LoadingScreen) -> void:
+func load_scene_async(scene_path: String, loading_screen: LoadingScreen, callback: Callable = func(tree): pass) -> void:
 	if self.loading_screen and self.loading_screen.is_inside_tree():
 		self.loading_screen.queue_free()
 		await self.loading_screen.tree_exiting
 
 	self.loading_screen = loading_screen
 	self.load_scene_path = scene_path
+	self.callback = callback
 	ResourceLoader.load_threaded_request(scene_path)
 	process_mode = PROCESS_MODE_ALWAYS
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if pending_callback:
+		callback.call(get_tree())
+		pending_callback = false
+	
 	var progress := []
 	var loaded_status = ResourceLoader.load_threaded_get_status(load_scene_path, progress)
 
@@ -36,6 +44,7 @@ func _process(delta: float) -> void:
 		loading_screen.value = 1.0
 		loading_screen.stage = LoadingScreen.Stage.UNLOAD
 		get_tree().change_scene_to_packed(ResourceLoader.load_threaded_get(load_scene_path))
+		pending_callback = true
 		if not loading_screen.has_stage_finished:
 			await loading_screen.stage_finished
 		process_mode = PROCESS_MODE_DISABLED

@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://5q0crfy66di6"]
+
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="1_qkmuv"]
+[ext_resource type="Script" path="res://levels/calibration/calibration_screen.gd" id="1_r4sw2"]
+[ext_resource type="Shader" path="res://levels/common/resources/shaders/background.gdshader" id="5_ok8f4"]
+[ext_resource type="Texture2D" uid="uid://b8m24qduv1xe0" path="res://levels/common/resources/double_note_black.png" id="6_4b4ir"]
+[ext_resource type="PackedScene" uid="uid://b3urfk13ajffu" path="res://levels/calibration/components/playfield.tscn" id="7_273fp"]
+[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="7_cd2u2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mg5xc"]
+shader = ExtResource("5_ok8f4")
+shader_parameter/background_color = Color(0.82, 0.67, 0.71, 1)
+shader_parameter/tiling = 13.5
+shader_parameter/gap = 1.75
+shader_parameter/tick = 0
+shader_parameter/tiled_texture = ExtResource("6_4b4ir")
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r4sw2")
+
+[node name="AudioSynchronizer" parent="." instance=ExtResource("1_qkmuv")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_mg5xc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Playfield" parent="CanvasLayer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("audio_synchronizer") instance=ExtResource("7_273fp")]
+layout_mode = 2
+audio_synchronizer = NodePath("../../../../AudioSynchronizer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AudioScrubber" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("track") instance=ExtResource("7_cd2u2")]
+layout_mode = 2
+track = NodePath("../../../../../AudioSynchronizer/Track")
+
+[editable path="AudioSynchronizer"]

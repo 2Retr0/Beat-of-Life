@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://253eofa3mbvv"]
+
+[ext_resource type="Texture2D" uid="uid://dqcld2v33vgue" path="res://levels/texting/textures/player_bubble.png" id="1_7d7ye"]
+[ext_resource type="Script" path="res://levels/texting/scripts/bubble.gd" id="1_rx4hc"]
+[ext_resource type="Texture2D" uid="uid://cgjkqk8633pbo" path="res://levels/texting/textures/crush_bubble.png" id="3_1tiy5"]
+
+[node name="Bubble" type="Node3D" node_paths=PackedStringArray("emotes_root")]
+script = ExtResource("1_rx4hc")
+player_bubble = ExtResource("1_7d7ye")
+crush_bubble = ExtResource("3_1tiy5")
+emotes_root = NodePath("Sprite3D/emotes")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_7d7ye")
+
+[node name="emotes" type="Node3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
