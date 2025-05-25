@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 	if pending_callback:
 		callback.call(get_tree())
 		pending_callback = false
-	
+
 	var progress := []
 	var loaded_status = ResourceLoader.load_threaded_get_status(load_scene_path, progress)
 

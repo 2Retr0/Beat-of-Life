@@ -21,23 +21,23 @@ func _ready() -> void:
 
 func _generate_multimeshes():
 	if not is_node_ready(): return
-	
+
 	# Free existing multimeshes (except first)
 	var children := get_children()
 	for child in children.slice(1):
 		child.free()
-	
+
 	# Add new multimeshes The number of multimeshes
 	# balances draw calls with amount of uploaded geometry.
 	for i in range(num_instances - 1):
 		var new_instance := children[0].duplicate()
 		new_instance.multimesh = children[0].multimesh.duplicate()
 		add_child(new_instance)
-	
+
 	var path_length := curve.get_baked_length()
 	var total_instances := floori(path_length / distance_between_instances)
 	var current_instance := 0
-	
+
 	# Distribute multimeshes such that instances conform along the path.
 	for multimesh_instance: MultiMeshInstance3D in get_children():
 		var multimesh := multimesh_instance.multimesh
@@ -56,7 +56,7 @@ func _generate_multimeshes():
 
 			multimesh.set_instance_transform(i, Transform3D(basis, position))
 			current_instance += 1
-		
+
 		# Overwrite current instance's multimesh with unique multimesh resource.
 		multimesh_instance.multimesh = multimesh
 

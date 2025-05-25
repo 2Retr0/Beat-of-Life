@@ -92,7 +92,7 @@ func create_playable(hit_object: HitObject) -> PlayableObject:
 		drawable = note_scenes[hit_object.lane % 4].instantiate()
 	drawable.init(self, playable)
 	drawables[playable] = drawable
-	
+
 	var group: int = hit_object.lane / 4
 	if group != last_group:
 		phone.add_bubble(group == 1)
@@ -147,5 +147,5 @@ func _on_audio_controller_seeked(new_time: float) -> void:
 			# (e.g., long notes that have started before the current time)
 			create_playable(hit_object)
 
-func _tick_phone() -> void:
+func _tick_phone(new_beat: Beat) -> void:
 	phone.tick_frame()

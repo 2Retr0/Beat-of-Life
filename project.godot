@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="Beat of Life"
-config/version="1.0.0"
 run/main_scene="res://main_temp_remove_me.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
@@ -35,7 +34,6 @@ SceneManager="*res://global/scene_manager.gd"
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/incompatible_ternary=0
-gdscript/warnings/untyped_declaration=1
 gdscript/warnings/integer_division=0
 
 [display]
