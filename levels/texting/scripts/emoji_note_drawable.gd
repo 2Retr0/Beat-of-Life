@@ -11,16 +11,24 @@ func init(player: TextingPlayer, playable: EmojiNotePlayable):
 	self.playable = playable
 
 func _process(delta: float) -> void:
+	if playable == null:
+		sprite.modulate.a = 1
+		return
 	if playable.hit_object.lane < 4:
-		if player.audio_controller.time >= playable.hit_object.time:
+		if playable.is_judged():
 			sprite.modulate.a = 1
 		else:
 			sprite.modulate.a = 0
 	else:
 		if playable.is_judged():
-			sprite.modulate.a = 1
-		else:
+			if playable.judgment.result == HitResult.Enum.Miss:
+				sprite.modulate.a = 0.5
+			else:
+				sprite.modulate.a = 1
+		elif player.audio_controller.time >= playable.hit_object.time:
 			sprite.modulate.a = 0.5
+		else:
+			sprite.modulate.a = 0
 
 func set_frame(frame: int) -> void:
 	sprite.frame = min(frame % 4, sprite.hframes - 1)

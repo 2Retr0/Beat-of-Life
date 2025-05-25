@@ -1,24 +1,12 @@
 class_name TextingPlayer extends BeatmapPlayer
 
-# SAME MAPS AS BIRTHDAY LEVEL
 const input_maps: Dictionary = {
-	3: [KEY_F, KEY_SPACE, KEY_J],
-	4: [KEY_D, KEY_F, KEY_J, KEY_K],
-	5: [KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K],
-	6: [KEY_S, KEY_D, KEY_F, KEY_J, KEY_K, KEY_L],
-	7: [KEY_S, KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K, KEY_L],
-	8: [KEY_A, KEY_S, KEY_D, KEY_F, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON],
-	9: [KEY_A, KEY_S, KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON],
+	8: [KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_D, KEY_F, KEY_J, KEY_K],
 }
 
 @export var note_scenes : Array[PackedScene]
 
-@export var playfield_center: Node
-
 @export var hit_audio_player : AudioStreamPlayer
-
-## Time (in seconds) for a hit object to travel to the playfield center
-@export var scroll_time: float = 0.5
 
 @export var auto: bool = false
 
@@ -105,12 +93,10 @@ func create_playable(hit_object: HitObject) -> PlayableObject:
 	drawable.init(self, playable)
 	drawables[playable] = drawable
 	
-	if hit_object.lane < 4:
-		playable.set_result(HitResult.Enum.Perfect)
-
-	var group: int = hit_object.lane % 4
+	var group: int = hit_object.lane / 4
 	if group != last_group:
 		phone.add_bubble(group == 1)
+		last_group = group
 	phone.get_bubble().add_drawable(drawable)
 
 	return playable
@@ -153,7 +139,7 @@ func _on_audio_controller_seeked(new_time: float) -> void:
 	create_index = 0
 	for i in len(beatmap.hit_objects):
 		var hit_object := beatmap.hit_objects[i]
-		if new_time < hit_object.get_start_time() - scroll_time:
+		if new_time < hit_object.get_start_time():
 			create_index = i
 			break
 		elif _is_relevant(hit_object):

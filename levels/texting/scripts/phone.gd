@@ -19,6 +19,8 @@ func add_bubble(is_player: bool) -> Bubble:
 	current_bubble = bubble_scene.instantiate()
 	current_bubble.set_is_player(is_player)
 	bubbles.add_child(current_bubble)
+	if bubbles.get_children().size() > 2:
+		bubbles.get_child(0).dispose()
 	return current_bubble
 
 func tick_frame() -> void:

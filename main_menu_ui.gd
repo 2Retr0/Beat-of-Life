@@ -6,9 +6,9 @@ extends Control
 @export_file("*.tscn") var play_scene_path
 @export_file("*.tscn") var options_scene_path
 
-const LOADING_SCREEN_COLUMNS := preload('res://level/common/ui/loading_screens/columns/loading_screen_columns.tscn')
-const LOADING_SCREEN_GRID := preload('res://level/common/ui/loading_screens/grid/loading_screen_grid.tscn')
-const LOADING_SCREEN_STARTUP := preload('res://level/common/ui/loading_screens/startup/loading_screen_startup.tscn')
+const LOADING_SCREEN_COLUMNS := preload('res://ui/loading/columns/loading_screen_columns.tscn')
+const LOADING_SCREEN_GRID := preload('res://ui/loading/grid/loading_screen_grid.tscn')
+const LOADING_SCREEN_STARTUP := preload('res://ui/loading/startup/loading_screen_startup.tscn')
 
 func _ready() -> void:
 	play_button.pressed.connect(_on_play)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://bcvw3yt6bxay8"]
+
+[ext_resource type="Script" path="res://game/scripts/beatmap_source.gd" id="1_rptcy"]
+[ext_resource type="Script" path="res://game/scripts/level.gd" id="2_sbttt"]
+[ext_resource type="Script" path="res://levels/texting/scripts/load_texting_beatmap.gd" id="2_tqi6v"]
+
+[sub_resource type="Resource" id="Resource_pn1kg"]
+script = ExtResource("2_tqi6v")
+path = "res://levels/texting/Distatikal - Level2 (Phantom-101) [test].osu"
+
+[resource]
+script = ExtResource("2_sbttt")
+level_name = &"Texting"
+beatmaps = Array[ExtResource("1_rptcy")]([SubResource("Resource_pn1kg")])
+player_scene_path = "res://levels/texting/scenes/texting.tscn"

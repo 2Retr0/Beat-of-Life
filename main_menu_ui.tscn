@@ -12,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fe5q8")
-play_scene_path = "res://level/main_menu/components/level_select.tscn"
+play_scene_path = "res://levels/level_select/level_select.tscn"
 options_scene_path = "res://dummy_options_menu.tscn"
 
 [node name="TextureRect" type="TextureRect" parent="."]

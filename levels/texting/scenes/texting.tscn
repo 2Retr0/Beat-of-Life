@@ -1,7 +1,6 @@
-[gd_scene load_steps=54 format=3 uid="uid://duvtbn20bo567"]
+[gd_scene load_steps=53 format=3 uid="uid://duvtbn20bo567"]
 
-[ext_resource type="Script" path="res://levels/birthday/scripts/birthday_player.gd" id="1_01m3h"]
-[ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="2_tr3b8"]
+[ext_resource type="Script" path="res://levels/texting/scripts/texting_player.gd" id="1_jytex"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="3_arfee"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="4_tpnrg"]
 [ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_wigq5"]
@@ -174,11 +173,11 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="BirthdayPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
-script = ExtResource("1_01m3h")
-note_scene = ExtResource("2_tr3b8")
-playfield_center = NodePath("playfield")
+[node name="TextingPlayer" type="Node" node_paths=PackedStringArray("hit_audio_player", "phone", "audio_controller", "score_display")]
+script = ExtResource("1_jytex")
+note_scenes = Array[PackedScene]([ExtResource("16_a3aa8"), ExtResource("17_0ocsv"), ExtResource("18_s24td"), ExtResource("19_p3vgp")])
 hit_audio_player = NodePath("HitAudioPlayer")
+phone = NodePath("scene/Playfield/phone")
 audio_controller = NodePath("AudioController")
 score_display = NodePath("ui/results")
 
@@ -341,11 +340,6 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.28237, -0.576895, 0)
 
 [node name="bubbles" type="Node3D" parent="scene/Playfield/phone"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0540747, -0.166738, 0)
-
-[node name="Bubble" parent="scene/Playfield/phone/bubbles" instance=ExtResource("20_4k1u2")]
-
-[node name="Bubble2" parent="scene/Playfield/phone/bubbles" instance=ExtResource("20_4k1u2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="WallMeshes" type="Node3D" parent="scene"]
 

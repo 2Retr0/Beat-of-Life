@@ -10,15 +10,7 @@ class_name Bubble extends Node3D
 
 @export var current_frame: int = 0
 
-@onready var sprite: Sprite3D = $Sprite3D
-
-func _process(delta: float) -> void:
-	var relevant: bool = false
-	for emote in emotes:
-		if emote.player.is_relevant(emote.playable.hit_object):
-			relevant = true
-	if not relevant:
-		dispose()
+@export var sprite: Sprite3D
 
 func set_is_player(is_player: bool) -> void:
 	if is_player:
