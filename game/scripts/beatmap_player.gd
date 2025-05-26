@@ -13,7 +13,7 @@ signal finished
 
 func initialize(beatmap: Beatmap) -> void:
 	self.beatmap = beatmap
-	
+
 	score.reset()
 	score_display.visible = false
 

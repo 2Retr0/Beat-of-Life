@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://bbh4p52j8axwj"]
+[gd_resource type="Resource" script_class="GameLevel" load_steps=5 format=3 uid="uid://bbh4p52j8axwj"]
 
 [ext_resource type="Script" path="res://game/scripts/beatmap_source.gd" id="1_j3a3s"]
-[ext_resource type="Script" path="res://game/scripts/level.gd" id="2_nvd76"]
+[ext_resource type="Script" path="res://game/scripts/game_level.gd" id="2_nvd76"]
 [ext_resource type="Script" path="res://rulesets/mania/load_mania_beatmap.gd" id="2_upjhf"]
 
 [sub_resource type="Resource" id="Resource_pdcda"]

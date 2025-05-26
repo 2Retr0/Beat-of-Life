@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://c3gtq5mjxutk0"]
+[gd_scene load_steps=37 format=3 uid="uid://c3gtq5mjxutk0"]
 
 [ext_resource type="Script" path="res://levels/level_select/level_select.gd" id="1_1qgpx"]
 [ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_movement_component.tres" id="1_r18fv"]
 [ext_resource type="Resource" uid="uid://iru8ynu04i00" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_rotation_component.tres" id="2_8f4l0"]
+[ext_resource type="Script" path="res://game/scripts/game_level.gd" id="2_dnqch"]
 [ext_resource type="Shader" path="res://levels/level_select/glow.gdshader" id="2_h5bhk"]
 [ext_resource type="Resource" uid="uid://rp3mpjmisoyh" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_object_movement_component.tres" id="3_jdaqf"]
 [ext_resource type="Resource" uid="uid://c8ulad7utgrg7" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/shader_stages/pre_blur_processing_stage.tres" id="4_5nmis"]
@@ -15,11 +16,8 @@
 [ext_resource type="Resource" uid="uid://bxfg45ubc2pv7" path="res://addons/sphynx_motion_blur_toolkit/guertin/shader_stages/guertin_tile_max_y_stage.tres" id="11_ivh8y"]
 [ext_resource type="Resource" uid="uid://bqehecsdgt70s" path="res://addons/sphynx_motion_blur_toolkit/guertin/shader_stages/guertin_tile_variance_stage.tres" id="12_t15k3"]
 [ext_resource type="Script" path="res://addons/sphynx_motion_blur_toolkit/base_classes/mb_compositor.gd" id="13_g6mec"]
-[ext_resource type="Script" path="res://levels/level_select/track.gd" id="15_g7vmh"]
-[ext_resource type="ArrayMesh" uid="uid://bfk7xtnfjmic5" path="res://levels/level_select/film_reel_segment.obj" id="16_ymr1g"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="17_xr5ka"]
 [ext_resource type="Texture2D" uid="uid://bi0rwih3gy00u" path="res://levels/birthday/textures/table.png" id="19_bi0t8"]
-[ext_resource type="Script" path="res://levels/level_select/level_select_entry.gd" id="20_toiaj"]
 [ext_resource type="Resource" uid="uid://bmxd1h166fskc" path="res://levels/birthday/birthday.tres" id="21_8jn8b"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="22_lfffi"]
 [ext_resource type="Resource" uid="uid://bcvw3yt6bxay8" path="res://levels/texting/texting.tres" id="23_1khj6"]
@@ -36,18 +34,13 @@ sky = SubResource("Sky_88vv8")
 tonemap_mode = 2
 glow_enabled = true
 glow_normalized = true
-glow_bloom = 0.6
+glow_bloom = 0.8
 glow_blend_mode = 1
-volumetric_fog_density = 0.25
-volumetric_fog_albedo = Color(0.927805, 0.719881, 0.607047, 1)
-volumetric_fog_emission = Color(0.274495, 0.0297131, 1.20327e-08, 1)
-volumetric_fog_length = 4.0
-volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_o67md"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -62,7 +55,7 @@ shader_stages/pre_blur_processor_stage = ExtResource("4_5nmis")
 [sub_resource type="CompositorEffect" id="CompositorEffect_i1gg6"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -97,7 +90,7 @@ uncapped_independence = false
 target_constant_framerate = 30.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_u78mf"]
-size = Vector2(20, 10)
+size = Vector2(100, 100)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3g02s"]
 render_priority = 0
@@ -124,6 +117,7 @@ alpha_curve = SubResource("CurveTexture_6x1du")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vhluw"]
 transparency = 1
 vertex_color_use_as_albedo = true
+albedo_color = Color(0.998, 0.823, 0.678, 0.421)
 albedo_texture = ExtResource("17_xr5ka")
 
 [sub_resource type="QuadMesh" id="QuadMesh_hp4hm"]
@@ -132,27 +126,15 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Skin" id="Skin_m422k"]
 
-[sub_resource type="Curve3D" id="Curve3D_5wkvc"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 2.28565, 0.0378568, 0.0112745, -4.17269, 3.72529e-09, -0.0112745, 4.17269, -3.72529e-09, 0.016101, 54.1997, 0.0378418, 0.00630701, -14.6903, -2.23517e-08, -0.00630701, 14.6903, 2.23517e-08, -0.0155428, 95.0149, 0.0378418, -0.0299342, -12.8742, 4.09782e-08, 0.0299342, 12.8742, -4.09782e-08, 0.0368968, 130.349, 0.0378418, -0.0184354, -11.8941, -1.49012e-08, 0.0184354, 11.8941, 1.49012e-08, -0.0524765, 170.045, 0.0378418, -0.0440928, -12.3346, 2.6077e-08, 0.0440928, 12.3346, -2.6077e-08, 0.0177267, 199.303, 0.0378418, 0.0117904, -13.3097, 0, -0.0117904, 13.3097, 0, -0.0179112, 256.952, 0.0378418, 0, 0, 0, -0.00449675, 0.877563, 3.72529e-09, -0.000547048, 302.534, 0.0378418, 0, 0, 0, 0, 0, 0, 0.00355727, 433.736, 0.0378418),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
-}
-point_count = 9
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32jm8"]
-albedo_color = Color(0.136826, 0.136826, 0.136826, 1)
-
-[sub_resource type="MultiMesh" id="MultiMesh_gi1f4"]
-transform_format = 1
-instance_count = 7
-mesh = ExtResource("16_ymr1g")
-buffer = PackedFloat32Array(-2.58764e-11, 1, -0.000565144, 0.000201477, -3.13948e-07, -0.000565886, -1, 2.64008, -1, 1.51783e-10, 3.13948e-07, 0.0378567, 1.75012e-11, 1, -0.000559271, 0.000593568, -2.96549e-07, -0.000559568, -1, 3.33716, -1, 1.83441e-10, 2.96549e-07, 0.0378565, -4.01229e-12, 1, -0.000554613, 0.000985326, -3.35056e-07, -0.000554919, -1, 4.04023, -1, 1.81917e-10, 3.35056e-07, 0.0378563, 2.85913e-11, 1, -0.000550553, 0.00137357, -3.35516e-07, -0.000550747, -1, 4.74251, -1, 2.13376e-10, 3.35516e-07, 0.037856, -1.19124e-07, 1, -0.000546807, 0.00175894, -2.61213e-07, -0.000547171, -1, 5.44455, -1, -1.18981e-07, 2.61278e-07, 0.0378558, -1.1916e-07, 1, -0.000543257, 0.00214158, -2.97564e-07, -0.000543475, -1, 6.14629, -1, -1.18999e-07, 2.97629e-07, 0.0378556, 1.19209e-07, 1, -0.000539844, 0.00252197, -2.98197e-07, -0.000540018, -1, 6.84839, -1, 1.1937e-07, 2.98133e-07, 0.0378554)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_tx1vj"]
-size = Vector3(1, 0.76, 0.07)
+size = Vector3(1.075, 0.707, 0)
 
 [node name="LevelSelect" type="Node3D"]
 script = ExtResource("1_1qgpx")
+run_animation = true
+levels = Array[ExtResource("2_dnqch")]([ExtResource("21_8jn8b"), ExtResource("23_1khj6")])
+previews = Array[Texture2D]([ExtResource("19_bi0t8"), ExtResource("22_lfffi")])
+beatmap_indices = Array[int]([0, 0])
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
@@ -163,9 +145,10 @@ compositor = SubResource("Compositor_k3f24")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.895282)
+fov = 45.0
 
 [node name="Background" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0108192, 0, -5.05442)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("QuadMesh_u78mf")
@@ -174,7 +157,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_3g02s")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.30097)
 cast_shadow = 0
-amount = 512
+emitting = false
+amount = 256
 lifetime = 5.0
 preprocess = 5.0
 randomness = 0.5
@@ -183,40 +167,13 @@ process_material = SubResource("ParticleProcessMaterial_cg1eb")
 draw_pass_1 = SubResource("QuadMesh_hp4hm")
 draw_skin = SubResource("Skin_m422k")
 
-[node name="Path3D" type="Path3D" parent="."]
-transform = Transform3D(-4.37057e-08, 0, -0.999869, 0, 1, 0, 0.999869, 0, -4.37057e-08, 0, -310, -0.667)
-curve = SubResource("Curve3D_5wkvc")
-script = ExtResource("15_g7vmh")
-num_instances = 100
-distance_between_instances = 0.702
+[node name="LevelSelectButton" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.667)
 
-[node name="FilmReelMultimesh" type="MultiMeshInstance3D" parent="Path3D"]
-material_override = SubResource("StandardMaterial3D_32jm8")
-cast_shadow = 0
-multimesh = SubResource("MultiMesh_gi1f4")
-
-[node name="birthday_level" type="Sprite3D" parent="Path3D/FilmReelMultimesh"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 310.812, 0.0328802)
-pixel_size = 0.0003
-texture = ExtResource("19_bi0t8")
-script = ExtResource("20_toiaj")
-level = ExtResource("21_8jn8b")
-
-[node name="Area3D" type="Area3D" parent="Path3D/FilmReelMultimesh/birthday_level"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/FilmReelMultimesh/birthday_level/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LevelSelectButton"]
 shape = SubResource("BoxShape3D_tx1vj")
 
-[node name="texting_level" type="Sprite3D" parent="Path3D/FilmReelMultimesh"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 310.112, 0.0328802)
-pixel_size = 0.0003
-texture = ExtResource("22_lfffi")
-script = ExtResource("20_toiaj")
-level = ExtResource("23_1khj6")
+[node name="FilmReelSegments" type="Node3D" parent="."]
+transform = Transform3D(0.999964, 0, 5.77062e-17, 0, 1, 0, -5.77062e-17, 0, 0.999964, 0, 0, -0.667)
 
-[node name="Area3D" type="Area3D" parent="Path3D/FilmReelMultimesh/texting_level"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Path3D/FilmReelMultimesh/texting_level/Area3D"]
-shape = SubResource("BoxShape3D_tx1vj")
-
-[connection signal="curve_changed" from="Path3D" to="Path3D" method="_on_curve_changed"]
+[connection signal="input_event" from="LevelSelectButton" to="." method="_on_level_select_button_input_event"]

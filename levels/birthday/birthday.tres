@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="Level" load_steps=5 format=3 uid="uid://bmxd1h166fskc"]
+[gd_resource type="Resource" script_class="GameLevel" load_steps=5 format=3 uid="uid://bmxd1h166fskc"]
 
 [ext_resource type="Script" path="res://game/scripts/beatmap_source.gd" id="1_njpcn"]
 [ext_resource type="Script" path="res://levels/birthday/scripts/load_birthday_beatmap.gd" id="2_1dfkh"]
-[ext_resource type="Script" path="res://game/scripts/level.gd" id="2_q4dq4"]
+[ext_resource type="Script" path="res://game/scripts/game_level.gd" id="3_sak15"]
 
-[sub_resource type="Resource" id="Resource_p1vwd"]
+[sub_resource type="Resource" id="Resource_01hu8"]
 script = ExtResource("2_1dfkh")
-path = "res://level/birthday/bday.osu"
+path = ""
 
 [resource]
-script = ExtResource("2_q4dq4")
+script = ExtResource("3_sak15")
 level_name = &"Birthday"
-beatmaps = Array[ExtResource("1_njpcn")]([SubResource("Resource_p1vwd")])
-player_scene_path = "res://level/birthday/birthday.tscn"
+beatmaps = Array[ExtResource("1_njpcn")]([SubResource("Resource_01hu8")])
+player_scene_path = "res://levels/birthday/scenes/birthday.tscn"

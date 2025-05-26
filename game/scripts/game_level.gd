@@ -1,5 +1,5 @@
 # A particular level to be displayed in the level selection
-class_name Level extends Resource
+class_name GameLevel extends Resource
 
 # Name of the level or scenario (not the name of the song)
 @export var level_name: StringName

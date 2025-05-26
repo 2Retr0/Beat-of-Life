@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Beat of Life"
+config/version="1.0.0"
 run/main_scene="res://main_temp_remove_me.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
@@ -58,6 +59,11 @@ movie_writer/disable_vsync=true
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg")
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
+theme/default_font_generate_mipmaps=true
 
 [input]
 

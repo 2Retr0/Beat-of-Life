@@ -20,7 +20,7 @@ func _init() -> void:
 	process_mode = PROCESS_MODE_DISABLED
 	visible = false
 
-func load_scene_async(scene_path: String, loading_screen: LoadingScreen, callback: Callable = func(tree): pass) -> void:
+func load_scene_async(scene_path: String, loading_screen: LoadingScreen, callback: Callable = func(tree: SceneTree): pass) -> void:
 	if self.loading_screen and self.loading_screen.is_inside_tree():
 		self.loading_screen.queue_free()
 		await self.loading_screen.tree_exiting

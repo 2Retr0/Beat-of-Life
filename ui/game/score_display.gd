@@ -11,10 +11,10 @@ class_name ScoreDisplay extends Control
 
 func set_score(score: LevelScore):
 	score_label.text = "%d" % score.score
-	
+
 	perfect_label.text = "%d" % score.count(HitResult.Enum.Perfect)
 	good_label.text = "%d" % score.count(HitResult.Enum.Good)
 	miss_label.text = "%d" % score.count(HitResult.Enum.Miss)
-	
+
 	accuracy_label.text = "%.2f" % (score.accuracy * 100)
 	max_combo_label.text = "%d" % score.max_combo

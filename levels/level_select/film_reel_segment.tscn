@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://n48fckbberii"]
+
+[ext_resource type="ArrayMesh" uid="uid://bfk7xtnfjmic5" path="res://levels/level_select/film_reel_segment.obj" id="1_4bhh8"]
+[ext_resource type="Script" path="res://levels/level_select/film_reel_segment.gd" id="2_v3b33"]
+[ext_resource type="Texture2D" uid="uid://bb3g3orioct3q" path="res://levels/level_select/rust.png" id="3_7x034"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32jm8"]
+albedo_color = Color(0.0093175, 0.0093175, 0.0093175, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6x1h"]
+transparency = 1
+albedo_color = Color(0.381, 0.266, 0.261, 0.579)
+albedo_texture = ExtResource("3_7x034")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bofts"]
+size = Vector2(0.725, 0.55)
+
+[node name="FilmReelSegment" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_32jm8")
+cast_shadow = 0
+mesh = ExtResource("1_4bhh8")
+skeleton = NodePath("../..")
+script = ExtResource("2_v3b33")
+
+[node name="Film" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0)
+material_override = SubResource("StandardMaterial3D_r6x1h")
+mesh = SubResource("PlaneMesh_bofts")
+
+[node name="Preview" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.002, 0)
+pixel_size = 0.0005
