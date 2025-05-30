@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://jpevx8ubwvip"]
+
+[ext_resource type="Script" path="res://levels/packing/scripts/packing_note_drawable.gd" id="1_ymqc6"]
+[ext_resource type="Texture2D" uid="uid://bepfmy2bpske2" path="res://levels/texting/textures/emote_100.png" id="2_4nl7k"]
+
+[node name="PackingNoteDrawable" type="Node3D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_ymqc6")
+sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+sorting_offset = 1.0
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_4nl7k")
+hframes = 4

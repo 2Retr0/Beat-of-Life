@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_pn1kg"]
 script = ExtResource("2_tqi6v")
-path = "res://levels/texting/Distatikal - Level2 (Phantom-101) [test].osu"
+path = "res://levels/texting/level2.osu"
 
 [resource]
 script = ExtResource("2_sbttt")

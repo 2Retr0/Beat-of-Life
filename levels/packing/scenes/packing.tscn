@@ -1,30 +1,19 @@
-[gd_scene load_steps=53 format=3 uid="uid://cmidcapvfg8su"]
+[gd_scene load_steps=42 format=3 uid="uid://draxxpfpb5514"]
 
-[ext_resource type="Script" path="res://levels/birthday/scripts/birthday_player.gd" id="5_1xy51"]
-[ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_ldion"]
-[ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="6_fsr2k"]
-[ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_ngo2o"]
-[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
-[ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
-[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="10_lr8a8"]
-[ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="10_rictb"]
-[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
-[ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="12_nqxdm"]
-[ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="12_sjtsb"]
-[ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="13_c42ww"]
-[ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="17_skuvf"]
-[ext_resource type="Script" path="res://levels/birthday/scripts/birthday_friend.gd" id="17_v0510"]
-[ext_resource type="Texture2D" uid="uid://bi0rwih3gy00u" path="res://levels/birthday/textures/table.png" id="17_yuvu8"]
-[ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="18_pn4vo"]
-[ext_resource type="Texture2D" uid="uid://cgcilasvu6b58" path="res://levels/birthday/textures/friend_1_normal.png" id="18_sykws"]
-[ext_resource type="Texture2D" uid="uid://bkm4ymtmth230" path="res://levels/birthday/textures/friend_1_bad.png" id="19_dk7mf"]
-[ext_resource type="Texture2D" uid="uid://cx6gi37dg6scm" path="res://levels/birthday/textures/friend_2_normal.png" id="19_n1l7b"]
-[ext_resource type="Texture2D" uid="uid://c7280hap71r88" path="res://levels/birthday/textures/friend_3_normal.png" id="20_34ebl"]
-[ext_resource type="Texture2D" uid="uid://do83cfmqs26ky" path="res://levels/birthday/textures/friend_4_normal.png" id="21_hfobf"]
-[ext_resource type="Texture2D" uid="uid://btup40lk2u1vg" path="res://levels/birthday/textures/friend_2_bad.png" id="21_nqfsp"]
-[ext_resource type="Texture2D" uid="uid://vrdgwvoglabq" path="res://levels/birthday/textures/friend_3_bad.png" id="23_t75xs"]
-[ext_resource type="Texture2D" uid="uid://d2narob2ko0u8" path="res://levels/birthday/textures/friend_4_bad.png" id="25_tnuau"]
-[ext_resource type="Texture2D" uid="uid://brqt50uvyl7qj" path="res://levels/birthday/textures/bg.png" id="26_14sdp"]
+[ext_resource type="Script" path="res://levels/packing/scripts/packing_player.gd" id="1_kp5uf"]
+[ext_resource type="PackedScene" uid="uid://jpevx8ubwvip" path="res://levels/packing/scenes/packing_note_drawable.tscn" id="2_301f3"]
+[ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="2_dfve5"]
+[ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="3_8fvcm"]
+[ext_resource type="Script" path="res://game/scripts/metronome.gd" id="4_4tnjn"]
+[ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="5_2uphi"]
+[ext_resource type="Script" path="res://ui/game/game_ui.gd" id="6_sok68"]
+[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="7_1ql4t"]
+[ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="8_1i4jg"]
+[ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="9_kkg23"]
+[ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="10_2pmul"]
+[ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="11_x8dnb"]
+[ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="26_4os2q"]
+[ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="27_ntu5o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qmyt"]
 font_size = 30
@@ -73,7 +62,7 @@ enabled = false
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
-script = ExtResource("12_sjtsb")
+script = ExtResource("9_kkg23")
 radius = 64.0
 blend_cascades = true
 
@@ -82,7 +71,7 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_8b6s
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0hcv8"]
 render_priority = 0
-shader = ExtResource("13_c42ww")
+shader = ExtResource("10_2pmul")
 shader_parameter/albedo = Color(0.623473, 0.339141, 0.305794, 1)
 shader_parameter/power = 0.175
 shader_parameter/tiling = 2.0
@@ -141,7 +130,7 @@ alpha_curve = SubResource("CurveTexture_0ap1x")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3jdp7"]
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("17_skuvf")
+albedo_texture = ExtResource("26_4os2q")
 shadow_to_opacity = true
 billboard_mode = 3
 billboard_keep_scale = true
@@ -163,24 +152,24 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="BirthdayPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
-script = ExtResource("5_1xy51")
-note_scene = ExtResource("6_fsr2k")
-playfield_center = NodePath("playfield")
+[node name="PackingPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
+script = ExtResource("1_kp5uf")
+note_scene = ExtResource("2_301f3")
+playfield_center = NodePath("scene/Playfield")
 hit_audio_player = NodePath("HitAudioPlayer")
 audio_controller = NodePath("AudioController")
 score_display = NodePath("ui/results")
 
-[node name="AudioController" parent="." instance=ExtResource("8_snhv2")]
+[node name="AudioController" parent="." instance=ExtResource("2_dfve5")]
 
 [node name="metronome" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("audio_controller")]
-stream = ExtResource("9_5moi1")
+stream = ExtResource("3_8fvcm")
 volume_db = -10.0
-script = ExtResource("5_ldion")
+script = ExtResource("4_4tnjn")
 audio_controller = NodePath("../AudioController")
 
 [node name="HitAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_rictb")
+stream = ExtResource("5_2uphi")
 volume_db = -8.0
 pitch_scale = 1.15
 max_polyphony = 5
@@ -192,17 +181,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("7_ngo2o")
+script = ExtResource("6_sok68")
 beatmap_player = NodePath("..")
 score_text = NodePath("score")
 combo_text = NodePath("combo")
 accuracy_text = NodePath("accuracy")
 
-[node name="results" parent="ui" instance=ExtResource("10_lr8a8")]
+[node name="results" parent="ui" instance=ExtResource("7_1ql4t")]
 layout_mode = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="scrubber" parent="ui" node_paths=PackedStringArray("audio_controller") instance=ExtResource("11_pr1iu")]
+[node name="scrubber" parent="ui" node_paths=PackedStringArray("audio_controller") instance=ExtResource("8_1i4jg")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -247,17 +236,6 @@ label_settings = SubResource("LabelSettings_vrv80")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="playfield" type="Control" parent="."]
-layout_mode = 3
-anchor_left = 0.5
-anchor_top = 0.8
-anchor_right = 0.5
-anchor_bottom = 0.8
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.7, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 3
 environment = SubResource("Environment_ttodm")
@@ -278,7 +256,7 @@ cast_shadow = 0
 instance_shader_parameters/tick = 0
 mesh = SubResource("PlaneMesh_fssr8")
 skeleton = NodePath("../../..")
-script = ExtResource("12_nqxdm")
+script = ExtResource("11_x8dnb")
 audio_controller = NodePath("../../AudioController")
 
 [node name="TableMesh" type="MeshInstance3D" parent="scene"]
@@ -290,65 +268,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
 
 [node name="Playfield" type="Node3D" parent="scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-
-[node name="Cake" type="Sprite3D" parent="scene/Playfield"]
-pixel_size = 0.002
-texture = ExtResource("17_yuvu8")
-
-[node name="Friends" type="Node3D" parent="scene/Playfield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-
-[node name="Friend1" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
-pixel_size = 0.002
-hframes = 3
-script = ExtResource("17_v0510")
-normal_sprites = ExtResource("18_sykws")
-normal_sprites_count = 3
-bad_sprites = ExtResource("19_dk7mf")
-bad_sprites_count = 2
-player = NodePath("../../../..")
-
-[node name="Friend2" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.2, 0)
-pixel_size = 0.002
-hframes = 3
-script = ExtResource("17_v0510")
-lane = 1
-normal_sprites = ExtResource("19_n1l7b")
-normal_sprites_count = 3
-bad_sprites = ExtResource("21_nqfsp")
-bad_sprites_count = 2
-player = NodePath("../../../..")
-
-[node name="Friend3" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.2, 0)
-pixel_size = 0.002
-hframes = 3
-script = ExtResource("17_v0510")
-lane = 2
-normal_sprites = ExtResource("20_34ebl")
-normal_sprites_count = 3
-bad_sprites = ExtResource("23_t75xs")
-bad_sprites_count = 2
-player = NodePath("../../../..")
-
-[node name="Friend4" type="Sprite3D" parent="scene/Playfield/Friends" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
-pixel_size = 0.002
-hframes = 3
-script = ExtResource("17_v0510")
-lane = 3
-normal_sprites = ExtResource("21_hfobf")
-normal_sprites_count = 3
-bad_sprites = ExtResource("25_tnuau")
-bad_sprites_count = 2
-player = NodePath("../../../..")
-
-[node name="Bg" type="Sprite3D" parent="scene/Playfield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-pixel_size = 0.002
-texture = ExtResource("26_14sdp")
 
 [node name="WallMeshes" type="Node3D" parent="scene"]
 
@@ -429,7 +348,7 @@ draw_pass_1 = SubResource("QuadMesh_ucoxw")
 
 [node name="CameraTrack" type="Path3D" parent="."]
 curve = SubResource("Curve3D_rhwwo")
-script = ExtResource("18_pn4vo")
+script = ExtResource("27_ntu5o")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
 transform = Transform3D(0.999837, 0, 0, 0, 0.928355, 0.371345, 0, -0.371342, 0.928363, 0, 2, 3)

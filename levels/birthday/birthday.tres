@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_01hu8"]
 script = ExtResource("2_1dfkh")
-path = ""
+path = "res://levels/birthday/bday.osu"
 
 [resource]
 script = ExtResource("3_sak15")

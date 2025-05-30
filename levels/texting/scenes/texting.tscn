@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://duvtbn20bo567"]
+[gd_scene load_steps=47 format=3 uid="uid://duvtbn20bo567"]
 
 [ext_resource type="Script" path="res://levels/texting/scripts/texting_player.gd" id="1_jytex"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="3_arfee"]
@@ -10,9 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="9_mhq7n"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="10_qtdla"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="11_prdwn"]
-[ext_resource type="ArrayMesh" uid="uid://ssihdd0k84cu" path="res://levels/demo/resources/beveled_cube_xz.obj" id="12_lj8pb"]
-[ext_resource type="Shader" path="res://levels/demo/resources/shaders/outline_inverted_hull.gdshader" id="13_ye7uf"]
-[ext_resource type="ArrayMesh" uid="uid://dhegmxhj00syp" path="res://levels/demo/resources/cutting_board.obj" id="14_4luia"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="15_cft5n"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="15_ju6dh"]
 [ext_resource type="Script" path="res://levels/texting/scripts/phone.gd" id="16_4jwlg"]
@@ -93,19 +90,6 @@ size = Vector3(10, 0.1, 1.25)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8ou7"]
 albedo_color = Color(0.773725, 0.684292, 0.598909, 1)
 roughness = 0.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_t7k83"]
-size = Vector3(2.5, 0.9, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eutv1"]
-render_priority = 0
-shader = ExtResource("13_ye7uf")
-shader_parameter/outline_color = Color(0.613133, 0.363821, 0.445922, 1)
-shader_parameter/outline_size = 1.025
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fune"]
-next_pass = SubResource("ShaderMaterial_eutv1")
-albedo_color = Color(0.849386, 0.500657, 0.733534, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_fu4dw"]
 size = Vector2(20, 1.5)
@@ -292,28 +276,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
 
 [node name="Playfield" type="Node3D" parent="scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-
-[node name="CounterMesh" type="MeshInstance3D" parent="scene/Playfield"]
-transform = Transform3D(1.375, 0, 0, 0, 0.05, 0, 0, 0, 0.625, 0, 0.9, 0)
-visible = false
-cast_shadow = 0
-mesh = ExtResource("12_lj8pb")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
-
-[node name="TableMesh" type="MeshInstance3D" parent="scene/Playfield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
-visible = false
-cast_shadow = 0
-mesh = SubResource("BoxMesh_t7k83")
-skeleton = NodePath("../../../..")
-
-[node name="CuttingBoardMesh" type="MeshInstance3D" parent="scene/Playfield"]
-transform = Transform3D(0.998579, 0, 0.0532946, 0, 0.5, 0, -0.0532946, 0, 0.998579, 0, 0.963799, 0.268152)
-visible = false
-material_override = SubResource("StandardMaterial3D_8fune")
-cast_shadow = 0
-mesh = ExtResource("14_4luia")
 
 [node name="phone" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("emotes", "bubbles")]
 sorting_offset = -1.0
