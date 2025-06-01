@@ -9,6 +9,6 @@ sprite = NodePath("Sprite3D")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 sorting_offset = 1.0
-modulate = Color(1, 1, 1, 0)
+pixel_size = 0.005
 texture = ExtResource("2_4nl7k")
 hframes = 4

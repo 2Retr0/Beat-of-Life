@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://draxxpfpb5514"]
+[gd_scene load_steps=43 format=3 uid="uid://draxxpfpb5514"]
 
 [ext_resource type="Script" path="res://levels/packing/scripts/packing_player.gd" id="1_kp5uf"]
 [ext_resource type="PackedScene" uid="uid://jpevx8ubwvip" path="res://levels/packing/scenes/packing_note_drawable.tscn" id="2_301f3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="9_kkg23"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="10_2pmul"]
 [ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="11_x8dnb"]
+[ext_resource type="Texture2D" uid="uid://ca4sd3hf8puqe" path="res://levels/texting/textures/emote_smiley.png" id="13_i0kbv"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="26_4os2q"]
 [ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="27_ntu5o"]
 
@@ -152,15 +153,17 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="PackingPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
+[node name="PackingPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "box", "audio_controller", "score_display")]
 script = ExtResource("1_kp5uf")
 note_scene = ExtResource("2_301f3")
 playfield_center = NodePath("scene/Playfield")
 hit_audio_player = NodePath("HitAudioPlayer")
+box = NodePath("scene/Playfield/Box")
 audio_controller = NodePath("AudioController")
 score_display = NodePath("ui/results")
 
-[node name="AudioController" parent="." instance=ExtResource("2_dfve5")]
+[node name="AudioController" parent="." node_paths=PackedStringArray("beatmap_player") instance=ExtResource("2_dfve5")]
+beatmap_player = NodePath("..")
 
 [node name="metronome" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("audio_controller")]
 stream = ExtResource("3_8fvcm")
@@ -267,7 +270,13 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
 
 [node name="Playfield" type="Node3D" parent="scene"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+
+[node name="Box" type="Sprite3D" parent="scene/Playfield"]
+sorting_offset = 1.0
+pixel_size = 0.005
+texture = ExtResource("13_i0kbv")
+hframes = 3
 
 [node name="WallMeshes" type="Node3D" parent="scene"]
 

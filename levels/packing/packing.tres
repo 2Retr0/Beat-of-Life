@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameLevel" load_steps=5 format=3 uid="uid://cng3fblx1mg7b"]
+
+[ext_resource type="Script" path="res://game/scripts/beatmap_source.gd" id="1_2y2wh"]
+[ext_resource type="Script" path="res://game/scripts/game_level.gd" id="2_fwxbm"]
+[ext_resource type="Script" path="res://levels/packing/scripts/load_packing_beatmap.gd" id="2_lwo1x"]
+
+[sub_resource type="Resource" id="Resource_0r6xd"]
+script = ExtResource("2_lwo1x")
+path = "res://levels/packing/level3.osu"
+
+[resource]
+script = ExtResource("2_fwxbm")
+level_name = &"Packing"
+beatmaps = Array[ExtResource("1_2y2wh")]([SubResource("Resource_0r6xd")])
+player_scene_path = "res://levels/packing/scenes/packing.tscn"

@@ -7,6 +7,6 @@ extends GeometryInstance3D
 func _ready() -> void:
 	audio_controller.beat_reached.connect(_update_shader)
 
-func _update_shader() -> void:
+func _update_shader(new_beat: Beat) -> void:
 	beat += 1
 	set_instance_shader_parameter('tick', beat)

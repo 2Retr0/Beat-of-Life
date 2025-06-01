@@ -1,15 +1,7 @@
 class_name PackingPlayer extends BeatmapPlayer
 
-## TODO: SWITCH TO USING GODOT INPUT MAP AT SOME POINT!
-const input_maps: Dictionary = {
-	3: [KEY_F, KEY_SPACE, KEY_J],
-	4: [KEY_D, KEY_F, KEY_J, KEY_K],
-	5: [KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K],
-	6: [KEY_S, KEY_D, KEY_F, KEY_J, KEY_K, KEY_L],
-	7: [KEY_S, KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K, KEY_L],
-	8: [KEY_A, KEY_S, KEY_D, KEY_F, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON],
-	9: [KEY_A, KEY_S, KEY_D, KEY_F, KEY_SPACE, KEY_J, KEY_K, KEY_L, KEY_SEMICOLON],
-}
+const left_key = KEY_LEFT
+const right_key = KEY_RIGHT
 
 @export var note_scene : PackedScene
 
@@ -22,12 +14,18 @@ const input_maps: Dictionary = {
 
 @export var auto: bool = false
 
+@export var current_lane: float = 0
+
+@export var slide_speed: float = 7.5
+
+@export var slide_speed_multiplier: float = 2
+
+@export var box: Sprite3D
+
 var create_index: int = 0
 
 var playables: Array[Array] # Array[Array[PlayableObject]]
 var drawables: Dictionary # Dictionary[PlayableObject, Node]
-
-var last_key_states: Array[bool]
 
 func initialize(beatmap: Beatmap) -> void:
 	assert(beatmap is PackingBeatmap, 'Beatmap is not packing beatmap')
@@ -37,9 +35,6 @@ func initialize(beatmap: Beatmap) -> void:
 	playables.resize(beatmap.lane_count)
 	for i in range(beatmap.lane_count):
 		playables[i] = []
-
-	last_key_states.resize(beatmap.lane_count)
-	last_key_states.fill(false)
 
 	if auto:
 		set_process_input(false) # Disable input if auto mode is on
@@ -51,23 +46,27 @@ func _process(delta: float) -> void:
 		for playable in lane_playables:
 			playable.process_tick()
 
+	var lane_change = 0
+	var effective_speed = slide_speed
+	if Input.is_physical_key_pressed(KEY_SHIFT):
+		effective_speed *= slide_speed_multiplier
+	
+	if Input.is_physical_key_pressed(left_key):
+		lane_change -= effective_speed * delta
+	
+	if Input.is_physical_key_pressed(right_key):
+		lane_change += effective_speed * delta
+	
+	current_lane = clamp(current_lane + lane_change, 0, beatmap.lane_count - 1)
+	
+	box.position = Vector3(0.65 * (current_lane - beatmap.lane_count / 2.0 + 0.5), 0, 0)
+
 	var time := audio_controller.time
 	for lane_playables in playables:
 		for playable in lane_playables:
 			if not _is_relevant(playable.hit_object):
 				dispose_playable(playable)
-			elif playable.can_perform_action():
-				if auto:
-					_perform_auto_action(playable)
-				else:
-					var lane = playable.hit_object.lane
-					var is_pressed : bool = Input.is_physical_key_pressed(input_maps[beatmap.lane_count][lane])
-					var was_pressed : bool = last_key_states[lane]
-					if is_pressed and not was_pressed:
-						playable.perform_action(PlayableObject.ActionType.PRESSED)
-					elif not is_pressed and was_pressed:
-						playable.perform_action(PlayableObject.ActionType.RELEASED)
-					last_key_states[lane] = is_pressed
+			else:
 				break
 
 	# Instantiate new relevant playables
