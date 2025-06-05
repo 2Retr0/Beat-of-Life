@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	var time := audio_controller.time
 	for lane_playables in playables:
 		for playable in lane_playables:
-			if not _is_relevant(playable.hit_object):
+			if not _is_relevant(playable.hit_object) and time > playable.hit_object.time:
 				dispose_playable(playable)
 			elif playable.can_perform_action():
 				if auto:
