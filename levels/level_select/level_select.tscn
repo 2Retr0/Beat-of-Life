@@ -41,7 +41,7 @@ glow_blend_mode = 1
 [sub_resource type="CompositorEffect" id="CompositorEffect_o67md"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -56,7 +56,7 @@ shader_stages/pre_blur_processor_stage = ExtResource("4_5nmis")
 [sub_resource type="CompositorEffect" id="CompositorEffect_i1gg6"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -157,6 +157,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_3g02s")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.30097)
 cast_shadow = 0
+emitting = false
 amount = 256
 lifetime = 5.0
 preprocess = 5.0
@@ -178,7 +179,7 @@ transform = Transform3D(0.999941, 0, 7.69397e-17, 0, 1, 0, -7.69397e-17, 0, 0.99
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ArrowUp" type="Label" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.125)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -195,7 +196,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ArrowDown" type="Label" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.5)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

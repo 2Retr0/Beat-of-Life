@@ -37,6 +37,7 @@ func _input(event: InputEvent) -> void:
 		if $Logo.is_animating:
 			$Logo.skip_animation()
 		elif logo_done:
+			set_process_input(false)
 			SceneManager.load_scene_async(play_scene_path, LOADING_SCREEN_GRID.instantiate())
 
 
