@@ -16,4 +16,4 @@ func perform_action(action: ActionType) -> void:
 		match action:
 			ActionType.PRESSED:
 				set_result(hit_object.get_result(player.get_time()))
-				player.play_sound()
+				player.play_sound(judgment.result)

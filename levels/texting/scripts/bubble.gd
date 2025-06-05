@@ -20,7 +20,7 @@ func set_is_player(is_player: bool) -> void:
 
 func add_drawable(emote: EmojiNoteDrawable) -> void:
 	emotes_root.add_child(emote)
-	emote.position = Vector3(emotes.size(), 0, 0)
+	emote.position = Vector3(emotes.size() * 1.2, 0, 0)
 	emote.set_frame(current_frame)
 	emotes.append(emote)
 

@@ -8,6 +8,8 @@ const input_maps: Dictionary = {
 
 @export var hit_audio_player : AudioStreamPlayer
 
+@export var hit_sfx: Array[AudioStream]
+
 @export var auto: bool = false
 
 @export var phone: Phone
@@ -22,6 +24,8 @@ var drawables: Dictionary # Dictionary[PlayableObject, Node]
 var last_key_states: Array[bool]
 
 signal judgment_received(judgment)
+
+signal input_received(lane)
 
 func initialize(beatmap: Beatmap) -> void:
 
@@ -60,6 +64,7 @@ func _process(delta: float) -> void:
 					var was_pressed : bool = last_key_states[lane]
 					if is_pressed and not was_pressed:
 						playable.perform_action(PlayableObject.ActionType.PRESSED)
+						input_received.emit(lane)
 					elif not is_pressed and was_pressed:
 						playable.perform_action(PlayableObject.ActionType.RELEASED)
 					last_key_states[lane] = is_pressed
@@ -120,7 +125,8 @@ func report_judgment(judgment: Judgment) -> void:
 	super.report_judgment(judgment)
 	judgment_received.emit(judgment)
 
-func play_sound() -> void:
+func play_sound(result: HitResult.Enum) -> void:
+	hit_audio_player.stream = hit_sfx[result]
 	hit_audio_player.play()
 
 func _on_audio_controller_seeked(new_time: float) -> void:

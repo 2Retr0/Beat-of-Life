@@ -1,12 +1,14 @@
-[gd_scene load_steps=47 format=3 uid="uid://duvtbn20bo567"]
+[gd_scene load_steps=59 format=3 uid="uid://duvtbn20bo567"]
 
 [ext_resource type="Script" path="res://levels/texting/scripts/texting_player.gd" id="1_jytex"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="3_arfee"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="4_tpnrg"]
 [ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_wigq5"]
-[ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="6_x8hfl"]
+[ext_resource type="AudioStream" uid="uid://duljr77j0otxe" path="res://levels/texting/sfx/miss.mp3" id="6_vtnvy"]
 [ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_4p2ok"]
+[ext_resource type="AudioStream" uid="uid://clvxyjt6b4e61" path="res://levels/texting/sfx/good.mp3" id="7_y5ms1"]
 [ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="8_nht6n"]
+[ext_resource type="AudioStream" uid="uid://2rcnahe1td7j" path="res://levels/texting/sfx/perfect.mp3" id="8_whkfq"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="9_mhq7n"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="10_qtdla"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="11_prdwn"]
@@ -16,9 +18,19 @@
 [ext_resource type="PackedScene" uid="uid://cp3106ydw2gee" path="res://levels/texting/scenes/emote_smiley.tscn" id="16_a3aa8"]
 [ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="16_a34bd"]
 [ext_resource type="PackedScene" uid="uid://cpl03oa8lc33s" path="res://levels/texting/scenes/emote_heart.tscn" id="17_0ocsv"]
+[ext_resource type="AudioStream" uid="uid://ij2mkkhawhiu" path="res://levels/texting/sfx/player_message.mp3" id="18_4i2f0"]
 [ext_resource type="PackedScene" uid="uid://bkpv3ih6clnf5" path="res://levels/texting/scenes/emote_skull.tscn" id="18_s24td"]
+[ext_resource type="Texture2D" uid="uid://dchahvba05kta" path="res://levels/texting/textures/hand_left.png" id="18_vambf"]
+[ext_resource type="AudioStream" uid="uid://d0wj08duqctrc" path="res://levels/texting/sfx/crush_message.mp3" id="19_ddubh"]
+[ext_resource type="Script" path="res://levels/texting/scripts/hand.gd" id="19_dgbe5"]
 [ext_resource type="PackedScene" uid="uid://chaad3w5nvpqo" path="res://levels/texting/scenes/emote_100.tscn" id="19_p3vgp"]
+[ext_resource type="Texture2D" uid="uid://cpf84bgfvd5b2" path="res://levels/texting/textures/hand_right.png" id="19_x2g4l"]
 [ext_resource type="PackedScene" uid="uid://253eofa3mbvv" path="res://levels/texting/scenes/bubble.tscn" id="20_4k1u2"]
+[ext_resource type="Texture2D" uid="uid://cgd06t68iu6mb" path="res://levels/texting/textures/crush_neutral.png" id="20_ism6j"]
+[ext_resource type="Script" path="res://levels/texting/scripts/pfp.gd" id="21_kxp7c"]
+[ext_resource type="Texture2D" uid="uid://dt7p5dtmntl1r" path="res://levels/texting/textures/crush_perfect.png" id="22_7acy6"]
+[ext_resource type="Texture2D" uid="uid://bp5ghhki8mfkt" path="res://levels/texting/textures/crush_good.png" id="23_dbqd3"]
+[ext_resource type="Texture2D" uid="uid://bp3n3egdf1vvb" path="res://levels/texting/textures/crush_bad.png" id="24_hpycm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qmyt"]
 font_size = 30
@@ -151,7 +163,7 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Curve3D" id="Curve3D_rhwwo"]
 _data = {
-"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -1, -0.05, 0, 3, 2.1, 0, 1, 0.05, -0.000991911, -1.22934, -1.03288, 0, 1.3, 2),
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -1, -0.05, 0, 3, 2.42, 0, 1, 0.05, -0.000991911, -1.22934, -1.03288, 0, 1.125, 2.375),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -161,6 +173,7 @@ up_vector_enabled = false
 script = ExtResource("1_jytex")
 note_scenes = Array[PackedScene]([ExtResource("16_a3aa8"), ExtResource("17_0ocsv"), ExtResource("18_s24td"), ExtResource("19_p3vgp")])
 hit_audio_player = NodePath("HitAudioPlayer")
+hit_sfx = Array[AudioStream]([ExtResource("6_vtnvy"), ExtResource("6_vtnvy"), ExtResource("7_y5ms1"), ExtResource("8_whkfq")])
 phone = NodePath("scene/Playfield/phone")
 audio_controller = NodePath("AudioController")
 score_display = NodePath("ui/results")
@@ -174,9 +187,8 @@ script = ExtResource("5_wigq5")
 audio_controller = NodePath("../AudioController")
 
 [node name="HitAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_x8hfl")
-volume_db = -8.0
-pitch_scale = 1.15
+stream = ExtResource("8_whkfq")
+volume_db = 10.0
 max_polyphony = 5
 
 [node name="ui" type="Control" parent="." node_paths=PackedStringArray("beatmap_player", "score_text", "combo_text", "accuracy_text")]
@@ -277,7 +289,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
 [node name="Playfield" type="Node3D" parent="scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
-[node name="phone" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("emotes", "bubbles")]
+[node name="phone" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("emotes", "bubbles", "sfx_player", "pfp")]
 sorting_offset = -1.0
 pixel_size = 0.002
 texture = ExtResource("15_ju6dh")
@@ -285,23 +297,63 @@ script = ExtResource("16_4jwlg")
 emotes = NodePath("emotes")
 bubbles = NodePath("bubbles")
 bubble_scene = ExtResource("20_4k1u2")
+player_message_sfx = ExtResource("18_4i2f0")
+crush_message_sfx = ExtResource("19_ddubh")
+sfx_player = NodePath("AudioStreamPlayer")
+pfp = NodePath("pfp")
 
 [node name="emotes" type="Node3D" parent="scene/Playfield/phone"]
 
 [node name="EmoteSmiley" parent="scene/Playfield/phone/emotes" instance=ExtResource("16_a3aa8")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.375333, -0.576895, 0)
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, -0.375333, -0.576895, 0)
 
 [node name="EmoteHeart" parent="scene/Playfield/phone/emotes" instance=ExtResource("17_0ocsv")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.155078, -0.576895, 0)
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, -0.155078, -0.576895, 0)
 
 [node name="EmoteSkull" parent="scene/Playfield/phone/emotes" instance=ExtResource("18_s24td")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.0685238, -0.576895, 0)
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0.0685238, -0.576895, 0)
 
 [node name="Emote100" parent="scene/Playfield/phone/emotes" instance=ExtResource("19_p3vgp")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.28237, -0.576895, 0)
+transform = Transform3D(0.175, 0, 0, 0, 0.175, 0, 0, 0, 0.175, 0.28237, -0.576895, 0)
 
 [node name="bubbles" type="Node3D" parent="scene/Playfield/phone"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0540747, -0.166738, 0)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="scene/Playfield/phone"]
+volume_db = -10.0
+
+[node name="pfp" type="Sprite3D" parent="scene/Playfield/phone" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0484659, 0.622833, 0)
+sorting_offset = 1.0
+pixel_size = 0.0015
+texture = ExtResource("20_ism6j")
+hframes = 3
+script = ExtResource("21_kxp7c")
+textures = Array[Texture]([ExtResource("20_ism6j"), ExtResource("24_hpycm"), ExtResource("23_dbqd3"), ExtResource("22_7acy6")])
+frame_counts = Array[int]([3, 4, 4, 4])
+player = NodePath("../../../..")
+
+[node name="HandLeft" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.686781, -0.735225, 0)
+sorting_offset = -0.5
+pixel_size = 0.002
+texture = ExtResource("18_vambf")
+hframes = 3
+script = ExtResource("19_dgbe5")
+min_lane = 4
+max_lane = 5
+player = NodePath("../../..")
+
+[node name="HandRight" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.52122, -0.688212, 0)
+sorting_offset = -0.5
+pixel_size = 0.002
+texture = ExtResource("19_x2g4l")
+hframes = 3
+script = ExtResource("19_dgbe5")
+min_lane = 6
+max_lane = 7
+player = NodePath("../../..")
 
 [node name="WallMeshes" type="Node3D" parent="scene"]
 
@@ -385,7 +437,7 @@ curve = SubResource("Curve3D_rhwwo")
 script = ExtResource("16_a34bd")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
-transform = Transform3D(0.999837, 0, 0, 0, 0.999869, 0, 0, 0, 0.999878, 0, 3, 2.1)
+transform = Transform3D(0.999837, 0, 0, 0, 0.999869, 0, 0, 0, 0.999878, 0, 3, 2.42)
 rotation_mode = 0
 cubic_interp = false
 loop = false
@@ -395,7 +447,5 @@ tilt_enabled = false
 transform = Transform3D(1.00002, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 current = true
 fov = 55.0
-
-[node name="SubViewport" type="SubViewport" parent="."]
 
 [editable path="AudioController"]
