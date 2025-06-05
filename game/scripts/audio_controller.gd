@@ -45,7 +45,7 @@ func play() -> void:
 	# Or a measure's time ahead of the first object's timing point, whichever is earlier
 	var start_timing = beatmap.get_current_timing(beatmap.get_object_start())
 	var measure_ahead = start_timing.time - start_timing.beat_length * start_timing.meter
-	time = min(measure_ahead, 0)
+	time = min(measure_ahead, 0) - 3
 
 	timing = beatmap.get_current_timing(time)
 	timing_changed.emit(timing)

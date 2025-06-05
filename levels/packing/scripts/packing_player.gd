@@ -14,11 +14,7 @@ const right_key = KEY_RIGHT
 
 @export var auto: bool = false
 
-@export var current_lane: float = 0
-
-@export var slide_speed: float = 7.5
-
-@export var slide_speed_multiplier: float = 2
+@export var current_lane: int = 0
 
 @export var box: Sprite3D
 
@@ -26,6 +22,9 @@ var create_index: int = 0
 
 var playables: Array[Array] # Array[Array[PlayableObject]]
 var drawables: Dictionary # Dictionary[PlayableObject, Node]
+
+var was_left_clicked: bool
+var was_right_clicked: bool
 
 func initialize(beatmap: Beatmap) -> void:
 	assert(beatmap is PackingBeatmap, 'Beatmap is not packing beatmap')
@@ -46,22 +45,26 @@ func _process(delta: float) -> void:
 		for playable in lane_playables:
 			playable.process_tick()
 
-	var lane_change = 0
-	var effective_speed = slide_speed
+	var lane_change = 1
+	if Input.is_physical_key_pressed(KEY_CTRL):
+		lane_change = 2
 	if Input.is_physical_key_pressed(KEY_SHIFT):
-		effective_speed *= slide_speed_multiplier
+		lane_change = 3
 	
-	if Input.is_physical_key_pressed(left_key):
-		lane_change -= effective_speed * delta
+	var is_left_clicked = Input.is_physical_key_pressed(left_key)
+	if is_left_clicked and not was_left_clicked:
+		current_lane -= lane_change
+	was_left_clicked = is_left_clicked
 	
-	if Input.is_physical_key_pressed(right_key):
-		lane_change += effective_speed * delta
+	var is_right_clicked = Input.is_physical_key_pressed(right_key)
+	if is_right_clicked and not was_right_clicked:
+		current_lane += lane_change
+	was_right_clicked = is_right_clicked
 	
-	current_lane = clamp(current_lane + lane_change, 0, beatmap.lane_count - 1)
+	current_lane = clamp(current_lane, 0, beatmap.lane_count - 1)
 	
 	box.position = Vector3(0.65 * (current_lane - beatmap.lane_count / 2.0 + 0.5), 0, 0)
 
-	var time := audio_controller.time
 	for lane_playables in playables:
 		for playable in lane_playables:
 			if not _is_relevant(playable.hit_object):

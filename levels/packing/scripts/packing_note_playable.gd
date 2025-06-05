@@ -6,7 +6,7 @@ func _init(player: BeatmapPlayer, hit_object: HitObject) -> void:
 func process_tick() -> void:
 	if !is_judged():
 		var delta = player.get_time() - hit_object.time
-		if abs(delta) <= hit_object.get_hit_windows().get_max_extent() and round(player.current_lane) == hit_object.lane:
+		if abs(delta) <= hit_object.get_hit_windows().get_max_extent() and player.current_lane == hit_object.lane:
 			set_result(HitResult.Enum.Perfect)
 			return
 		if delta > hit_object.get_hit_windows().get_max_extent():
