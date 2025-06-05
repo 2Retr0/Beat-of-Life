@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c3gtq5mjxutk0"]
+[gd_scene load_steps=38 format=3 uid="uid://c3gtq5mjxutk0"]
 
 [ext_resource type="Script" path="res://levels/level_select/level_select.gd" id="1_1qgpx"]
 [ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_movement_component.tres" id="1_r18fv"]
@@ -22,7 +22,6 @@
 [ext_resource type="Resource" uid="uid://bmxd1h166fskc" path="res://levels/birthday/birthday.tres" id="21_8jn8b"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="22_lfffi"]
 [ext_resource type="Resource" uid="uid://bcvw3yt6bxay8" path="res://levels/texting/texting.tres" id="23_1khj6"]
-[ext_resource type="AudioStream" uid="uid://dwtesm74bvk5" path="res://levels/level_select/level_select.wav" id="23_ob1nv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_er1tt"]
 
@@ -174,7 +173,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.667)
 shape = SubResource("BoxShape3D_tx1vj")
 
 [node name="FilmReelSegments" type="Node3D" parent="."]
-transform = Transform3D(0.999937, 0, 7.69395e-17, 0, 1, 0, -7.69395e-17, 0, 0.999937, 0, 0, -0.667)
+transform = Transform3D(0.99994, 0, 7.69397e-17, 0, 1, 0, -7.69397e-17, 0, 0.99994, 0, 0, -0.667)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -214,7 +213,3 @@ theme_override_font_sizes/font_size = 45
 text = "➤"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("23_ob1nv")
-autoplay = true

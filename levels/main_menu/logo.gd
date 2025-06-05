@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func animate() -> void:
 	is_animating = true
+	$WordsBackground.visible = false
 	$Background.visible = true
 
 	tween = create_tween().set_parallel(true)
@@ -35,13 +36,14 @@ func animate() -> void:
 		tween.tween_method(func(t: float):
 			var theta := 2.0*PI*t*10.0
 			letter.position = letter_origin + Vector2(sin(theta), sin(theta*0.8 + 0.5))*letter.size.y/27.0, 0.0, 1.0, 0.125).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_ELASTIC).set_delay(delay + 0.3)
-		delay += LETTER_DELAY*1.85
-	delay -= LETTER_DELAY*1.85 - 0.325
+		delay += LETTER_DELAY*1.8
+	delay -= LETTER_DELAY*1.8 - 0.3
 
 	tween.tween_property($Foreground, ^'color:a', 0.0, 8.0).from(1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_delay(delay)
 	tween.tween_callback(func():
 		is_animating = false
 		finished.emit()
+		$WordsBackground.visible = true
 		$Background.visible = false).set_delay(delay)
 
 func skip_animation() -> void:
@@ -54,6 +56,7 @@ func skip_animation() -> void:
 
 	tween = create_tween()
 	tween.tween_property($Foreground, ^'color:a', 0.0, 12.0).from(1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	$WordsBackground.visible = true
 	$Background.visible = false
 	set_logo_alpha(1.0)
 	finished.emit()

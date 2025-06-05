@@ -1,11 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://bstyynx7prws4"]
+[gd_scene load_steps=23 format=3 uid="uid://bstyynx7prws4"]
 
 [ext_resource type="Script" path="res://levels/main_menu/main_menu.gd" id="1_syius"]
 [ext_resource type="Script" path="res://levels/main_menu/logo.gd" id="2_1oi3j"]
-[ext_resource type="Texture2D" uid="uid://gpwuqmk8kk7r" path="res://levels/main_menu/main_menu.png" id="2_pwxm1"]
+[ext_resource type="Texture2D" uid="uid://gpwuqmk8kk7r" path="res://levels/main_menu/main_menu.png" id="2_ipw4m"]
+[ext_resource type="Texture2D" uid="uid://bfyni2ocd0c38" path="res://levels/main_menu/assets/Title_B.png" id="4_tk3re"]
+[ext_resource type="Texture2D" uid="uid://cdh0e0rpnde36" path="res://levels/main_menu/assets/Title_e1.png" id="5_3cynk"]
 [ext_resource type="Texture2D" uid="uid://jw2ubvs721bm" path="res://levels/common/resources/double_note_white.png" id="5_24q5q"]
-[ext_resource type="Shader" path="res://levels/main_menu/snow.gdshader" id="5_rihck"]
-[ext_resource type="AudioStream" uid="uid://bhqppvs6lp8ku" path="res://levels/main_menu/main_menu.wav" id="6_mp5yr"]
+[ext_resource type="Shader" path="res://levels/main_menu/assets/snow.gdshader" id="5_rihck"]
+[ext_resource type="Texture2D" uid="uid://crqvdisfnwg86" path="res://levels/main_menu/assets/Title_a.png" id="6_ge6ni"]
+[ext_resource type="Texture2D" uid="uid://cph0w3hqc4rnn" path="res://levels/main_menu/assets/Title_t.png" id="7_rqu0e"]
+[ext_resource type="Texture2D" uid="uid://cf5nllx67quyd" path="res://levels/main_menu/assets/Title_o.png" id="8_ku56w"]
+[ext_resource type="Texture2D" uid="uid://megkuu5o0pl4" path="res://levels/main_menu/assets/Title_f1.png" id="9_mkufw"]
+[ext_resource type="Texture2D" uid="uid://dnd5ivtyvlack" path="res://levels/main_menu/assets/Title_L.png" id="10_tuu8r"]
+[ext_resource type="Texture2D" uid="uid://7myjrx3c2mf6" path="res://levels/main_menu/assets/Title_i.png" id="11_eopbj"]
+[ext_resource type="Texture2D" uid="uid://isjnjco2yhb3" path="res://levels/main_menu/assets/Title_f2.png" id="12_vm3uj"]
+[ext_resource type="Texture2D" uid="uid://chwcdqlecj4x" path="res://levels/main_menu/assets/Title_e2.png" id="13_1ibpm"]
+[ext_resource type="Shader" path="res://levels/main_menu/assets/letter_background.gdshader" id="13_d8ufv"]
+[ext_resource type="AudioStream" uid="uid://bhqppvs6lp8ku" path="res://levels/main_menu/main_menu.wav" id="17_7juqv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5v00a"]
+shader = ExtResource("13_d8ufv")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o23k3"]
 shader = ExtResource("5_rihck")
@@ -51,7 +65,7 @@ offset_top = -63.0
 offset_bottom = 63.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pwxm1")
+texture = ExtResource("2_ipw4m")
 expand_mode = 3
 stretch_mode = 6
 metadata/_edit_lock_ = true
@@ -64,7 +78,7 @@ offset_right = 560.0
 offset_bottom = 490.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pwxm1")
+texture = ExtResource("2_ipw4m")
 expand_mode = 3
 stretch_mode = 6
 metadata/_edit_lock_ = true
@@ -100,20 +114,165 @@ mouse_filter = 2
 color = Color(0.0117021, 0.0117021, 0.0117021, 1)
 metadata/_edit_lock_ = true
 
+[node name="WordsBackground" type="Control" parent="Logo"]
+visible = false
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -792.0
+offset_top = -92.0
+offset_right = -92.0
+offset_bottom = 608.0
+grow_horizontal = 0
+scale = Vector2(0.6, 0.6)
+pivot_offset = Vector2(350, 350)
+mouse_filter = 2
+
+[node name="Beat" type="Control" parent="Logo/WordsBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B" type="TextureRect" parent="Logo/WordsBackground/Beat"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -296.25
+offset_top = -292.5
+offset_right = -90.25
+offset_bottom = -6.5
+texture = ExtResource("4_tk3re")
+stretch_mode = 5
+
+[node name="e" type="TextureRect" parent="Logo/WordsBackground/Beat"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -141.25
+offset_top = -248.75
+offset_right = 47.75
+offset_bottom = -61.75
+texture = ExtResource("5_3cynk")
+stretch_mode = 5
+
+[node name="a" type="TextureRect" parent="Logo/WordsBackground/Beat"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = 11.25
+offset_top = -253.75
+offset_right = 227.25
+offset_bottom = -54.75
+texture = ExtResource("6_ge6ni")
+stretch_mode = 5
+
+[node name="t" type="TextureRect" parent="Logo/WordsBackground/Beat"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = 171.25
+offset_top = -356.25
+offset_right = 387.25
+offset_bottom = 24.75
+texture = ExtResource("7_rqu0e")
+stretch_mode = 5
+
+[node name="of" type="Control" parent="Logo/WordsBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="o" type="TextureRect" parent="Logo/WordsBackground/of"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -72.5
+offset_top = -53.75
+offset_right = 143.5
+offset_bottom = 327.25
+scale = Vector2(0.39, 0.39)
+texture = ExtResource("8_ku56w")
+stretch_mode = 5
+
+[node name="f" type="TextureRect" parent="Logo/WordsBackground/of"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = 6.24997
+offset_top = -63.75
+offset_right = 222.25
+offset_bottom = 317.25
+scale = Vector2(0.385, 0.385)
+texture = ExtResource("9_mkufw")
+stretch_mode = 5
+
+[node name="Life" type="Control" parent="Logo/WordsBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="L" type="TextureRect" parent="Logo/WordsBackground/Life"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -290.0
+offset_top = 12.5
+offset_right = -74.0
+offset_bottom = 393.5
+texture = ExtResource("10_tuu8r")
+stretch_mode = 5
+
+[node name="i" type="TextureRect" parent="Logo/WordsBackground/Life"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -116.25
+offset_top = 111.25
+offset_right = 28.75
+offset_bottom = 393.25
+texture = ExtResource("11_eopbj")
+stretch_mode = 5
+
+[node name="f" type="TextureRect" parent="Logo/WordsBackground/Life"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = -45.0
+offset_top = 85.0
+offset_right = 171.0
+offset_bottom = 466.0
+texture = ExtResource("12_vm3uj")
+stretch_mode = 5
+
+[node name="e" type="TextureRect" parent="Logo/WordsBackground/Life"]
+material = SubResource("ShaderMaterial_5v00a")
+layout_mode = 0
+offset_left = 110.0
+offset_top = 7.5
+offset_right = 326.0
+offset_bottom = 388.5
+texture = ExtResource("13_1ibpm")
+stretch_mode = 5
+
 [node name="Words" type="Control" parent="Logo"]
 layout_mode = 3
-anchors_preset = 6
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -897.0
-offset_top = -459.0
-offset_right = -197.0
-offset_bottom = 241.0
+offset_left = -800.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = 600.0
 grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.6, 0.6)
 pivot_offset = Vector2(350, 350)
 mouse_filter = 2
 
@@ -127,52 +286,41 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="B" type="Label" parent="Logo/Words/Beat"]
+[node name="B" type="TextureRect" parent="Logo/Words/Beat"]
 layout_mode = 0
-offset_left = -348.0
-offset_top = -328.0
-offset_right = -149.0
-offset_bottom = 91.0
-rotation = -0.279987
-theme_override_font_sizes/font_size = 250
-text = "B"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -296.25
+offset_top = -292.5
+offset_right = -90.25
+offset_bottom = -6.5
+texture = ExtResource("4_tk3re")
+stretch_mode = 5
 
-[node name="e" type="Label" parent="Logo/Words/Beat"]
+[node name="e" type="TextureRect" parent="Logo/Words/Beat"]
 layout_mode = 0
-offset_left = -156.0
-offset_top = -362.0
-offset_right = 2.99998
-offset_bottom = 22.0
-rotation = -0.162887
-theme_override_font_sizes/font_size = 250
-text = "e"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -141.25
+offset_top = -248.75
+offset_right = 47.75
+offset_bottom = -61.75
+texture = ExtResource("5_3cynk")
+stretch_mode = 5
 
-[node name="a" type="Label" parent="Logo/Words/Beat"]
+[node name="a" type="TextureRect" parent="Logo/Words/Beat"]
 layout_mode = 0
-offset_left = 42.0
-offset_top = -360.0
-offset_right = 188.0
-offset_bottom = -11.0
-rotation = 0.0438012
-theme_override_font_sizes/font_size = 250
-text = "a"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 11.25
+offset_top = -253.75
+offset_right = 227.25
+offset_bottom = -54.75
+texture = ExtResource("6_ge6ni")
+stretch_mode = 5
 
-[node name="t" type="Label" parent="Logo/Words/Beat"]
+[node name="t" type="TextureRect" parent="Logo/Words/Beat"]
 layout_mode = 0
-offset_left = 201.0
-offset_top = -349.0
-offset_right = 300.0
-rotation = 0.138702
-theme_override_font_sizes/font_size = 250
-text = "t"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 171.25
+offset_top = -356.25
+offset_right = 387.25
+offset_bottom = 24.75
+texture = ExtResource("7_rqu0e")
+stretch_mode = 5
 
 [node name="of" type="Control" parent="Logo/Words"]
 layout_mode = 1
@@ -184,27 +332,25 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="o" type="Label" parent="Logo/Words/of"]
+[node name="o" type="TextureRect" parent="Logo/Words/of"]
 layout_mode = 0
-offset_left = -62.0
-offset_top = -53.0
-offset_bottom = 87.0
-theme_override_font_sizes/font_size = 100
-text = "o"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -72.5
+offset_top = -53.75
+offset_right = 143.5
+offset_bottom = 327.25
+scale = Vector2(0.39, 0.39)
+texture = ExtResource("8_ku56w")
+stretch_mode = 5
 
-[node name="f" type="Label" parent="Logo/Words/of"]
+[node name="f" type="TextureRect" parent="Logo/Words/of"]
 layout_mode = 0
-offset_left = -13.77
-offset_top = -35.0
-offset_right = 26.23
-offset_bottom = 105.0
-rotation = -0.213263
-theme_override_font_sizes/font_size = 100
-text = "f"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 6.24997
+offset_top = -63.75
+offset_right = 222.25
+offset_bottom = 317.25
+scale = Vector2(0.385, 0.385)
+texture = ExtResource("9_mkufw")
+stretch_mode = 5
 
 [node name="Life" type="Control" parent="Logo/Words"]
 layout_mode = 1
@@ -217,57 +363,41 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="L" type="Label" parent="Logo/Words/Life"]
+[node name="L" type="TextureRect" parent="Logo/Words/Life"]
 layout_mode = 0
-offset_left = -237.5
-offset_top = -20.0
-offset_right = -101.5
-offset_bottom = 329.0
-rotation = 0.138455
-pivot_offset = Vector2(68, 174)
-theme_override_font_sizes/font_size = 250
-text = "L"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -290.0
+offset_top = 12.5
+offset_right = -74.0
+offset_bottom = 393.5
+texture = ExtResource("10_tuu8r")
+stretch_mode = 5
 
-[node name="i" type="Label" parent="Logo/Words/Life"]
+[node name="i" type="TextureRect" parent="Logo/Words/Life"]
 layout_mode = 0
-offset_left = -92.5
-offset_top = 32.5
-offset_right = -22.5
-offset_bottom = 381.5
-rotation = 0.0569713
-pivot_offset = Vector2(35, 174)
-theme_override_font_sizes/font_size = 250
-text = "i"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -116.25
+offset_top = 111.25
+offset_right = 28.75
+offset_bottom = 393.25
+texture = ExtResource("11_eopbj")
+stretch_mode = 5
 
-[node name="f" type="Label" parent="Logo/Words/Life"]
+[node name="f" type="TextureRect" parent="Logo/Words/Life"]
 layout_mode = 0
-offset_left = -3.75002
-offset_top = 32.5
-offset_right = 87.25
-offset_bottom = 381.5
-rotation = -0.093725
-pivot_offset = Vector2(45, 174)
-theme_override_font_sizes/font_size = 250
-text = "f"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -45.0
+offset_top = 85.0
+offset_right = 171.0
+offset_bottom = 466.0
+texture = ExtResource("12_vm3uj")
+stretch_mode = 5
 
-[node name="e" type="Label" parent="Logo/Words/Life"]
+[node name="e" type="TextureRect" parent="Logo/Words/Life"]
 layout_mode = 0
-offset_left = 100.0
-offset_top = -50.0
-offset_right = 245.0
-offset_bottom = 299.0
-rotation = -0.273647
-pivot_offset = Vector2(72, 174)
-theme_override_font_sizes/font_size = 250
-text = "e"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 110.0
+offset_top = 7.5
+offset_right = 326.0
+offset_bottom = 388.5
+texture = ExtResource("13_1ibpm")
+stretch_mode = 5
 
 [node name="Foreground" type="ColorRect" parent="Logo"]
 anchors_preset = 15
@@ -291,7 +421,7 @@ preprocess = 5.0
 visibility_rect = Rect2(0, 0, 1920, 1080)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_mp5yr")
+stream = ExtResource("17_7juqv")
 autoplay = true
 
 [connection signal="finished" from="Logo" to="." method="_on_logo_finished"]

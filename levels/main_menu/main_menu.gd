@@ -45,6 +45,7 @@ func _on_logo_finished() -> void:
 	$GPUParticles2D.emitting = true
 	logo_done = true
 	if tween: tween.kill()
+	$AudioStreamPlayer.seek(3.5)
 	tween = create_tween()
 	tween.tween_method(func(t: float):
 		$GPUParticles2D.material.set_shader_parameter(&'alpha_factor', t), 0.6, 0.1, 1.0).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
