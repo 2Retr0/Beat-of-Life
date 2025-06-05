@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://duvtbn20bo567"]
+[gd_scene load_steps=60 format=3 uid="uid://duvtbn20bo567"]
 
 [ext_resource type="Script" path="res://levels/texting/scripts/texting_player.gd" id="1_jytex"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="3_arfee"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://dt7p5dtmntl1r" path="res://levels/texting/textures/crush_perfect.png" id="22_7acy6"]
 [ext_resource type="Texture2D" uid="uid://bp5ghhki8mfkt" path="res://levels/texting/textures/crush_good.png" id="23_dbqd3"]
 [ext_resource type="Texture2D" uid="uid://bp3n3egdf1vvb" path="res://levels/texting/textures/crush_bad.png" id="24_hpycm"]
+[ext_resource type="Texture2D" uid="uid://cv46jmnxo0u3j" path="res://levels/texting/textures/background.png" id="31_hhqko"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qmyt"]
 font_size = 30
@@ -163,7 +164,7 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Curve3D" id="Curve3D_rhwwo"]
 _data = {
-"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -1, -0.05, 0, 3, 2.42, 0, 1, 0.05, -0.000991911, -1.22934, -1.03288, 0, 1.125, 2.375),
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -1, -0.05, 0, 3, 2.42, 0, 1, 0.05, -0.000991911, -1.22934, -1.03288, 0, 2.1, 2.375),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -287,7 +288,7 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_i8ou7")
 
 [node name="Playfield" type="Node3D" parent="scene"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0.2)
 
 [node name="phone" type="Sprite3D" parent="scene/Playfield" node_paths=PackedStringArray("emotes", "bubbles", "sfx_player", "pfp")]
 sorting_offset = -1.0
@@ -431,6 +432,12 @@ preprocess = 5.0
 randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_fce6q")
 draw_pass_1 = SubResource("QuadMesh_ucoxw")
+
+[node name="Background" type="Sprite3D" parent="scene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000595331, 2.4089, -1.09662)
+sorting_offset = -2.0
+pixel_size = 0.003
+texture = ExtResource("31_hhqko")
 
 [node name="CameraTrack" type="Path3D" parent="."]
 curve = SubResource("Curve3D_rhwwo")
