@@ -157,7 +157,7 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Curve3D" id="Curve3D_rhwwo"]
 _data = {
-"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.2, -0.5, 0, 2, 3, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 1.7, 2),
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, 0, -0.1, 0, 1.7, 2.5, 0, 0, 0.1, -0.000991911, -1.22934, -1.03288, 0, 1.7, 2),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -346,8 +346,9 @@ bad_sprites_count = 2
 player = NodePath("../../../..")
 
 [node name="Bg" type="Sprite3D" parent="scene/Playfield"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-pixel_size = 0.002
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.186236, -0.700182)
+sorting_offset = -1.0
+pixel_size = 0.0015
 texture = ExtResource("26_14sdp")
 
 [node name="WallMeshes" type="Node3D" parent="scene"]
@@ -432,7 +433,7 @@ curve = SubResource("Curve3D_rhwwo")
 script = ExtResource("18_pn4vo")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
-transform = Transform3D(0.999837, 0, 0, 0, 0.928355, 0.371345, 0, -0.371342, 0.928363, 0, 2, 3)
+transform = Transform3D(0.999837, 0, 0, 0, 0.999867, 0, 0, 0, 0.999876, 0, 1.7, 2.5)
 cubic_interp = false
 loop = false
 tilt_enabled = false
