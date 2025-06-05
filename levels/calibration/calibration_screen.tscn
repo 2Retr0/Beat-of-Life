@@ -9,7 +9,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg5xc"]
 shader = ExtResource("5_ok8f4")
-shader_parameter/background_color = Color(0.82, 0.67, 0.71, 1)
 shader_parameter/tiling = 13.5
 shader_parameter/gap = 1.75
 shader_parameter/tick = 0
@@ -56,8 +55,7 @@ audio_synchronizer = NodePath("../../../../AudioSynchronizer")
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AudioScrubber" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("track") instance=ExtResource("7_cd2u2")]
+[node name="AudioScrubber" parent="CanvasLayer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("7_cd2u2")]
 layout_mode = 2
-track = NodePath("../../../../../AudioSynchronizer/Track")
 
 [editable path="AudioSynchronizer"]

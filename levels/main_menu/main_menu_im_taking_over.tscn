@@ -1,0 +1,292 @@
+[gd_scene load_steps=10 format=3 uid="uid://bstyynx7prws4"]
+
+[ext_resource type="Texture2D" uid="uid://jkw0ktlype66" path="res://ui/textures/menu_demo.png" id="1_51nid"]
+[ext_resource type="Script" path="res://levels/main_menu/main_menu.gd" id="1_syius"]
+[ext_resource type="Script" path="res://levels/main_menu/logo.gd" id="2_1oi3j"]
+[ext_resource type="Texture2D" uid="uid://jw2ubvs721bm" path="res://levels/common/resources/double_note_white.png" id="5_24q5q"]
+[ext_resource type="Shader" path="res://levels/main_menu/snow.gdshader" id="5_rihck"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o23k3"]
+shader = ExtResource("5_rihck")
+shader_parameter/alpha_factor = 0.0
+
+[sub_resource type="Curve" id="Curve_xjwnw"]
+max_value = 3.0
+_data = [Vector2(0, 1.13546), 0.0, -1.49163, 0, 0, Vector2(1, 0.2749), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7q0rf"]
+curve = SubResource("Curve_xjwnw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_20nyr"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(1200, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1200, 0, 1)
+direction = Vector3(-1, 1, 0)
+spread = 10.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -50.0
+angular_velocity_max = 50.0
+scale_over_velocity_max = 1000.0
+scale_over_velocity_curve = SubResource("CurveTexture_7q0rf")
+turbulence_enabled = true
+turbulence_noise_strength = 0.25
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.001
+
+[node name="MainMenuImTakingOver" type="Node"]
+script = ExtResource("1_syius")
+play_scene_path = "res://levels/level_select/level_select.tscn"
+options_scene_path = "res://dummy_options_menu.tscn"
+
+[node name="TextureRectAnchor" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -63.0
+offset_bottom = 63.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_51nid")
+expand_mode = 3
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="TextureRectParallax" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 560.0
+offset_bottom = 490.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_51nid")
+expand_mode = 3
+stretch_mode = 6
+metadata/_edit_lock_ = true
+
+[node name="NEEDS STYLING SOMEONE HELP ME" type="Label" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -471.0
+offset_top = -65.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.280782, 0.0874114, 0.086661, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_font_sizes/font_size = 30
+text = "Press any button to continue!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Logo" type="Node" parent="."]
+script = ExtResource("2_1oi3j")
+
+[node name="Background" type="ColorRect" parent="Logo"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0117021, 0.0117021, 0.0117021, 1)
+metadata/_edit_lock_ = true
+
+[node name="Words" type="Control" parent="Logo"]
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -897.0
+offset_top = -459.0
+offset_right = -197.0
+offset_bottom = 241.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset = Vector2(350, 350)
+mouse_filter = 2
+
+[node name="Beat" type="Control" parent="Logo/Words"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B" type="Label" parent="Logo/Words/Beat"]
+layout_mode = 0
+offset_left = -348.0
+offset_top = -328.0
+offset_right = -149.0
+offset_bottom = 91.0
+rotation = -0.279987
+theme_override_font_sizes/font_size = 250
+text = "B"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="e" type="Label" parent="Logo/Words/Beat"]
+layout_mode = 0
+offset_left = -156.0
+offset_top = -362.0
+offset_right = 2.99998
+offset_bottom = 22.0
+rotation = -0.162887
+theme_override_font_sizes/font_size = 250
+text = "e"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="a" type="Label" parent="Logo/Words/Beat"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = -360.0
+offset_right = 188.0
+offset_bottom = -11.0
+rotation = 0.0438012
+theme_override_font_sizes/font_size = 250
+text = "a"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="t" type="Label" parent="Logo/Words/Beat"]
+layout_mode = 0
+offset_left = 201.0
+offset_top = -349.0
+offset_right = 300.0
+rotation = 0.138702
+theme_override_font_sizes/font_size = 250
+text = "t"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="of" type="Control" parent="Logo/Words"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="o" type="Label" parent="Logo/Words/of"]
+layout_mode = 0
+offset_left = -62.0
+offset_top = -53.0
+offset_bottom = 87.0
+theme_override_font_sizes/font_size = 100
+text = "o"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f" type="Label" parent="Logo/Words/of"]
+layout_mode = 0
+offset_left = -13.77
+offset_top = -35.0
+offset_right = 26.23
+offset_bottom = 105.0
+rotation = -0.213263
+theme_override_font_sizes/font_size = 100
+text = "f"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Life" type="Control" parent="Logo/Words"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="L" type="Label" parent="Logo/Words/Life"]
+layout_mode = 0
+offset_left = -237.5
+offset_top = -20.0
+offset_right = -101.5
+offset_bottom = 329.0
+rotation = 0.138455
+pivot_offset = Vector2(68, 174)
+theme_override_font_sizes/font_size = 250
+text = "L"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="i" type="Label" parent="Logo/Words/Life"]
+layout_mode = 0
+offset_left = -92.5
+offset_top = 32.5
+offset_right = -22.5
+offset_bottom = 381.5
+rotation = 0.0569713
+pivot_offset = Vector2(35, 174)
+theme_override_font_sizes/font_size = 250
+text = "i"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="f" type="Label" parent="Logo/Words/Life"]
+layout_mode = 0
+offset_left = -3.75002
+offset_top = 32.5
+offset_right = 87.25
+offset_bottom = 381.5
+rotation = -0.093725
+pivot_offset = Vector2(45, 174)
+theme_override_font_sizes/font_size = 250
+text = "f"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="e" type="Label" parent="Logo/Words/Life"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = -50.0
+offset_right = 245.0
+offset_bottom = 299.0
+rotation = -0.273647
+pivot_offset = Vector2(72, 174)
+theme_override_font_sizes/font_size = 250
+text = "e"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Foreground" type="ColorRect" parent="Logo"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.778445, 0.778446, 0.778445, 0)
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_o23k3")
+position = Vector2(0, -80)
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_20nyr")
+texture = ExtResource("5_24q5q")
+lifetime = 10.0
+preprocess = 5.0
+visibility_rect = Rect2(0, 0, 1920, 1080)
+
+[connection signal="finished" from="Logo" to="." method="_on_logo_finished"]

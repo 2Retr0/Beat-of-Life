@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Beat of Life"
 config/version="1.0.0"
-run/main_scene="res://main_temp_remove_me.tscn"
+run/main_scene="res://levels/main_menu/main_menu_loading_screen.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=240
@@ -40,6 +40,8 @@ gdscript/warnings/integer_division=0
 
 [display]
 
+window/size/viewport_width=1440
+window/size/viewport_height=810
 window/size/borderless=true
 window/size/extend_to_title=true
 window/size/window_width_override=1
