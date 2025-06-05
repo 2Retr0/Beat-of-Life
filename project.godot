@@ -15,6 +15,7 @@ config/version="1.0.0"
 run/main_scene="res://main_temp_remove_me.tscn"
 config/auto_accept_quit=false
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=240
 boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 config/icon="res://ui/textures/icon.png"
@@ -44,17 +45,10 @@ window/size/extend_to_title=true
 window/size/window_width_override=1
 window/size/window_height_override=1
 window/stretch/aspect="ignore"
-window/vsync/vsync_mode=0
 
 [dotnet]
 
 project/assembly_name="BeatOfLife"
-
-[editor]
-
-movie_writer/mjpeg_quality=1.0
-movie_writer/movie_file="C:/Users/Retr0/Documents/Projects/Godot/Beat-of-Life/demo.avi"
-movie_writer/disable_vsync=true
 
 [editor_plugins]
 
@@ -77,5 +71,4 @@ playfield_hit={
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
