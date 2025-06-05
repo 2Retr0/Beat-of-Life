@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://levels/birthday/scripts/birthday_player.gd" id="5_1xy51"]
 [ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_ldion"]
+[ext_resource type="AudioStream" uid="uid://ccylmdgnk7lfc" path="res://levels/birthday/puff.wav" id="6_efhlf"]
 [ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="6_fsr2k"]
 [ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_ngo2o"]
-[ext_resource type="PackedScene" uid="uid://pf6obdw4qsv5" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
+[ext_resource type="PackedScene" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
-[ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="10_rictb"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
 [ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="12_nqxdm"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="12_sjtsb"]
@@ -180,9 +180,9 @@ script = ExtResource("5_ldion")
 audio_controller = NodePath("../AudioController")
 
 [node name="HitAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_rictb")
-volume_db = -8.0
-pitch_scale = 1.15
+stream = ExtResource("6_efhlf")
+volume_db = 7.0
+pitch_scale = 0.5
 max_polyphony = 5
 
 [node name="ui" type="Control" parent="." node_paths=PackedStringArray("beatmap_player", "score_text", "combo_text", "accuracy_text")]
