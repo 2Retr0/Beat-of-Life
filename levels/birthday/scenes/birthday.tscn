@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_ldion"]
 [ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="6_fsr2k"]
 [ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_ngo2o"]
+[ext_resource type="PackedScene" uid="uid://pf6obdw4qsv5" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
-[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="10_lr8a8"]
 [ext_resource type="AudioStream" uid="uid://bmcjhq25ijw8y" path="res://levels/common/resources/samples/hit.wav" id="10_rictb"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
 [ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="12_nqxdm"]
@@ -169,7 +169,7 @@ note_scene = ExtResource("6_fsr2k")
 playfield_center = NodePath("playfield")
 hit_audio_player = NodePath("HitAudioPlayer")
 audio_controller = NodePath("AudioController")
-score_display = NodePath("ui/results")
+score_display = NodePath("ui/ResultsScreen")
 
 [node name="AudioController" parent="." instance=ExtResource("8_snhv2")]
 
@@ -198,9 +198,8 @@ score_text = NodePath("score")
 combo_text = NodePath("combo")
 accuracy_text = NodePath("accuracy")
 
-[node name="results" parent="ui" instance=ExtResource("10_lr8a8")]
+[node name="ResultsScreen" parent="ui" instance=ExtResource("8_g5ti7")]
 layout_mode = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="scrubber" parent="ui" node_paths=PackedStringArray("audio_controller") instance=ExtResource("11_pr1iu")]
 layout_mode = 1

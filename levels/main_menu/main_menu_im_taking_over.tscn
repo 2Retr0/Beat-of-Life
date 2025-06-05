@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bstyynx7prws4"]
+[gd_scene load_steps=11 format=3 uid="uid://bstyynx7prws4"]
 
-[ext_resource type="Texture2D" uid="uid://jkw0ktlype66" path="res://ui/textures/menu_demo.png" id="1_51nid"]
 [ext_resource type="Script" path="res://levels/main_menu/main_menu.gd" id="1_syius"]
 [ext_resource type="Script" path="res://levels/main_menu/logo.gd" id="2_1oi3j"]
+[ext_resource type="Texture2D" uid="uid://gpwuqmk8kk7r" path="res://levels/main_menu/main_menu.png" id="2_pwxm1"]
 [ext_resource type="Texture2D" uid="uid://jw2ubvs721bm" path="res://levels/common/resources/double_note_white.png" id="5_24q5q"]
 [ext_resource type="Shader" path="res://levels/main_menu/snow.gdshader" id="5_rihck"]
+[ext_resource type="AudioStream" uid="uid://bhqppvs6lp8ku" path="res://levels/main_menu/main_menu.wav" id="6_mp5yr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o23k3"]
 shader = ExtResource("5_rihck")
@@ -50,7 +51,7 @@ offset_top = -63.0
 offset_bottom = 63.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_51nid")
+texture = ExtResource("2_pwxm1")
 expand_mode = 3
 stretch_mode = 6
 metadata/_edit_lock_ = true
@@ -63,7 +64,7 @@ offset_right = 560.0
 offset_bottom = 490.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_51nid")
+texture = ExtResource("2_pwxm1")
 expand_mode = 3
 stretch_mode = 6
 metadata/_edit_lock_ = true
@@ -288,5 +289,9 @@ texture = ExtResource("5_24q5q")
 lifetime = 10.0
 preprocess = 5.0
 visibility_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_mp5yr")
+autoplay = true
 
 [connection signal="finished" from="Logo" to="." method="_on_logo_finished"]

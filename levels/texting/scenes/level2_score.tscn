@@ -1,0 +1,131 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckavt1td3bkqy"]
+
+[ext_resource type="Script" path="res://ui/game/score_display.gd" id="1_v42v6"]
+[ext_resource type="Texture2D" uid="uid://dtpfls71byguf" path="res://levels/texting/textures/score.png" id="2_q75ns"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_34hhq"]
+font_size = 36
+font_color = Color(0.627451, 0.34902, 0.584314, 1)
+
+[node name="ResultsScreen" type="Control" node_paths=PackedStringArray("score_label", "perfect_label", "good_label", "miss_label", "accuracy_label", "max_combo_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v42v6")
+score_label = NodePath("ScoreLabel")
+perfect_label = NodePath("PerfectLabel")
+good_label = NodePath("GoodLabel")
+miss_label = NodePath("MissLabel")
+accuracy_label = NodePath("AccuracyLabel")
+max_combo_label = NodePath("MaxComboLabel")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_q75ns")
+expand_mode = 3
+
+[node name="PerfectLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.535
+anchor_top = 0.345
+anchor_right = 0.616
+anchor_bottom = 0.388
+offset_left = -0.400024
+offset_top = -0.450012
+offset_right = -0.0401001
+offset_bottom = -0.279999
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1
+
+[node name="GoodLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.51
+anchor_top = 0.4
+anchor_right = 0.586
+anchor_bottom = 0.442
+offset_right = -0.480042
+offset_bottom = -0.0200195
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1
+
+[node name="MissLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.457
+anchor_right = 0.578
+anchor_bottom = 0.502
+offset_left = -0.0800171
+offset_top = -0.170013
+offset_right = -0.320007
+offset_bottom = 0.379974
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1
+
+[node name="AccuracyLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.545
+anchor_top = 0.567
+anchor_right = 0.622
+anchor_bottom = 0.61
+offset_left = 0.199951
+offset_top = -0.27002
+offset_right = -0.680054
+offset_bottom = -0.100006
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1
+
+[node name="MaxComboLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.564
+anchor_top = 0.621
+anchor_right = 0.641
+anchor_bottom = 0.668
+offset_left = -0.160034
+offset_top = -0.0100403
+offset_right = -0.0400391
+offset_bottom = -0.0800171
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.515
+anchor_top = 0.732
+anchor_right = 0.594
+anchor_bottom = 0.774
+offset_left = -0.600037
+offset_top = 0.0799561
+offset_right = -0.360046
+offset_bottom = 0.0599365
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234567"
+label_settings = SubResource("LabelSettings_34hhq")
+vertical_alignment = 1

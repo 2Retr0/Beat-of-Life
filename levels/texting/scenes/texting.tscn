@@ -7,11 +7,11 @@
 [ext_resource type="AudioStream" uid="uid://duljr77j0otxe" path="res://levels/texting/sfx/miss.mp3" id="6_vtnvy"]
 [ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_4p2ok"]
 [ext_resource type="AudioStream" uid="uid://clvxyjt6b4e61" path="res://levels/texting/sfx/good.mp3" id="7_y5ms1"]
-[ext_resource type="PackedScene" uid="uid://d148aqwdj7owj" path="res://ui/game/scenes/results_screen.tscn" id="8_nht6n"]
 [ext_resource type="AudioStream" uid="uid://2rcnahe1td7j" path="res://levels/texting/sfx/perfect.mp3" id="8_whkfq"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="9_mhq7n"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="10_qtdla"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="11_prdwn"]
+[ext_resource type="PackedScene" uid="uid://ckavt1td3bkqy" path="res://levels/texting/scenes/level2_score.tscn" id="13_dy105"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="15_cft5n"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="15_ju6dh"]
 [ext_resource type="Script" path="res://levels/texting/scripts/phone.gd" id="16_4jwlg"]
@@ -177,7 +177,7 @@ hit_audio_player = NodePath("HitAudioPlayer")
 hit_sfx = Array[AudioStream]([ExtResource("6_vtnvy"), ExtResource("6_vtnvy"), ExtResource("7_y5ms1"), ExtResource("8_whkfq")])
 phone = NodePath("scene/Playfield/phone")
 audio_controller = NodePath("AudioController")
-score_display = NodePath("ui/results")
+score_display = NodePath("ui/ResultsScreen")
 
 [node name="AudioController" parent="." instance=ExtResource("3_arfee")]
 
@@ -205,7 +205,7 @@ score_text = NodePath("score")
 combo_text = NodePath("combo")
 accuracy_text = NodePath("accuracy")
 
-[node name="results" parent="ui" instance=ExtResource("8_nht6n")]
+[node name="ResultsScreen" parent="ui" instance=ExtResource("13_dy105")]
 layout_mode = 1
 
 [node name="scrubber" parent="ui" node_paths=PackedStringArray("audio_controller") instance=ExtResource("9_mhq7n")]

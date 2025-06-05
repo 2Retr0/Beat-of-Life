@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c3gtq5mjxutk0"]
+[gd_scene load_steps=39 format=3 uid="uid://c3gtq5mjxutk0"]
 
 [ext_resource type="Script" path="res://levels/level_select/level_select.gd" id="1_1qgpx"]
 [ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_movement_component.tres" id="1_r18fv"]
@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://bmxd1h166fskc" path="res://levels/birthday/birthday.tres" id="21_8jn8b"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="22_lfffi"]
 [ext_resource type="Resource" uid="uid://bcvw3yt6bxay8" path="res://levels/texting/texting.tres" id="23_1khj6"]
+[ext_resource type="AudioStream" uid="uid://dwtesm74bvk5" path="res://levels/level_select/level_select.wav" id="23_ob1nv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_er1tt"]
 
@@ -41,7 +42,7 @@ glow_blend_mode = 1
 [sub_resource type="CompositorEffect" id="CompositorEffect_o67md"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -56,7 +57,7 @@ shader_stages/pre_blur_processor_stage = ExtResource("4_5nmis")
 [sub_resource type="CompositorEffect" id="CompositorEffect_i1gg6"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = true
+enabled = false
 effect_callback_type = 4
 needs_motion_vectors = true
 needs_normal_roughness = false
@@ -157,7 +158,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_3g02s")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.30097)
 cast_shadow = 0
-emitting = false
 amount = 256
 lifetime = 5.0
 preprocess = 5.0
@@ -174,12 +174,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.667)
 shape = SubResource("BoxShape3D_tx1vj")
 
 [node name="FilmReelSegments" type="Node3D" parent="."]
-transform = Transform3D(0.999941, 0, 7.69397e-17, 0, 1, 0, -7.69397e-17, 0, 0.999941, 0, 0, -0.667)
+transform = Transform3D(0.999937, 0, 7.69395e-17, 0, 1, 0, -7.69395e-17, 0, 0.999937, 0, 0, -0.667)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="ArrowUp" type="Label" parent="UI"]
-self_modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.125)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -196,7 +196,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ArrowDown" type="Label" parent="UI"]
-self_modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0.5)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -214,3 +214,7 @@ theme_override_font_sizes/font_size = 45
 text = "➤"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_ob1nv")
+autoplay = true
