@@ -50,9 +50,11 @@ func _input(event: InputEvent) -> void:
 			# FIXME: There is a terrible input handling between level select mouse button and clicking to skip animation. And i've only made it worse...
 			if not $LevelSelectButton.is_connected(&'input_event', _on_level_select_button_input_event):
 				$LevelSelectButton.connect(&'input_event', _on_level_select_button_input_event)
-		elif event.is_action_pressed(&'ui_down'):
+		elif event.is_action_pressed(&'ui_down') or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if level_index != len(levels) - 1: $AudioStreamPlayer.play()
 			level_index += 1
-		elif event.is_action_pressed(&'ui_up'):
+		elif event.is_action_pressed(&'ui_up')  or event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			if level_index != 0: $AudioStreamPlayer.play()
 			level_index -= 1
 		elif event.is_action_pressed(&'ui_accept'):
 			_load_currently_selected_level()
@@ -70,6 +72,8 @@ func _ready() -> void:
 
 	await get_tree().create_timer(0.35).timeout
 	animate()
+	
+var previous_index := 0
 
 func _process(delta: float) -> void:
 	# Logic for repositioning segments to match target level index.
@@ -81,6 +85,12 @@ func _process(delta: float) -> void:
 
 	$UI/ArrowUp.self_modulate.a = arrow_alpha*(1.0 if level_index != 0 else 0.25)
 	$UI/ArrowDown.self_modulate.a = arrow_alpha*(1.0 if level_index != len(levels) - 1 else 0.25)
+
+func _physics_process(delta: float) -> void:
+	if previous_index != int(offset_y/SEGMENT_SIZE):
+		previous_index = int(offset_y/SEGMENT_SIZE)
+		$AudioStreamPlayer2.play()
+		$AudioStreamPlayer2.seek(0.05)
 
 func animate() -> void:
 	if is_animating or not is_node_ready(): return
@@ -138,3 +148,15 @@ func _on_level_select_button_input_event(camera: Node, event: InputEvent, event_
 	if event.is_pressed and not event.is_released() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		set_process_input(false)
 		_load_currently_selected_level()
+
+
+func _on_down_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_released() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if level_index != len(levels) - 1: $AudioStreamPlayer.play()
+		level_index += 1
+
+
+func _on_up_button_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event.is_released() and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if level_index != 0: $AudioStreamPlayer.play()
+		level_index -= 1
