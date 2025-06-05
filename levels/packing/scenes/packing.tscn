@@ -147,7 +147,7 @@ size = Vector2(0.05, 0.05)
 
 [sub_resource type="Curve3D" id="Curve3D_rhwwo"]
 _data = {
-"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.2, -0.5, 0, 2, 3, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 1.7, 2),
+"points": PackedVector3Array(0.664265, 0.440682, 1.48275, 0, -0.15, -0.5, 0, 2.3, 3.5, 0.001, 0.1, 0.5, -0.000991911, -1.22934, -1.03288, 0, 2, 2.5),
 "tilts": PackedFloat32Array(0, 0)
 }
 point_count = 2
@@ -360,7 +360,7 @@ curve = SubResource("Curve3D_rhwwo")
 script = ExtResource("27_ntu5o")
 
 [node name="Path" type="PathFollow3D" parent="CameraTrack"]
-transform = Transform3D(0.999837, 0, 0, 0, 0.928355, 0.371345, 0, -0.371342, 0.928363, 0, 2, 3)
+transform = Transform3D(0.999837, 0, 0, 0, 0.957701, 0.287313, 0, -0.287311, 0.957709, 0, 2.3, 3.5)
 cubic_interp = false
 loop = false
 tilt_enabled = false
