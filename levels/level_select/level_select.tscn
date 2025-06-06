@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c3gtq5mjxutk0"]
+[gd_scene load_steps=42 format=3 uid="uid://c3gtq5mjxutk0"]
 
 [ext_resource type="Script" path="res://levels/level_select/level_select.gd" id="1_1qgpx"]
 [ext_resource type="Resource" uid="uid://cslvcweyejh3c" path="res://addons/sphynx_motion_blur_toolkit/pre_blur_processing/resources/default_camera_movement_component.tres" id="1_r18fv"]
@@ -24,6 +24,7 @@
 [ext_resource type="Resource" uid="uid://bcvw3yt6bxay8" path="res://levels/texting/texting.tres" id="23_1khj6"]
 [ext_resource type="AudioStream" uid="uid://w6c8s5vm41r2" path="res://ui/audio/button_select.mp3" id="23_1qxve"]
 [ext_resource type="AudioStream" uid="uid://d1k4mv154jf0n" path="res://ui/audio/mouse_click.mp3" id="24_4g3si"]
+[ext_resource type="AudioStream" uid="uid://ydtirtnc46fm" path="res://levels/level_select/calm-6.mp3" id="25_rl4yv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_er1tt"]
 
@@ -239,7 +240,7 @@ shape = SubResource("CircleShape2D_8qych")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_1qxve")
-volume_db = -10.0
+volume_db = -20.0
 pitch_scale = 2.0
 max_polyphony = 2
 
@@ -248,6 +249,11 @@ stream = ExtResource("24_4g3si")
 volume_db = -20.0
 pitch_scale = 0.75
 max_polyphony = 10
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_rl4yv")
+volume_db = -5.0
+autoplay = true
 
 [connection signal="input_event" from="UI/ArrowUp/UpButton" to="." method="_on_up_button_input_event"]
 [connection signal="input_event" from="UI/ArrowDown/DownButton" to="." method="_on_down_button_input_event"]
