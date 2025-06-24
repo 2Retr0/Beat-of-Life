@@ -8,10 +8,13 @@ class_name PackingNoteDrawable extends Node3D
 
 @export var textures: Array[Texture]
 
+@export var time_alive: float
+
 func init(player: PackingPlayer, playable: PackingNotePlayable):
 	self.player = player
 	self.playable = playable
-	#sprite.texture = textures[playable.hit_object.lane]
+	sprite.texture = textures[playable.hit_object.lane]
+	time_alive = 0
 
 func _ready() -> void:
 	if not player or not playable:
@@ -25,6 +28,10 @@ func _process(delta: float) -> void:
 		return
 	var time := player.audio_controller.time
 	position.y = _get_position(time).y
+	
+	time_alive += delta
+	rotation.z = time_alive * (5 + player.audio_controller.time * 0.5)
+	scale = Vector3.ONE * (1 - 1 / (time_alive + 1))
 
 func _get_position(time : float) -> Vector3:
 	return Vector3(

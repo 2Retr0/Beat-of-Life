@@ -63,7 +63,8 @@ func _process(delta: float) -> void:
 	
 	current_lane = clamp(current_lane, 0, beatmap.lane_count - 1)
 	
-	box.position = Vector3(0.65 * (current_lane - beatmap.lane_count / 2.0 + 0.5), 0, 0)
+	var target_position = Vector3(0.65 * (current_lane - beatmap.lane_count / 2.0 + 0.5), 0, 0)
+	box.position = lerp(box.position, target_position, 0.1)
 
 	for lane_playables in playables:
 		for playable in lane_playables:

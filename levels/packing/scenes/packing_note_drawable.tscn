@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://jpevx8ubwvip"]
+[gd_scene load_steps=6 format=3 uid="uid://jpevx8ubwvip"]
 
 [ext_resource type="Script" path="res://levels/packing/scripts/packing_note_drawable.gd" id="1_ymqc6"]
-[ext_resource type="Texture2D" uid="uid://bepfmy2bpske2" path="res://levels/texting/textures/emote_100.png" id="2_4nl7k"]
+[ext_resource type="Texture2D" uid="uid://ki4srhfpyp8b" path="res://levels/packing/textures/object_figurine.png" id="2_ivtev"]
+[ext_resource type="Texture2D" uid="uid://b580qt4ofibi" path="res://levels/packing/textures/object_vase.png" id="3_wo7u8"]
+[ext_resource type="Texture2D" uid="uid://cwju8wwkluo5y" path="res://levels/packing/textures/object_skincare.png" id="4_xrwyq"]
+[ext_resource type="Texture2D" uid="uid://fugy0411lghh" path="res://levels/packing/textures/object_piggy.png" id="5_6wu58"]
 
 [node name="PackingNoteDrawable" type="Node3D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ymqc6")
 sprite = NodePath("Sprite3D")
-textures = Array[Texture]([null, null, null, null])
+textures = Array[Texture]([ExtResource("2_ivtev"), ExtResource("3_wo7u8"), ExtResource("4_xrwyq"), ExtResource("5_6wu58")])
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 sorting_offset = 1.0
-pixel_size = 0.005
-texture = ExtResource("2_4nl7k")
-hframes = 4
+pixel_size = 0.003
+texture = ExtResource("2_ivtev")

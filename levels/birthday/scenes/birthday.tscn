@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ccylmdgnk7lfc" path="res://levels/birthday/puff.wav" id="6_efhlf"]
 [ext_resource type="PackedScene" uid="uid://x6185u1mgc4b" path="res://levels/birthday/scenes/birthday_note_drawable.tscn" id="6_fsr2k"]
 [ext_resource type="Script" path="res://ui/game/game_ui.gd" id="7_ngo2o"]
-[ext_resource type="PackedScene" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
+[ext_resource type="PackedScene" uid="uid://pf6obdw4qsv5" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
