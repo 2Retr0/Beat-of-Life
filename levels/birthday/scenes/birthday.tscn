@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cmidcapvfg8su"]
+[gd_scene load_steps=54 format=3 uid="uid://cmidcapvfg8su"]
 
 [ext_resource type="Script" path="res://levels/birthday/scripts/birthday_player.gd" id="5_1xy51"]
 [ext_resource type="Script" path="res://game/scripts/metronome.gd" id="5_ldion"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://pf6obdw4qsv5" path="res://levels/birthday/scenes/level1_score.tscn" id="8_g5ti7"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="8_snhv2"]
 [ext_resource type="AudioStream" uid="uid://c7es1ayuwuac3" path="res://levels/common/resources/samples/metronome.wav" id="9_5moi1"]
+[ext_resource type="Texture2D" uid="uid://gv36ul3sl65r" path="res://levels/birthday/textures/instructions.png" id="10_ac3hc"]
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="11_pr1iu"]
 [ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="12_nqxdm"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="12_sjtsb"]
@@ -163,13 +164,15 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="BirthdayPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "score_display")]
+[node name="BirthdayPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "audio_controller", "instructions", "score_display")]
 script = ExtResource("5_1xy51")
 note_scene = ExtResource("6_fsr2k")
 playfield_center = NodePath("playfield")
 hit_audio_player = NodePath("HitAudioPlayer")
 audio_controller = NodePath("AudioController")
+instructions = NodePath("ui/instructions")
 score_display = NodePath("ui/ResultsScreen")
+level_select_path = "res://levels/level_select/level_select.tscn"
 
 [node name="AudioController" parent="." instance=ExtResource("8_snhv2")]
 
@@ -245,6 +248,16 @@ text = "100%"
 label_settings = SubResource("LabelSettings_vrv80")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="instructions" type="TextureRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_ac3hc")
+stretch_mode = 5
 
 [node name="playfield" type="Control" parent="."]
 layout_mode = 3

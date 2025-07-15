@@ -141,7 +141,7 @@ func _load_currently_selected_level() -> void:
 		for child in tree.root.get_children():
 			if child is BeatmapPlayer:
 				child.initialize(beatmap)
-				child.play())
+	)
 
 func _on_level_select_button_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if not done_animating: return

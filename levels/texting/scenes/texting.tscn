@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://duvtbn20bo567"]
+[gd_scene load_steps=61 format=3 uid="uid://duvtbn20bo567"]
 
 [ext_resource type="Script" path="res://levels/texting/scripts/texting_player.gd" id="1_jytex"]
 [ext_resource type="PackedScene" uid="uid://d1qbfbxp0ditp" path="res://game/scenes/audio_controller.tscn" id="3_arfee"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="10_qtdla"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="11_prdwn"]
 [ext_resource type="PackedScene" uid="uid://ckavt1td3bkqy" path="res://levels/texting/scenes/level2_score.tscn" id="13_dy105"]
+[ext_resource type="Texture2D" uid="uid://di22oxe5aknm4" path="res://levels/texting/textures/instructions.png" id="15_b4dom"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="15_cft5n"]
 [ext_resource type="Texture2D" uid="uid://bm5cbjprj1fkh" path="res://levels/texting/textures/phone_base.png" id="15_ju6dh"]
 [ext_resource type="Script" path="res://levels/texting/scripts/phone.gd" id="16_4jwlg"]
@@ -170,14 +171,16 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="TextingPlayer" type="Node" node_paths=PackedStringArray("hit_audio_player", "phone", "audio_controller", "score_display")]
+[node name="TextingPlayer" type="Node" node_paths=PackedStringArray("hit_audio_player", "phone", "audio_controller", "instructions", "score_display")]
 script = ExtResource("1_jytex")
 note_scenes = Array[PackedScene]([ExtResource("16_a3aa8"), ExtResource("17_0ocsv"), ExtResource("18_s24td"), ExtResource("19_p3vgp")])
 hit_audio_player = NodePath("HitAudioPlayer")
 hit_sfx = Array[AudioStream]([ExtResource("6_vtnvy"), ExtResource("6_vtnvy"), ExtResource("7_y5ms1"), ExtResource("8_whkfq")])
 phone = NodePath("scene/Playfield/phone")
 audio_controller = NodePath("AudioController")
+instructions = NodePath("ui/instructions")
 score_display = NodePath("ui/ResultsScreen")
+level_select_path = "res://levels/level_select/level_select.tscn"
 
 [node name="AudioController" parent="." instance=ExtResource("3_arfee")]
 
@@ -248,6 +251,16 @@ grow_horizontal = 0
 text = "100%"
 label_settings = SubResource("LabelSettings_vrv80")
 horizontal_alignment = 2
+
+[node name="instructions" type="TextureRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_b4dom")
+stretch_mode = 5
 
 [node name="playfield" type="Control" parent="."]
 layout_mode = 3

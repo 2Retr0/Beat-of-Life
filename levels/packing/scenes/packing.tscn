@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://draxxpfpb5514"]
+[gd_scene load_steps=46 format=3 uid="uid://draxxpfpb5514"]
 
 [ext_resource type="Script" path="res://levels/packing/scripts/packing_player.gd" id="1_kp5uf"]
 [ext_resource type="PackedScene" uid="uid://jpevx8ubwvip" path="res://levels/packing/scenes/packing_note_drawable.tscn" id="2_301f3"]
@@ -11,9 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://daxfedsw5jend" path="res://ui/game/scenes/audio_scrubber.tscn" id="8_1i4jg"]
 [ext_resource type="Script" path="res://levels/common/resources/compositor/blur/compositor_effect_gaussian_blur.gd" id="9_kkg23"]
 [ext_resource type="Shader" path="res://levels/demo/resources/shaders/checkerboard.gdshader" id="10_2pmul"]
+[ext_resource type="Texture2D" uid="uid://dfcwuogb1w7j1" path="res://levels/packing/textures/instructions.png" id="10_v144f"]
 [ext_resource type="Script" path="res://ui/game/beat_shader_mesh.gd" id="11_x8dnb"]
 [ext_resource type="Texture2D" uid="uid://m6d2ypvxv5qd" path="res://levels/packing/textures/box.png" id="13_xcn3y"]
 [ext_resource type="Texture2D" uid="uid://db5vs1theuv1v" path="res://levels/packing/textures/bg.png" id="14_rpyt5"]
+[ext_resource type="Texture2D" uid="uid://dkdgt7cdy4ie4" path="res://levels/packing/textures/shelf.png" id="15_x4qct"]
 [ext_resource type="Texture2D" uid="uid://sv6qersy7e1x" path="res://levels/demo/resources/dust.png" id="26_4os2q"]
 [ext_resource type="Script" path="res://levels/demo/camera_track.gd" id="27_ntu5o"]
 
@@ -154,7 +156,7 @@ _data = {
 point_count = 2
 up_vector_enabled = false
 
-[node name="PackingPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "box", "audio_controller", "score_display")]
+[node name="PackingPlayer" type="Node" node_paths=PackedStringArray("playfield_center", "hit_audio_player", "box", "audio_controller", "instructions", "score_display")]
 script = ExtResource("1_kp5uf")
 note_scene = ExtResource("2_301f3")
 playfield_center = NodePath("scene/Playfield")
@@ -162,7 +164,9 @@ hit_audio_player = NodePath("HitAudioPlayer")
 scroll_time = 1.5
 box = NodePath("scene/Playfield/Box")
 audio_controller = NodePath("AudioController")
+instructions = NodePath("ui/instructions")
 score_display = NodePath("ui/results")
+level_select_path = "res://levels/level_select/level_select.tscn"
 
 [node name="AudioController" parent="." node_paths=PackedStringArray("beatmap_player") instance=ExtResource("2_dfve5")]
 beatmap_player = NodePath("..")
@@ -241,6 +245,16 @@ label_settings = SubResource("LabelSettings_vrv80")
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="instructions" type="TextureRect" parent="ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_v144f")
+stretch_mode = 5
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 process_mode = 3
 environment = SubResource("Environment_ttodm")
@@ -277,11 +291,17 @@ sorting_offset = 1.0
 pixel_size = 0.0047
 texture = ExtResource("14_rpyt5")
 
+[node name="shelf" type="Sprite3D" parent="scene/bg"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.2)
+sorting_offset = 2.0
+pixel_size = 0.003
+texture = ExtResource("15_x4qct")
+
 [node name="Playfield" type="Node3D" parent="scene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.5)
 
 [node name="Box" type="Sprite3D" parent="scene/Playfield"]
-sorting_offset = 1.0
+sorting_offset = 3.0
 pixel_size = 0.002
 texture = ExtResource("13_xcn3y")
 

@@ -12,6 +12,6 @@ sprite = NodePath("Sprite3D")
 textures = Array[Texture]([ExtResource("2_ivtev"), ExtResource("3_wo7u8"), ExtResource("4_xrwyq"), ExtResource("5_6wu58")])
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-sorting_offset = 1.0
+sorting_offset = 3.0
 pixel_size = 0.003
 texture = ExtResource("2_ivtev")

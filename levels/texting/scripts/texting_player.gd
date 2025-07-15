@@ -28,7 +28,6 @@ signal judgment_received(judgment)
 signal input_received(lane)
 
 func initialize(beatmap: Beatmap) -> void:
-
 	super.initialize(beatmap)
 
 	playables.resize(beatmap.lane_count)
